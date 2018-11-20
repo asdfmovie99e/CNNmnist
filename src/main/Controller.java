@@ -1,25 +1,21 @@
-package sample;
+package main;
 
 /*
  @author Niklas Bruns
  @version 1.0
  */
 
-import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 
-import javax.imageio.ImageIO;
 
 public class Controller {
 
