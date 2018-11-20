@@ -9,9 +9,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import helper.MathHelper;
-import helper.PictureCoder;
-import helper.WeightSaver;
+
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -73,33 +71,6 @@ public class Controller {
 
     @FXML
     void onAuswertenClicked(ActionEvent event) {
-        try {
-            Image snapshot = canvas.snapshot(null,null);
-            ImageIO.write(SwingFXUtils.fromFXImage(snapshot,null), "png", new File(System.getenv("APPDATA") + "\\mnist\\" + "paint.png"));
-
-            PictureCoder.shrinkImage();
-            Thread.sleep(2000);
-            double[] resultArray = NetworkController.analyzeShrunkImage();
-            textausgabe.setText(Double.toString(resultArray[10]));
-            double smallest = Double.MAX_VALUE;
-            double biggest = Double.MIN_VALUE;
-            for(int i = 0 ; i < 10; i++){
-                if(resultArray[i] < smallest) smallest = resultArray[i];
-                if(resultArray[i] > biggest) biggest = resultArray[i];
-            }
-            double range = biggest - smallest;
-            double[] modifiedArray = new double[10];
-            for (int i = 0 ; i < 10; i++){
-                modifiedArray[i] = (resultArray[i] - smallest) / range;
-            }
-            showpb(modifiedArray);
-
-        }   catch (Exception e) {
-            e.printStackTrace();
-
-        }
-
-
 
     }
 
@@ -128,20 +99,11 @@ public class Controller {
 
     @FXML
     void onGewichteladenclicked(ActionEvent event) {
-        MathHelper.start();
-        WeightSaver.initialize(0, 0);
-        WeightSaver.chooseFile();
-        NetworkController.initializeNetwork();
     }
 
     @FXML
     void onLernenClicked(ActionEvent event) {
-        Main.closeStage();
-        MathHelper.start();
-        WeightSaver.initialize(0, 0);
-        WeightSaver.chooseFile();
-        NetworkController.initializeNetwork();
-        NetworkController.startLearning();
+
     }
 
 
