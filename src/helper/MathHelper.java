@@ -4,16 +4,16 @@ import java.util.HashMap;
 
 public class MathHelper {
 
-    private static HashMap<Double, Double> sigmoidMap;
+    private static HashMap<Integer, Double> sigmoidMap;
     private static boolean sigmoidMapInitialized = false;
 
     public static void start() {
         // wird ausgeführt um die HashMaps zu erstellen, welche die Berechnung verschnellern
         sigmoidMapInitialized = true;
-        sigmoidMap = new HashMap<Double, Double>();
+        sigmoidMap = new HashMap<Integer, Double>();
         for (int i = -600; i <= 600; i += 1) {
             double iDouble = i;
-            sigmoidMap.put(((double) i) / 100, (double) (1 / (1 + Math.pow(Math.E, -(iDouble / 100)))));
+            sigmoidMap.put((int)(iDouble ), (double) (1 / (1 + Math.pow(Math.E, -(iDouble / 100)))));
 
         }
     }
