@@ -1,4 +1,4 @@
-package main;
+package gui;
 
 /*
  @author Niklas Bruns
