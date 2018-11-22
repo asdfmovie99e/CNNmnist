@@ -1,23 +1,23 @@
 package main;
 
+import helper.MathHelper;
+
 public class Neuron {
-private int id;
-private double inputvalue;
-private double outputvalue;
+protected int id;
+private double inputvalue = 0;
+private double outputvalue = 0;
 
 
-    Neuron (int id, double inputvalue, double outputvalue)
-{
-    this.id=id;
-    this.inputvalue=inputvalue;
-    this.outputvalue=outputvalue;
-}
 
     public void setInputvalue(Double inputvalue) {
         this.inputvalue = inputvalue;
     }
 
+    //Übergibt Outputwert an Edge
     public Double getOutputvalue() {
+        outputvalue= MathHelper.getSigmoidApprox(inputvalue);
         return outputvalue;
     }
+
+
 }

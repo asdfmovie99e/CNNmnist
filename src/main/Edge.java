@@ -15,4 +15,13 @@ public class Edge {
 
 
 
+    public void giveToNextNeuron()
+    {  double newinputvalue; //Dieser Wert wird an das nächste Neuron übergeben.
+
+        newinputvalue= Neuron.beforeNeuronid.getOutputvalue() * weight;
+        Neuron.behindNeuronid.setInputvalue(newinputvalue);
+    }
+
+
+
 }
