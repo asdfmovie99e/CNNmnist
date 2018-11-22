@@ -1,4 +1,4 @@
 package main;
 
-public class HiddenNeuron {
+public class HiddenNeuron extends Neuron {
 }
