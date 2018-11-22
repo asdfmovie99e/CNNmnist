@@ -14,7 +14,7 @@ private HashMap<Integer, Edge> edgeMap;
         edgeMap= new HashMap<Integer, Edge>();
     }
 
-    public void reiceiveOutputFromPreviousEdge(Double prevOutput) {
+    public void receiveOutputFromPreviousEdge(Double prevOutput) {
         inputSum += prevOutput;
     }
 

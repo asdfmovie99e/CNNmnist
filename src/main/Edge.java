@@ -20,7 +20,7 @@ public class Edge {
     {  double newInputValue; //Dieser Wert wird an das nächste Neuron übergeben.
 
         newInputValue= previousNeuron.getOutputvalue() * weight;
-        nextNeuron.reiceiveOutputFromPreviousEdge(newInputValue);
+        nextNeuron.receiveOutputFromPreviousEdge(newInputValue);
     }
 
 
