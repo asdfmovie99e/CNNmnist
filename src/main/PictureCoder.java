@@ -7,4 +7,7 @@ public class PictureCoder {
         return null;
     }
 
+    public Integer getLabel(int pictureId){
+        return  null;
+    }
 }
