@@ -2,21 +2,30 @@ package main;
 
 import helper.MathHelper;
 
+import java.util.HashMap;
+
 public class Neuron {
 protected int id;
-private double inputvalue = 0;
-private double outputvalue = 0;
+private double inputSum = 0;
+private double outputValue = 0;
+private HashMap<Integer, Edge> edgeMap;
 
+    Neuron(){
+        edgeMap= new HashMap<Integer, Edge>();
+    }
 
-
-    public void setInputvalue(Double inputvalue) {
-        this.inputvalue = inputvalue;
+    public void reiceiveOutputFromPreviousEdge(Double prevOutput) {
+        inputSum += prevOutput;
     }
 
     //Übergibt Outputwert an Edge
     public Double getOutputvalue() {
-        outputvalue= MathHelper.getSigmoidApprox(inputvalue);
-        return outputvalue;
+        outputValue= MathHelper.getSigmoidApprox(inputSum);
+        return outputValue;
     }
 
+    public void resetInputSum()
+    {
+        inputSum = 0;
+    }
 }

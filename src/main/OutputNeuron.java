@@ -2,7 +2,8 @@ package main;
 
 public class OutputNeuron extends Neuron {
 
-    OutputNeuron (int id)
-    {this.id=id; }
+    public OutputNeuron (int id)
+    {   super();
+        this.id=id; }
 
 }

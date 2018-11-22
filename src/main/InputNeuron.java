@@ -3,7 +3,10 @@ package main;
 
 public class InputNeuron extends Neuron {
 
-InputNeuron (int id)
-{this.id=id; }
+    public InputNeuron (int id) {
+    super();
+    this.id=id;
+}
+
 
 }

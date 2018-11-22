@@ -1,28 +1,42 @@
 package main;
 
 public class Edge {
+    int id;
     double weight;
-    int beforeNeuronid;
-    int behindNeuronid;
+    Neuron previousNeuron;
+    Neuron nextNeuron;
 
-    Edge(double weight, int beforeNeuronid, int behindNeuronid)
-    {
-        this.weight=weight;
-        this.beforeNeuronid=beforeNeuronid;
-        this.behindNeuronid=behindNeuronid;
+    Edge(int id,Neuron previousNeuron, Neuron nextNeuron)
+    {   this.id=id;
+        this.weight=Math.random();
+        this.previousNeuron=previousNeuron;
+        this.nextNeuron=nextNeuron;
 
     }
 
 
 
     public void giveToNextNeuron()
-    {  double newinputvalue; //Dieser Wert wird an das nächste Neuron übergeben.
+    {  double newInputValue; //Dieser Wert wird an das nächste Neuron übergeben.
 
-        newinputvalue= Neuron.beforeNeuronid.getOutputvalue() * weight;
-        Neuron.behindNeuronid.setInputvalue(newinputvalue);
+        newInputValue= previousNeuron.getOutputvalue() * weight;
+        nextNeuron.reiceiveOutputFromPreviousEdge(newInputValue);
     }
 
 
+    public double getWeight() {
+        return weight;
+    }
 
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
