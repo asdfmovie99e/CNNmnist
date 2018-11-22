@@ -19,5 +19,4 @@ private double outputvalue = 0;
         return outputvalue;
     }
 
-
 }
