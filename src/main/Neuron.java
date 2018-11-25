@@ -1,5 +1,8 @@
 package main;
-
+/*
+ @author Niklas Bruns
+ @version 1.0
+ */
 import helper.MathHelper;
 
 import java.util.HashMap;

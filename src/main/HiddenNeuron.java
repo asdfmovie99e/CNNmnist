@@ -1,5 +1,8 @@
 package main;
-
+/*
+ @author Niklas Bruns
+ @version 1.0
+ */
 public class HiddenNeuron extends Neuron {
 
 
@@ -7,6 +10,7 @@ public class HiddenNeuron extends Neuron {
         super();
         this.id=id;
 }
+
 
 
 }
