@@ -6,17 +6,18 @@ package main;
 import helper.MathHelper;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class Neuron {
 protected int id;
 private double inputSum = 0;
 private double outputValue = 0;
-private HashMap<Integer, Edge> incomingEdgeMap;
-private HashMap<Integer, Edge> outgoingEdgeMap;
+private HashSet<Edge> incomingEdgeSet; //
+private HashSet<Edge> outgoingEdgeSet;
 
     Neuron(){
-        outgoingEdgeMap= new HashMap<Integer, Edge>();
-        incomingEdgeMap= new HashMap<Integer, Edge>();
+        outgoingEdgeSet = new HashSet<Edge>();
+        incomingEdgeSet = new HashSet<Edge>();
     }
 
     public void receiveOutputFromPreviousEdge(Double prevOutput) {
@@ -34,10 +35,10 @@ private HashMap<Integer, Edge> outgoingEdgeMap;
         inputSum = 0;
     }
 
-   public void addIncomingEdge(int edgeIdent, Edge edge){
-        incomingEdgeMap.put(edgeIdent, edge);
+   public void addIncomingEdge(Edge edge){
+        incomingEdgeSet.add(edge);
    }
-    public void addOutgoingEdge(int edgeIdent, Edge edge){
-        outgoingEdgeMap.put(edgeIdent, edge);
+    public void addOutgoingEdge(Edge edge){
+        outgoingEdgeSet.add(edge);
     }
 }

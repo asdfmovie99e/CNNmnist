@@ -5,11 +5,11 @@ public class NetoworkController {
     // die zweite ist eine convolutional schicht und die 3. maxpooling
     // die 4. wieder conv dann wieder maxpool und an 6. stelle output
     private static final int ANZAHL_INPUT_NEURONEN = 748;
-    private static final int ANZAHL_HIDDEN_NEURONEN_ONE = 784;
-    private static final int ANZAHL_HIDDEN_NEURONEN_TWO = 1;
-    private static final int ANZAHL_HIDDEN_NEURONEN_THREE = 1;
-    private static final int ANZAHL_HIDDEN_NEURONEN_FOUR = 1;
-    private static final int ANZAHL_HIDDEN_NEURONEN_FIVE = 1;// eigentlich variabel. muss mal mit rumgespielt werden
+    private static final int ANZAHL_HIDDEN_NEURONEN_ONE = 784; //conv mit 3x3 filter
+    private static final int ANZAHL_HIDDEN_NEURONEN_TWO = 196; // max pool 2x2 wird zu 1
+    private static final int ANZAHL_HIDDEN_NEURONEN_THREE = 196; //conv mit 3x3 filter
+    private static final int ANZAHL_HIDDEN_NEURONEN_FOUR = 49; // max pool 2x2 wird zu 1
+    private static final int ANZAHL_HIDDEN_NEURONEN_FIVE = 50;// voll vermaschte hidden schicht
     private static final int ANZAHL_OUTPUT_NEURONEN = 10;
     // es wird von einer 4x4 convolution schicht und einer 2x2 max pooling schicht ausgegangen
     private static final int ANZAHL_EGDES =    123456789; // muss noch manuel eingegeben werden
@@ -55,6 +55,7 @@ public class NetoworkController {
             outputNeurons[i] = new OutputNeuron(i);
         }
         createFirstEdgeLayer();
+        createSecondEdgeLayer();
     }
 
     private static void sendForward(){
@@ -64,18 +65,36 @@ public class NetoworkController {
     private static void createFirstEdgeLayer(){
         Edge currentEdge = null;
         for(int i = 0; i < ANZAHL_HIDDEN_NEURONEN_ONE; i++){
-            int xCoord = i % 28;
-            int yCoord = (i - xCoord) / 28;
             for(int i1 = -1; i1<= 1; i1++){
                 for(int i2 = -1; i2 <= 1; i2++){
-                    int inputIdent = i + i1 - (28 * i2);
-                    if(0 <= inputIdent && inputIdent <= ANZAHL_INPUT_NEURONEN)
-                    currentEdge = new Edge(edgeCounter,inputNeurons[inputIdent],hiddenNeuronsOne[i]);
-                    inputNeurons[i].addOutgoingEdge(i,currentEdge);
-                    hiddenNeuronsOne[i].addIncomingEdge(i,currentEdge);
-                    edgeCounter++;
+                    int outgoingIdent = i + i1 - (28 * i2);
+                    if(0 <= outgoingIdent && outgoingIdent <= ANZAHL_INPUT_NEURONEN) {
+                        currentEdge = new Edge(edgeCounter, inputNeurons[outgoingIdent], hiddenNeuronsOne[i]);
+                        inputNeurons[outgoingIdent].addOutgoingEdge(currentEdge);
+                        hiddenNeuronsOne[i].addIncomingEdge(currentEdge);
+                        edgeCounter++;
+                    }
                 }
             }
         }
     }
+
+    private static void createSecondEdgeLayer(){
+        Edge currentEdge = null;
+        int rootAnzahl = (int) Math.pow(ANZAHL_HIDDEN_NEURONEN_TWO, 0.5d);
+        for(int i = 0; i < ANZAHL_HIDDEN_NEURONEN_TWO; i++){
+            for(int i1 = 0; i1 <= 1; i++){
+                for(int i2 = 0; i2 <= 1; i++){
+                    int outgoingIdent = i1 +i2 * rootAnzahl + (i % (rootAnzahl/2)) * 2 + (i - (i % (rootAnzahl/2))) * 4;//formel nicht anpacken. werde ich nie wieder verstehen
+                    if(0 <= outgoingIdent && outgoingIdent <= ANZAHL_HIDDEN_NEURONEN_ONE){
+                        currentEdge = new Edge(edgeCounter, hiddenNeuronsOne[outgoingIdent], hiddenNeuronsTwo[i]);
+                        hiddenNeuronsOne[outgoingIdent].addOutgoingEdge(currentEdge);
+                        hiddenNeuronsTwo[i].addIncomingEdge(currentEdge);
+                        edgeCounter++;
+                    }
+                }
+            }
+        }
+    }
+
 }
