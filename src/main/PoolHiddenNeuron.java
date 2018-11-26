@@ -4,7 +4,7 @@ package main;
 
 public class PoolHiddenNeuron extends HiddenNeuron {
 
-    double maxinput = 0;
+    double maxinput = Double.MIN_VALUE;
 
             //Konstruktor
     PoolHiddenNeuron(int id){
@@ -16,5 +16,9 @@ public class PoolHiddenNeuron extends HiddenNeuron {
             maxinput = prevOutput;
         }
 
+    }
+
+    public void resetMaxInput(){
+        maxinput = Double.MIN_VALUE;
     }
 }

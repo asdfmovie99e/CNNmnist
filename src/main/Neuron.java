@@ -11,10 +11,12 @@ public class Neuron {
 protected int id;
 private double inputSum = 0;
 private double outputValue = 0;
-private HashMap<Integer, Edge> edgeMap;
+private HashMap<Integer, Edge> incomingEdgeMap;
+private HashMap<Integer, Edge> outgoingEdgeMap;
 
     Neuron(){
-        edgeMap= new HashMap<Integer, Edge>();
+        outgoingEdgeMap= new HashMap<Integer, Edge>();
+        incomingEdgeMap= new HashMap<Integer, Edge>();
     }
 
     public void receiveOutputFromPreviousEdge(Double prevOutput) {
@@ -30,5 +32,12 @@ private HashMap<Integer, Edge> edgeMap;
     public void resetInputSum()
     {
         inputSum = 0;
+    }
+
+   public void addIncomingEdge(int edgeIdent, Edge edge){
+        incomingEdgeMap.put(edgeIdent, edge);
+   }
+    public void addOutgoingEdge(int edgeIdent, Edge edge){
+        outgoingEdgeMap.put(edgeIdent, edge);
     }
 }
