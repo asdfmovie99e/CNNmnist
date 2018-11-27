@@ -55,6 +55,7 @@ public class NetworkController {
         createFirstEdgeLayer();
         createSecondEdgeLayer();
         createThirdLayer();
+        createFourthLayer();
     }
 
     private static void sendForward(){
@@ -62,17 +63,13 @@ public class NetworkController {
     }
 
     private static void createFirstEdgeLayer(){
-        Edge currentEdge = null;
         int neuronOneRoot = (int) Math.pow(ANZAHL_HIDDEN_NEURONEN_ONE, 0.5d);
         for(int i = 0; i < ANZAHL_HIDDEN_NEURONEN_ONE; i++){
             for(int i1 = -1; i1<= 1; i1++){
                 for(int i2 = -1; i2 <= 1; i2++){
                     int outgoingIdent = i + i1 - (neuronOneRoot * i2);
-                    if(0 <= outgoingIdent && outgoingIdent <= ANZAHL_INPUT_NEURONEN) {
-                        currentEdge = new Edge(edgeCounter, inputNeurons[outgoingIdent], hiddenNeuronsOne[i]);
-                        inputNeurons[outgoingIdent].addOutgoingEdge(currentEdge);
-                        hiddenNeuronsOne[i].addIncomingEdge(currentEdge);
-                        edgeCounter++;
+                    if(0 <= outgoingIdent && outgoingIdent < ANZAHL_INPUT_NEURONEN) {
+                        connectNeurons(inputNeurons[outgoingIdent], hiddenNeuronsOne[i]);
                     }
                 }
             }
@@ -80,17 +77,13 @@ public class NetworkController {
     }
 
     private static void createSecondEdgeLayer(){
-        Edge currentEdge = null;
         int neuronTwoRoot = (int) Math.pow(ANZAHL_HIDDEN_NEURONEN_TWO, 0.5d);
         for(int i = 0; i < ANZAHL_HIDDEN_NEURONEN_TWO; i++){
-            for(int i1 = 0; i1 <= 1; i++){
-                for(int i2 = 0; i2 <= 1; i++){
+            for(int i1 = 0; i1 <= 1; i1++){
+                for(int i2 = 0; i2 <= 1; i2++){
                     int outgoingIdent = i1 +i2 * neuronTwoRoot + (i % (neuronTwoRoot/2)) * 2 + (i - (i % (neuronTwoRoot/2))) * 4;//formel nicht anpacken. werde ich nie wieder verstehen
-                    if(0 <= outgoingIdent && outgoingIdent <= ANZAHL_HIDDEN_NEURONEN_ONE){
-                        currentEdge = new Edge(edgeCounter, hiddenNeuronsOne[outgoingIdent], hiddenNeuronsTwo[i]);
-                        hiddenNeuronsOne[outgoingIdent].addOutgoingEdge(currentEdge);
-                        hiddenNeuronsTwo[i].addIncomingEdge(currentEdge);
-                        edgeCounter++;
+                    if(0 <= outgoingIdent && outgoingIdent < ANZAHL_HIDDEN_NEURONEN_ONE){
+                        connectNeurons(hiddenNeuronsOne[outgoingIdent], hiddenNeuronsTwo[i]);
                     }
                 }
             }
@@ -98,17 +91,13 @@ public class NetworkController {
     }
 
     private static void createThirdLayer(){
-        Edge currentEdge = null;
         int neuronThreeRoot = (int) Math.pow(ANZAHL_HIDDEN_NEURONEN_THREE, 0.5d);
         for(int i = 0; i < ANZAHL_HIDDEN_NEURONEN_THREE; i++){
             for(int i1 = -1; i1<= 1; i1++){
                 for(int i2 = -1; i2 <= 1; i2++){
                     int outgoingIdent = i + i1 - (neuronThreeRoot * i2);
-                    if(0 <= outgoingIdent && outgoingIdent <= ANZAHL_HIDDEN_NEURONEN_TWO) {
-                        currentEdge = new Edge(edgeCounter, hiddenNeuronsTwo[outgoingIdent], hiddenNeuronsThree[i]);
-                        hiddenNeuronsTwo[outgoingIdent].addOutgoingEdge(currentEdge);
-                        hiddenNeuronsThree[i].addIncomingEdge(currentEdge);
-                        edgeCounter++;
+                    if(0 <= outgoingIdent && outgoingIdent < ANZAHL_HIDDEN_NEURONEN_TWO) {
+                        connectNeurons(hiddenNeuronsTwo[outgoingIdent], hiddenNeuronsThree[i]);
                     }
                 }
             }
@@ -116,4 +105,28 @@ public class NetworkController {
 
     }
 
+    private static void createFourthLayer(){
+        int neuronFourRoot = (int) Math.pow(ANZAHL_HIDDEN_NEURONEN_FOUR, 0.5d);
+        for(int i = 0; i < ANZAHL_HIDDEN_NEURONEN_FOUR; i++){
+            for(int i1 = 0; i1 <= 1; i1++){
+                for(int i2 = 0; i2 <= 1; i2++){
+                    int outgoingIdent = i1 +i2 * neuronFourRoot + (i % (neuronFourRoot/2)) * 2 + (i - (i % (neuronFourRoot/2))) * 4;//formel nicht anpacken. werde ich nie wieder verstehen
+                    if(0 <= outgoingIdent && outgoingIdent < ANZAHL_HIDDEN_NEURONEN_THREE){
+                        connectNeurons(hiddenNeuronsThree[outgoingIdent], hiddenNeuronsFour[i]);
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
+    private static void connectNeurons(Neuron previousNeuron, Neuron nextNeuron){
+        Edge currentEdge = null;
+        currentEdge = new Edge(edgeCounter, previousNeuron, nextNeuron);
+        previousNeuron.addOutgoingEdge(currentEdge);
+        nextNeuron.addIncomingEdge(currentEdge);
+        edgeCounter++;
+    }
 }
