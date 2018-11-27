@@ -56,6 +56,8 @@ public class NetworkController {
         createSecondEdgeLayer();
         createThirdEdgeLayer();
         createFourthEdgeLayer();
+        createFifthEdgeLayer();
+        createSixthEdgeLayer();
     }
 
     private static void sendForward(){
@@ -119,6 +121,21 @@ public class NetworkController {
         }
     }
 
+    private static void createFifthEdgeLayer(){
+        for(int i = 0; i < ANZAHL_HIDDEN_NEURONEN_FOUR; i++){
+            for(int i1 = 0; i1 < ANZAHL_HIDDEN_NEURONEN_FIVE; i1++){
+                connectNeurons(hiddenNeuronsFour[i], hiddenNeuronsFive[i1]);
+            }
+        }
+    }
+
+    private static void createSixthEdgeLayer(){
+        for(int i = 0; i < ANZAHL_HIDDEN_NEURONEN_FIVE; i++){
+            for(int i1 = 0; i1 < ANZAHL_OUTPUT_NEURONEN; i1++){
+                connectNeurons(hiddenNeuronsFive[i], outputNeurons[i1]);
+            }
+        }
+    }
 
 
 
