@@ -1,6 +1,6 @@
 package main;
 
-public class NetoworkController {
+public class NetworkController {
     //das netz ist so gedacht, dass die erste schicht eine normle input schicht ist.
     // die zweite ist eine convolutional schicht und die 3. maxpooling
     // die 4. wieder conv dann wieder maxpool und an 6. stelle output
@@ -32,8 +32,6 @@ public class NetoworkController {
 
     private static void createNeuronNetwork(){
         for(int i = 0; i < ANZAHL_INPUT_NEURONEN; i++){
-            int xCoord = i % 28;
-            int yCoord = (i - xCoord) / 28;
             inputNeurons[i]  = new InputNeuron(i);
         }
         for(int i = 0; i < ANZAHL_HIDDEN_NEURONEN_ONE; i++){
@@ -56,6 +54,7 @@ public class NetoworkController {
         }
         createFirstEdgeLayer();
         createSecondEdgeLayer();
+        createThirdLayer();
     }
 
     private static void sendForward(){
@@ -64,10 +63,11 @@ public class NetoworkController {
 
     private static void createFirstEdgeLayer(){
         Edge currentEdge = null;
+        int neuronOneRoot = (int) Math.pow(ANZAHL_HIDDEN_NEURONEN_ONE, 0.5d);
         for(int i = 0; i < ANZAHL_HIDDEN_NEURONEN_ONE; i++){
             for(int i1 = -1; i1<= 1; i1++){
                 for(int i2 = -1; i2 <= 1; i2++){
-                    int outgoingIdent = i + i1 - (28 * i2);
+                    int outgoingIdent = i + i1 - (neuronOneRoot * i2);
                     if(0 <= outgoingIdent && outgoingIdent <= ANZAHL_INPUT_NEURONEN) {
                         currentEdge = new Edge(edgeCounter, inputNeurons[outgoingIdent], hiddenNeuronsOne[i]);
                         inputNeurons[outgoingIdent].addOutgoingEdge(currentEdge);
@@ -81,11 +81,11 @@ public class NetoworkController {
 
     private static void createSecondEdgeLayer(){
         Edge currentEdge = null;
-        int rootAnzahl = (int) Math.pow(ANZAHL_HIDDEN_NEURONEN_TWO, 0.5d);
+        int neuronTwoRoot = (int) Math.pow(ANZAHL_HIDDEN_NEURONEN_TWO, 0.5d);
         for(int i = 0; i < ANZAHL_HIDDEN_NEURONEN_TWO; i++){
             for(int i1 = 0; i1 <= 1; i++){
                 for(int i2 = 0; i2 <= 1; i++){
-                    int outgoingIdent = i1 +i2 * rootAnzahl + (i % (rootAnzahl/2)) * 2 + (i - (i % (rootAnzahl/2))) * 4;//formel nicht anpacken. werde ich nie wieder verstehen
+                    int outgoingIdent = i1 +i2 * neuronTwoRoot + (i % (neuronTwoRoot/2)) * 2 + (i - (i % (neuronTwoRoot/2))) * 4;//formel nicht anpacken. werde ich nie wieder verstehen
                     if(0 <= outgoingIdent && outgoingIdent <= ANZAHL_HIDDEN_NEURONEN_ONE){
                         currentEdge = new Edge(edgeCounter, hiddenNeuronsOne[outgoingIdent], hiddenNeuronsTwo[i]);
                         hiddenNeuronsOne[outgoingIdent].addOutgoingEdge(currentEdge);
@@ -95,6 +95,25 @@ public class NetoworkController {
                 }
             }
         }
+    }
+
+    private static void createThirdLayer(){
+        Edge currentEdge = null;
+        int neuronThreeRoot = (int) Math.pow(ANZAHL_HIDDEN_NEURONEN_THREE, 0.5d);
+        for(int i = 0; i < ANZAHL_HIDDEN_NEURONEN_THREE; i++){
+            for(int i1 = -1; i1<= 1; i1++){
+                for(int i2 = -1; i2 <= 1; i2++){
+                    int outgoingIdent = i + i1 - (neuronThreeRoot * i2);
+                    if(0 <= outgoingIdent && outgoingIdent <= ANZAHL_HIDDEN_NEURONEN_TWO) {
+                        currentEdge = new Edge(edgeCounter, hiddenNeuronsTwo[outgoingIdent], hiddenNeuronsThree[i]);
+                        hiddenNeuronsTwo[outgoingIdent].addOutgoingEdge(currentEdge);
+                        hiddenNeuronsThree[i].addIncomingEdge(currentEdge);
+                        edgeCounter++;
+                    }
+                }
+            }
+        }
+
     }
 
 }

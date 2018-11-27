@@ -19,8 +19,6 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        System.out.println(MathHelper.getSigmoidApprox(1.3d));
-        new InputNeuron(1);
         launch(args);
     }
 }
