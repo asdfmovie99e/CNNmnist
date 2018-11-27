@@ -6,7 +6,7 @@ public class PoolHiddenNeuron extends HiddenNeuron {
 
     double maxinput = Double.MIN_VALUE;
 
-            //Konstruktor
+    //Konstruktor
     PoolHiddenNeuron(int id){
         super(id);
     }

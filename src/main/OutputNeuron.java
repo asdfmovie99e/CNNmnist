@@ -6,4 +6,7 @@ public class OutputNeuron extends Neuron {
     {   super();
         this.id=id; }
 
+
+
+    //deltalernregel hinzufuegen
 }
