@@ -77,7 +77,7 @@ public class NetworkController {
     }
 
     private static void createSecondEdgeLayer(){
-        int neuronOneRoot = (int) Math.pow(ANZAHL_HIDDEN_NEURONEN_ONE, 0.5d);
+        int neuronOneRoot = (int) Math.pow(ANZAHL_HIDDEN_NEURONEN_ONE, 0.5d);//es ist kein fehler, dass es wieder neuronOneRoot ist
         for(int i = 0; i < ANZAHL_HIDDEN_NEURONEN_TWO; i++){
             for(int i1 = 0; i1 <= 1; i1++){
                 for(int i2 = 0; i2 <= 1; i2++){
@@ -106,7 +106,7 @@ public class NetworkController {
     }
 
     private static void createFourthEdgeLayer(){
-        int neuronThreeRoot = (int) Math.pow(ANZAHL_HIDDEN_NEURONEN_THREE, 0.5d);
+        int neuronThreeRoot = (int) Math.pow(ANZAHL_HIDDEN_NEURONEN_THREE, 0.5d);//es ist kein fehler, dass es wieder neuronThreeRoot ist
         for(int i = 0; i < ANZAHL_HIDDEN_NEURONEN_FOUR; i++){
             for(int i1 = 0; i1 <= 1; i1++){
                 for(int i2 = 0; i2 <= 1; i2++){
@@ -118,6 +118,7 @@ public class NetworkController {
             }
         }
     }
+
 
 
 
