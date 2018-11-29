@@ -1,13 +1,13 @@
 package main;
 
-public class PictureCoder {
-
-    public Double[][] get2DPictureArray(int pictureId) {
-        //gibt ein 2 dimensionales Array aus in dem die Pixel des Bildes pictureId gespeichert sind. jeder wert ist zwischen 0(weiss) und 1(schwarz)
-        return null;
-    }
-
-    public Integer getLabel(int pictureId){
-        return  null;
+public class PictureCoder
+{
+    public String picture;
+    public byte [][] pixel;
+    
+    public PictureCoder(String picture, byte [][] pixel)
+    {
+        this.picture = picture;
+        this.pixel = pixel;
     }
 }
