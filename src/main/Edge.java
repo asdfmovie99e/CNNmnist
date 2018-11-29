@@ -1,5 +1,6 @@
 package main;
 
+
 public class Edge {
     int id;
     double weight;
@@ -20,7 +21,11 @@ public class Edge {
     {  double newInputValue; //Dieser Wert wird an das nächste Neuron übergeben.
 
         newInputValue= previousNeuron.getOutputvalue() * weight;
-        nextNeuron.receiveOutputFromPreviousEdge(newInputValue);
+        if(nextNeuron instanceof PoolHiddenNeuron){
+            ((PoolHiddenNeuron)nextNeuron).receiveOutputFromPreviousEdge(newInputValue, this);
+        } else {
+            nextNeuron.receiveOutputFromPreviousEdge(newInputValue);
+        }
     }
 
 

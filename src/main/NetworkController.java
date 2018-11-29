@@ -61,7 +61,9 @@ public class NetworkController {
     }
 
     private static void sendForward(){
-
+        for(int i = 0; i < ANZAHL_INPUT_NEURONEN; i++){
+            ///////////////////////////////////////////////////////////7
+        }
     }
 
     private static void createFirstEdgeLayer(){
