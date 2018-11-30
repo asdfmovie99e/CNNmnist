@@ -10,10 +10,10 @@ import java.util.HashSet;
 
 public class Neuron {
 protected int id;
-private double inputSum = 0;
-private double outputValue = 0;
-private HashSet<Edge> incomingEdgeSet; //
-private HashSet<Edge> outgoingEdgeSet;
+protected double inputSum = 0;
+protected double outputValue = 0;
+protected HashSet<Edge> incomingEdgeSet; //
+protected HashSet<Edge> outgoingEdgeSet;
 
     Neuron(){
         outgoingEdgeSet = new HashSet<Edge>();
@@ -29,6 +29,7 @@ private HashSet<Edge> outgoingEdgeSet;
         outputValue= MathHelper.getSigmoidApprox(inputSum);
         return outputValue;
     }
+
 
     public void resetInputSum()
     {
