@@ -36,6 +36,12 @@ protected HashSet<Edge> outgoingEdgeSet;
         inputSum = 0;
     }
 
+    public void activateOutgoingEdges(){
+        for(Edge edge: outgoingEdgeSet){
+            edge.giveToNextNeuron();
+        }
+    }
+
    public void addIncomingEdge(Edge edge){
         incomingEdgeSet.add(edge);
    }
