@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class PictureCoder {
     File trainImages = new File("MNIST/train-images.idx3-ubyte");
-    File trainLabels = new File("MNIST/train-images.idx3-ubyte");
+    File trainLabels = new File("MNIST/train-labels.idx1-ubyte");
     BufferedImage images;
     BufferedImage labels;
     ArrayList<ArrayList<ArrayList<Byte>>> picturelist = new ArrayList<ArrayList<ArrayList<Byte>>>();
@@ -29,13 +29,14 @@ public class PictureCoder {
 
         for(int i=16; i<60000; i++)
         {
-            ArrayList<ArrayList<Byte>> picture = new ArrayList<ArrayList<Byte>>(); //bild
+            ArrayList<ArrayList<Byte>> picture = new ArrayList<ArrayList<Byte>>();
             for(int ii=0; ii<28; ii++)
             {
                 ArrayList<Byte> row = new ArrayList<Byte>(); // reihe
                 for(int iii=0; iii<28; iii++)
                 {
                     row.add((byte)(images.getRGB(ii, iii)));
+                    row.add((byte)(labels.getRGB(ii, iii)));
                 }
                 picture.add(row);
             }
