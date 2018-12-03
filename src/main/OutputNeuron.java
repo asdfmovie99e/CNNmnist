@@ -8,8 +8,7 @@ public class OutputNeuron extends Neuron {
     }
 
 
-    //deltalernregel noch in Bearbeitung
-
+@Deprecated
     public void deltalearn(double targetWeigth) {
 
         double littleDelta = targetWeigth - getOutputvalue();
