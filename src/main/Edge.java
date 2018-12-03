@@ -1,11 +1,13 @@
 package main;
 
 
+import helper.MathHelper;
+
 public class Edge {
-    int id;
-    double weight;
-    Neuron previousNeuron;
-    Neuron nextNeuron;
+    private int id;
+    private double weight;
+    private Neuron previousNeuron;
+    private Neuron nextNeuron;
 
     Edge(int id,Neuron previousNeuron, Neuron nextNeuron)
     {   this.id=id;
@@ -16,6 +18,13 @@ public class Edge {
     }
 
 
+    public Neuron getPreviousNeuron() {
+        return previousNeuron;
+    }
+
+    public Neuron getNextNeuron() {
+        return nextNeuron;
+    }
 
     public void giveToNextNeuron()
     {  double newInputValue; //Dieser Wert wird an das nächste Neuron übergeben.
@@ -43,5 +52,11 @@ public class Edge {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void modWeight(double smallDelta) {
+        double ableitungInput = MathHelper.getSigmoidApprox(previousNeuron.getOutputvalue()) * (1 - MathHelper.getSigmoidApprox(previousNeuron.getOutputvalue()));
+        double bigDelta = NetworkController.EPSILON * smallDelta * previousNeuron.getOutputvalue() * ableitungInput;
+        weight += bigDelta;
     }
 }

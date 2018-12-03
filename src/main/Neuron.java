@@ -8,10 +8,11 @@ import helper.MathHelper;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public class Neuron {
+public abstract class Neuron {
 protected int id;
 protected double inputSum = 0;
 protected double outputValue = 0;
+protected double smallDelta;
 protected HashSet<Edge> incomingEdgeSet; //
 protected HashSet<Edge> outgoingEdgeSet;
 
@@ -30,6 +31,13 @@ protected HashSet<Edge> outgoingEdgeSet;
         return outputValue;
     }
 
+    public int getId(){
+        return id;
+    }
+
+    public double getSmallDelta(){
+        return smallDelta;
+    }
 
     public void resetInputSum()
     {

@@ -11,6 +11,15 @@ public class HiddenNeuron extends Neuron {
         this.id=id;
 }
 
+public void sendDeltaToEdge(){
+        double smallDelta = 0;
+        for(Edge edge: outgoingEdgeSet){
+            smallDelta += edge.getWeight() * edge.getNextNeuron().getSmallDelta();
+        }
+        for (Edge edge: incomingEdgeSet){
+            edge.modWeight(smallDelta);
+        }
+}
 
 
 }

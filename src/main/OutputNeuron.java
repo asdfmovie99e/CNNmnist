@@ -20,4 +20,13 @@ public class OutputNeuron extends Neuron {
 
 
     }
+
+
+    public void sendDeltaToEdge(int targetWeight){
+        smallDelta  = targetWeight - getOutputvalue();
+        for(Edge edge: incomingEdgeSet){
+            edge.modWeight(smallDelta);
+        }
+
+    }
 }
