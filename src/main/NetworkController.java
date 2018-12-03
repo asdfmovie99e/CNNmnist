@@ -64,34 +64,34 @@ public class NetworkController {
     }
 
     private static void sendForward(Byte[][] pixelArray) {
-            for (int i = 0; i < ANZAHL_INPUT_NEURONEN; i++) {// input neuronen senden schleife
-                for(int yAxis = 0; yAxis < 28; yAxis++){
-                    for(int xAxis = 0; xAxis < 28; xAxis++){
-                        inputNeurons[xAxis + 28*yAxis].receiveRawByte(pixelArray[xAxis][yAxis]);
-                    }
+        for (int i = 0; i < ANZAHL_INPUT_NEURONEN; i++) {// input neuronen senden schleife
+            for(int yAxis = 0; yAxis < 28; yAxis++){
+                for(int xAxis = 0; xAxis < 28; xAxis++){
+                    inputNeurons[xAxis + 28*yAxis].receiveRawByte(pixelArray[xAxis][yAxis]);
                 }
-                inputNeurons[i].activateOutgoingEdges();
             }
-            for (int i = 0; i < ANZAHL_HIDDEN_NEURONEN_ONE; i++){
-                hiddenNeuronsOne[i].activateOutgoingEdges();
-                hiddenNeuronsOne[i].resetInputSum();
-            }
-            for (int i = 0; i < ANZAHL_HIDDEN_NEURONEN_TWO; i++){
-                hiddenNeuronsTwo[i].activateOutgoingEdges();
-                hiddenNeuronsTwo[i].resetInputSum();
-            }
-            for (int i = 0; i < ANZAHL_HIDDEN_NEURONEN_THREE; i++){
-                hiddenNeuronsThree[i].activateOutgoingEdges();
-                hiddenNeuronsThree[i].resetInputSum();
-            }
-            for (int i = 0; i < ANZAHL_HIDDEN_NEURONEN_FOUR; i++){
-                hiddenNeuronsFour[i].activateOutgoingEdges();
-                hiddenNeuronsFour[i].resetInputSum();
-            }
-            for (int i = 0; i < ANZAHL_HIDDEN_NEURONEN_FIVE; i++){
-                hiddenNeuronsFive[i].activateOutgoingEdges();
-                hiddenNeuronsFive[i].resetInputSum();
-            }
+            inputNeurons[i].activateOutgoingEdges();
+        }
+        for (int i = 0; i < ANZAHL_HIDDEN_NEURONEN_ONE; i++){
+            hiddenNeuronsOne[i].activateOutgoingEdges();
+            hiddenNeuronsOne[i].resetInputSum();
+        }
+        for (int i = 0; i < ANZAHL_HIDDEN_NEURONEN_TWO; i++){
+            hiddenNeuronsTwo[i].activateOutgoingEdges();
+            hiddenNeuronsTwo[i].resetInputSum();
+        }
+        for (int i = 0; i < ANZAHL_HIDDEN_NEURONEN_THREE; i++){
+            hiddenNeuronsThree[i].activateOutgoingEdges();
+            hiddenNeuronsThree[i].resetInputSum();
+        }
+        for (int i = 0; i < ANZAHL_HIDDEN_NEURONEN_FOUR; i++){
+            hiddenNeuronsFour[i].activateOutgoingEdges();
+            hiddenNeuronsFour[i].resetInputSum();
+        }
+        for (int i = 0; i < ANZAHL_HIDDEN_NEURONEN_FIVE; i++){
+            hiddenNeuronsFive[i].activateOutgoingEdges();
+            hiddenNeuronsFive[i].resetInputSum();
+        }
     }
 
     private static void createFirstEdgeLayer() {
