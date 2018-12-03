@@ -9,7 +9,7 @@ public class InputNeuron extends Neuron {
     super();
     this.id=id;
     }
-
+@Deprecated
     public void receiveRawByte(byte b){
         double result;
         if (b < 0 ) {
@@ -24,4 +24,7 @@ public class InputNeuron extends Neuron {
         this.inputSum = inputSum;
     }
 
+    public void receiveInput(int input) {
+        this.inputSum = input;
+    }
 }

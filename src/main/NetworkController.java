@@ -110,11 +110,11 @@ public class NetworkController {
         createSixthEdgeLayer();
     }
 
-    private static void sendForward(Byte[][] pixelArray) {
+    private static void sendForward(int[][] pixelArray) {
         for (int i = 0; i < ANZAHL_INPUT_NEURONEN; i++) {// input neuronen senden schleife
             for(int yAxis = 0; yAxis < 28; yAxis++){
                 for(int xAxis = 0; xAxis < 28; xAxis++){
-                    inputNeurons[xAxis + 28*yAxis].receiveRawByte(pixelArray[xAxis][yAxis]);
+                    inputNeurons[xAxis + 28*yAxis].receiveInput(pixelArray[xAxis][yAxis]);
                 }
             }
             inputNeurons[i].activateOutgoingEdges();
