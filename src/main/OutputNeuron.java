@@ -9,16 +9,7 @@ public class OutputNeuron extends Neuron {
 
 
     //deltalernregel noch in Bearbeitung
-@Deprecated // niklas alte methode
-    public void deltalearn(double targetWeigth) {
 
-        double littleDelta = targetWeigth - getOutputvalue();
-        double a = getOutputvalue();   //passendes Neuron?
-        double delta = NetworkController.EPSILON * littleDelta * a;
-
-
-
-    }
 
 
     public void sendDeltaToEdge(int targetWeight){

@@ -11,7 +11,7 @@ public class Edge {
 
     Edge(int id,Neuron previousNeuron, Neuron nextNeuron)
     {   this.id=id;
-        this.weight=Math.random();
+        this.weight=Math.random() - 0.5d;
         this.previousNeuron=previousNeuron;
         this.nextNeuron=nextNeuron;
 

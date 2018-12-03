@@ -4,7 +4,7 @@ package main;
 
 public class PoolHiddenNeuron extends HiddenNeuron {
 
-    double maxinput = Double.MIN_VALUE;
+    double maxinput = -100000000000000000000000d;
     Edge maxEdge = null;
 
     //Konstruktor
@@ -22,7 +22,7 @@ public class PoolHiddenNeuron extends HiddenNeuron {
     }
     @Override
     public void resetInputSum(){
-        maxinput = Double.MIN_VALUE;
+        maxinput = -10000000000000000d;
         maxEdge = null;
     }
 
