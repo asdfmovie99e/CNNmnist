@@ -11,6 +11,7 @@ public class NetworkController {
     private static final int ANZAHL_HIDDEN_NEURONEN_FOUR = 49; // max pool 2x2 wird zu 1
     private static final int ANZAHL_HIDDEN_NEURONEN_FIVE = 50;// voll vermaschte hidden schicht
     private static final int ANZAHL_OUTPUT_NEURONEN = 10;
+    private static final double EPSILON = 0.05f;
     // es wird von einer 4x4 convolution schicht und einer 2x2 max pooling schicht ausgegangen
     private static final int ANZAHL_EGDES = 123456789; // muss noch manuel eingegeben werden
     private static final int ANZAHL_BILDER = 59000;
@@ -28,6 +29,11 @@ public class NetworkController {
     public static void startLearning() {
         createNeuronNetwork();
         sendForward();
+        backwardPropagation();
+    }
+
+    private static void backwardPropagation() {
+
     }
 
     private static void createNeuronNetwork() {
