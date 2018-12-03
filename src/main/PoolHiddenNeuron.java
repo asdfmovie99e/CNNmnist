@@ -41,4 +41,10 @@ public class PoolHiddenNeuron extends HiddenNeuron {
         }
             maxEdge.modWeight(smallDelta);
     }
+
+@Override
+    public Double getOutputvalue() {
+
+        return maxinput;
+    }
 }

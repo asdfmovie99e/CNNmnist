@@ -1,8 +1,10 @@
 package main;
 
 import helper.LearnObserver;
+import helper.TestPictureCreator;
 
 public class NetworkController {
+    public static final double EPSILON = 0.01d;
     //das netz ist so gedacht, dass die erste schicht eine normle input schicht ist.
     // die zweite ist eine convolutional schicht und die 3. maxpooling
     // die 4. wieder conv dann wieder maxpool und an 6. stelle output
@@ -13,7 +15,6 @@ public class NetworkController {
     private static final int ANZAHL_HIDDEN_NEURONEN_FOUR = 49; // max pool 2x2 wird zu 1
     private static final int ANZAHL_HIDDEN_NEURONEN_FIVE = 100;// voll vermaschte hidden schicht
     private static final int ANZAHL_OUTPUT_NEURONEN = 10;
-    public static final double EPSILON = 0.01d;
     // es wird von einer 4x4 convolution schicht und einer 2x2 max pooling schicht ausgegangen
     private static final int ANZAHL_EGDES = 123456789; // muss noch manuel eingegeben werden
     private static final int ANZAHL_BILDER = 59000;
@@ -123,24 +124,41 @@ public class NetworkController {
     }
 
     private static void sendForward(int[][] pixelArray) {
-        for (int i = 0; i < ANZAHL_INPUT_NEURONEN; i++) {// input neuronen senden schleife
+        /*for (int i = 0; i < ANZAHL_INPUT_NEURONEN; i++) {// input neuronen senden schleife
             for(int yAxis = 0; yAxis < 28; yAxis++){
                 for(int xAxis = 0; xAxis < 28; xAxis++){
                     try{
-                    inputNeurons[xAxis + 28*yAxis].receiveInput(pixelArray[xAxis][yAxis]); }
+                    inputNeurons[xAxis + 28*yAxis].receiveInput(pixelArray[xAxis][yAxis] / 255d);
+
+                        }
                     catch (Exception e){
                         e.printStackTrace();
                     }
                 }
             }
             inputNeurons[i].activateOutgoingEdges();
+            TestPictureCreator.passValue(i,inputNeurons[i].getOutputvalue()); // DEBUG PURPOSE
+
+        }*/
+        for(int yAxis = 0; yAxis < 28; yAxis++) {
+            for (int xAxis = 0; xAxis < 28; xAxis++) {
+                inputNeurons[xAxis + 28*yAxis].receiveInput(pixelArray[xAxis][yAxis] / 255d);
+                inputNeurons[xAxis + 28*yAxis].activateOutgoingEdges();
+               // TestPictureCreator.passValue(xAxis + 28*yAxis,inputNeurons[xAxis + 28*yAxis].getOutputvalue()); // DEBUG PURPOSE
+            }
         }
+
+
+
+        //TestPictureCreator.createPic();// debug
         for (int i = 0; i < ANZAHL_HIDDEN_NEURONEN_ONE; i++){
             hiddenNeuronsOne[i].activateOutgoingEdges();
         }
         for (int i = 0; i < ANZAHL_HIDDEN_NEURONEN_TWO; i++){
             hiddenNeuronsTwo[i].activateOutgoingEdges();
+          //  TestPictureCreator.passValue(i,hiddenNeuronsTwo[i].getOutputvalue()); // DEBUG PURPOSE
         }
+       // TestPictureCreator.createPic();// debug
         for (int i = 0; i < ANZAHL_HIDDEN_NEURONEN_THREE; i++){
             hiddenNeuronsThree[i].activateOutgoingEdges();
         }
