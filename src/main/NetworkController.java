@@ -1,5 +1,5 @@
 package main;
-
+//:)
 import helper.LearnObserver;
 import helper.TestPictureCreator;
 
@@ -163,15 +163,16 @@ public class NetworkController {
         }
         for (int i = 0; i < ANZAHL_HIDDEN_NEURONEN_TWO; i++){
             hiddenNeuronsTwo[i].activateOutgoingEdges();
-          //  TestPictureCreator.passValue(i,hiddenNeuronsTwo[i].getOutputvalue()); // DEBUG PURPOSE
+
         }
-       // TestPictureCreator.createPic();// debug
         for (int i = 0; i < ANZAHL_HIDDEN_NEURONEN_THREE; i++){
             hiddenNeuronsThree[i].activateOutgoingEdges();
         }
         for (int i = 0; i < ANZAHL_HIDDEN_NEURONEN_FOUR; i++){
             hiddenNeuronsFour[i].activateOutgoingEdges();
+            TestPictureCreator.passValue(i,hiddenNeuronsFour[i].getOutputvalue()); // DEBUG PURPOSE
         }
+        TestPictureCreator.createPic(7);// debug
         for (int i = 0; i < ANZAHL_HIDDEN_NEURONEN_FIVE; i++){
             hiddenNeuronsFive[i].activateOutgoingEdges();
         }

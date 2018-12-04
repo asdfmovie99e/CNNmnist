@@ -7,22 +7,22 @@ import java.io.IOException;
  // nur für debug zwecke. Die ganze klasse
 public class TestPictureCreator {
 
-    private static Double[] pixelArray = new Double[14*14];
+    private static Double[] pixelArray = new Double[784];
 
     public static void passValue(int ident, double value){
         pixelArray[ident] = value;
     }
 
 
-   public static void createPic() {
+   public static void createPic(int size) {
            int colorInt;
-           BufferedImage bufferedImage = new BufferedImage(14, 14, BufferedImage.TYPE_INT_RGB); // hoehe auf 28x28 festgelegt, da nur mit dem mnist datensatz gearbeitet wird
-           for (int iy = 0; iy < 14; iy++) {
-               for (int ix = 0; ix < 14; ix++) {
-                    if(ix + (iy * 14) > -1){
+           BufferedImage bufferedImage = new BufferedImage(size, size, BufferedImage.TYPE_INT_RGB); // hoehe auf 28x28 festgelegt, da nur mit dem mnist datensatz gearbeitet wird
+           for (int iy = 0; iy < size; iy++) {
+               for (int ix = 0; ix < size; ix++) {
+                    if(ix + (iy * size) > -1){
                         doNothing();
                     }
-                   double tempColor =  pixelArray[ix + (iy * 14)];
+                   double tempColor =  pixelArray[ix + (iy * size)];
                    colorInt =255 -  (int) ((tempColor * 255));
                    int pixel = (colorInt << 24 | colorInt << 16 | colorInt << 8 | colorInt); // bit shifting um den standards zu entsprchen. red green und blue sind immer 0
                    bufferedImage.setRGB(ix, iy, pixel);
