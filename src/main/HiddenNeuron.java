@@ -7,8 +7,7 @@ public class HiddenNeuron extends Neuron {
 
 
     public HiddenNeuron (int id) {
-        super();
-        this.id=id;
+        super(id);
 }
 
 public void sendDeltaToEdge(){

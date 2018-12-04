@@ -1,15 +1,16 @@
 package main;
 
 
+import helper.MathHelper;
+
 public class InputNeuron extends Neuron {
 
 
 
     public InputNeuron (int id) {
-    super();
-    this.id=id;
+    super(id);
     }
-
+@Deprecated
     public void receiveRawByte(byte b){
         double result;
         if (b < 0 ) {
@@ -24,4 +25,12 @@ public class InputNeuron extends Neuron {
         this.inputSum = inputSum;
     }
 
+    public void receiveInput(double input) {
+        this.inputSum = input;
+    }
+
+    @Override
+    public Double getOutputvalue() {
+        return inputSum;
+    }
 }

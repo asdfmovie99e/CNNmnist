@@ -16,9 +16,10 @@ protected double smallDelta;
 protected HashSet<Edge> incomingEdgeSet; //
 protected HashSet<Edge> outgoingEdgeSet;
 
-    Neuron(){
+    Neuron(int id){
         outgoingEdgeSet = new HashSet<Edge>();
         incomingEdgeSet = new HashSet<Edge>();
+        this.id = id;
     }
 
     public void receiveOutputFromPreviousEdge(Double prevOutput) {

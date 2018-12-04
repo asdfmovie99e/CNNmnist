@@ -19,9 +19,10 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-       // NetworkController.startLearning();
        // launch(args);
         MathHelper.start();
+        PictureCoderOld.readMnistFiles();
+        NetworkController.startLearning();
 
     }
 }

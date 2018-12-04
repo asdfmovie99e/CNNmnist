@@ -3,21 +3,12 @@ package main;
 public class OutputNeuron extends Neuron {
 
     public OutputNeuron(int id) {
-        super();
-        this.id = id;
+        super(id);
     }
 
 
-@Deprecated
-    public void deltalearn(double targetWeigth) {
+    //deltalernregel noch in Bearbeitung
 
-        double littleDelta = targetWeigth - getOutputvalue();
-        double a = getOutputvalue();   //passendes Neuron?
-        double delta = NetworkController.EPSILON * littleDelta * a;
-
-
-
-    }
 
 
     public void sendDeltaToEdge(int targetWeight){
