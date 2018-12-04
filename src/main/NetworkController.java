@@ -65,14 +65,20 @@ public class NetworkController {
     }
 
     private static void backwardPropagation(Integer trueLabel) {
+        OutputNeuron highestOutput = null;
         for(OutputNeuron outputNeuron: outputNeurons){
-            LearnObserver.incTried(outputNeuron.getId());
             if(trueLabel == outputNeuron.getId()){
                 outputNeuron.sendDeltaToEdge(1);
-                LearnObserver.incSucces(outputNeuron.getId());
+                LearnObserver.incTried(outputNeuron.getId());
+                if(highestOutput == null || highestOutput.getOutputvalue() < outputNeuron.getOutputvalue()){
+                    highestOutput = outputNeuron;
+                }
             }else{
                 outputNeuron.sendDeltaToEdge(0);
             }
+        }
+        if(highestOutput.getId() == trueLabel){
+            LearnObserver.incSucces(trueLabel);
         }
         for(HiddenNeuron hiddenNeuron: hiddenNeuronsFive){
             hiddenNeuron.sendDeltaToEdge();
