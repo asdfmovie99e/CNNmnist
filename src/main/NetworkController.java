@@ -71,11 +71,12 @@ public class NetworkController {
             if(trueLabel == outputNeuron.getId()){
                 outputNeuron.sendDeltaToEdge(1);
                 LearnObserver.incTried(outputNeuron.getId());
-                if(highestOutput == null || highestOutput.getOutputvalue() < outputNeuron.getOutputvalue()){
-                    highestOutput = outputNeuron;
-                }
             }else{
                 outputNeuron.sendDeltaToEdge(0);
+            }
+
+            if(highestOutput == null || highestOutput.getOutputvalue() < outputNeuron.getOutputvalue()){
+                highestOutput = outputNeuron;
             }
         }
         if(highestOutput.getId() == trueLabel){

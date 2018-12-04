@@ -20,6 +20,7 @@ public class LearnObserver {
 
     public static void showResults(){
         for(int i = 0; i < 10;i++){
+            if(timesTried[i] == 0) return;
             System.out.println("Die Zahl " + i + " ist zu " + 100 * timesSuccessfull[i] / timesTried[i] + " richtig.");
         }
     }
