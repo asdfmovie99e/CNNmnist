@@ -3,16 +3,19 @@ package main;
 import helper.LearnObserver;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class NetworkController {
 
     private static final int ANZAHL_INPUT_NEURONS = 28 * 28;
-    private static final int ANZAHL_HIDDEN_ONE = 100;
+    private static final int ANZAHL_HIDDEN_ONE = 748;
+    private static final int ANZAHL_HIDDEN_TWO = 100;
     private static final int ANZAHL_OUTPUT_NEURON = 10;
     public static final double EPSILON = 0.05d;
     private static final int ANZAHL_BILDER = 60000;
     private static ArrayList<InputNeuron> inputNeurons = new ArrayList<InputNeuron>();
     private static ArrayList<HiddenNeuron> hiddenNeuronsOne = new ArrayList<HiddenNeuron>();
+    private static ArrayList<HiddenNeuron> hiddenNeuronsTwo = new ArrayList<HiddenNeuron>();
     private static ArrayList<OutputNeuron> outputNeurons = new ArrayList<OutputNeuron>();
 
 
@@ -40,6 +43,9 @@ public class NetworkController {
         for(HiddenNeuron hiddenNeuron : hiddenNeuronsOne){
             hiddenNeuron.sendOutputToNextEdge();
         }
+        for(HiddenNeuron hiddenNeuron : hiddenNeuronsTwo){
+            hiddenNeuron.sendOutputToNextEdge();
+        }
         for(OutputNeuron outputNeuron: outputNeurons){
             outputNeuron.calculateOutput();
         }
@@ -49,6 +55,9 @@ public class NetworkController {
         for(HiddenNeuron hiddenNeuron : hiddenNeuronsOne){
             hiddenNeuron.resetInput();
         }
+        for(HiddenNeuron hiddenNeuron : hiddenNeuronsTwo){
+            hiddenNeuron.resetInput();
+        }
         for(OutputNeuron outputNeuron: outputNeurons){
             outputNeuron.resetInput();
         }
@@ -56,20 +65,42 @@ public class NetworkController {
     }
 
     private static void instantiateEdges() {
-        //von input zu hiddenOne
-        for(InputNeuron inputNeuron: inputNeurons){
+        InputNeuron[] inputNeuronsArray = (InputNeuron[]) inputNeurons.toArray();
+        HiddenNeuron[] hiddenNeuronsOneArray = (HiddenNeuron[]) arrayListToArrayByIdent(hiddenNeuronsOne);
+
             for(HiddenNeuron hiddenNeuron : hiddenNeuronsOne){
-                connectNeurons(inputNeuron, hiddenNeuron);
+                for(int x = -1; x <= 1; x++){
+                    for(int y = -1; y <= 1;y++){
+                        int inputNeuronIdent = hiddenNeuron.getIdentNumber() + x + y * 28;
+                        if(hiddenNeuron.getIdentNumber() >=28 && hiddenNeuron.getIdentNumber() <= 27*28 && hiddenNeuron.getIdentNumber() % 28 != 0 && hiddenNeuron.getIdentNumber() % 28 != 27) {
+                            connectNeurons(inputNeuronsArray[inputNeuronIdent], hiddenNeuron);
+                        }
+                    }
+                }
             }
-        }
+
 
         //von hiddenOne zum output
-        for(HiddenNeuron hiddenNeuron : hiddenNeuronsOne){
+        for(HiddenNeuron hiddenNeuron1 : hiddenNeuronsOne){
+            for(HiddenNeuron hiddenNeuron2: hiddenNeuronsTwo){
+                connectNeurons(hiddenNeuron1, hiddenNeuron2);
+            }
+        }
+        for(HiddenNeuron hiddenNeuron : hiddenNeuronsTwo){
             for(OutputNeuron outputNeuron: outputNeurons){
                 connectNeurons(hiddenNeuron, outputNeuron);
             }
         }
 
+    }
+
+    private static <NeuronType extends Neuron> Object[] arrayListToArrayByIdent(ArrayList<NeuronType> neuronList) {
+        NeuronType[] resultArray =(NeuronType[]) new Object[neuronList.size()];
+        for(int i = 0; i < neuronList.size(); i++){
+            resultArray[((NeuronType)neuronList.get(i)).getIdentNumber()] = (NeuronType) neuronList.get(i);
+        }
+
+        return resultArray;
     }
 
     private static void instantiateNeurons() {
@@ -80,6 +111,10 @@ public class NetworkController {
         for(int i = 0; i < ANZAHL_HIDDEN_ONE; i++){
             HiddenNeuron hiddenNeuron = new HiddenNeuron(i);
             hiddenNeuronsOne.add(hiddenNeuron);
+        }
+        for(int i = 0; i < ANZAHL_HIDDEN_TWO; i++){
+            HiddenNeuron hiddenNeuron = new HiddenNeuron(i);
+            hiddenNeuronsTwo.add(hiddenNeuron);
         }
         for(int i = 0; i < ANZAHL_OUTPUT_NEURON; i++){
             OutputNeuron outputNeuron = new OutputNeuron(i);
@@ -103,8 +138,12 @@ public class NetworkController {
                 outputNeuron.modWeight(0d);
             }
         }
+        for(HiddenNeuron hiddenNeuron: hiddenNeuronsTwo) {
+            hiddenNeuron.modWeight();
+        }
         for(HiddenNeuron hiddenNeuron: hiddenNeuronsOne){
             hiddenNeuron.modWeight();
+
         }
     }
 
