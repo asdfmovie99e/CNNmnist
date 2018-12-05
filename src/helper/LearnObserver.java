@@ -20,6 +20,10 @@ public class LearnObserver {
         }
 
         timesTried[label] += 1;
+        if(IntStream.of(timesTried).sum() % 5000 == 0){
+            timesSuccessfull = new int[10];
+            timesTried = new int[10];
+        }
         if(biggestNeuron.getIdentNumber() == label) {
             timesSuccessfull[biggestNeuron.getIdentNumber()] += 1;
         }
