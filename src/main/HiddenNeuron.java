@@ -2,9 +2,9 @@ package main;
 
 import helper.MathHelper;
 
-public class OutputNeuron extends Neuron{
+public class HiddenNeuron extends Neuron {
 
-    public OutputNeuron(int identNumber) {
+    public HiddenNeuron(int identNumber) {
         super(identNumber);
     }
 
@@ -24,11 +24,17 @@ public class OutputNeuron extends Neuron{
         return lastOutputValue;
     }
 
-    public void modWeight(Double targetWeight) {
-        Double smallDelta = targetWeight - calculateOutput();
+    public void modWeight() {
+        double smallDelta = 0;
+       for(Edge edge: outgoingEdges){
+           smallDelta += edge.getCurrentWeight() * edge.getNextNeuron().getLastSmallDelta();
+       }
+
+
+
         lastSmallDelta = smallDelta;
         Double ableitung = MathHelper.getSigmoidApprox(lastInputValue) * (1 - MathHelper.getSigmoidApprox(lastInputValue));
-        for(Edge edge: incomingEdges){
+        for (Edge edge : incomingEdges) {
             edge.modWeight(smallDelta, ableitung);
         }
     }

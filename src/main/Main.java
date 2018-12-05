@@ -23,6 +23,6 @@ public class Main extends Application {
         MathHelper.start();
         PictureCoder.readMnistFiles();
         NetworkController.startLearning();
-
+        System.exit(1);
     }
 }

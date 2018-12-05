@@ -1,27 +1,35 @@
 package helper;
 
+import main.OutputNeuron;
+
+import java.util.ArrayList;
+import java.util.stream.IntStream;
+
 public class LearnObserver {
     private static int[] timesSuccessfull = new int[10];
     private static int[] timesTried = new int[10];
 
 
-    public static void incSucces(int zahl){
-        timesSuccessfull[zahl]++;
-    }
 
-    public static void incTried(int zahl){
-        timesTried[zahl]++;
-    }
-
-    public static void reset(){
-         timesSuccessfull = new int[10];
-         timesTried = new int[10];
-    }
-
-    public static void showResults(){
-        for(int i = 0; i < 10;i++){
-            if(timesTried[i] == 0) return;
-            System.out.println("Die Zahl " + i + " ist zu " + 100 * timesSuccessfull[i] / timesTried[i] + " richtig.");
+    public static void watchResults(Integer label, ArrayList<OutputNeuron> outputNeurons) {
+        OutputNeuron biggestNeuron = null;
+        for(OutputNeuron outputNeuron: outputNeurons){
+            if(biggestNeuron == null || outputNeuron.calculateOutput() > biggestNeuron.calculateOutput()){
+                biggestNeuron = outputNeuron;
+            }
         }
+
+        timesTried[label] += 1;
+        if(biggestNeuron.getIdentNumber() == label) {
+            timesSuccessfull[biggestNeuron.getIdentNumber()] += 1;
+        }
+        System.out.println(IntStream.of(timesTried).sum() / 600 + " Prozent abgeschlossen.");
+        for(int i = 0; i < 10;i++){
+            try {
+                System.out.println("Die Zahl " + (i + 1) + " war zu " + 100 * timesSuccessfull[i] / timesTried[i] + " Prozent richtig.");
+            }catch (Exception e){
+                System.out.println("Noch nicht genügend Zahlen");
+            }
+            }
     }
 }

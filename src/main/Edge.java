@@ -12,6 +12,10 @@ public class Edge {
         this.nextNeuron = nextNeuron;
     }
 
+    public double getCurrentWeight() {
+        return currentWeight;
+    }
+
     public void receiveInput(double lastInputValue) {
         this.lastInputValue = lastInputValue;
         sendToNextLayer();
@@ -35,4 +39,9 @@ public class Edge {
         return nextNeuron;
     }
 
+    public void modWeight(Double smallDelta, Double ableitung) {
+        double edgeInput = previousNeuron.getLastOutputValue();
+        Double bigDelta = smallDelta * ableitung * NetworkController.EPSILON * edgeInput;
+        currentWeight += bigDelta;
+    }
 }

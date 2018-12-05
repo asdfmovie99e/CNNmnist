@@ -8,8 +8,8 @@ public class InputNeuron extends Neuron {
     }
 
     @Override
-    public void resetInput(){
-        throw new UnsupportedOperationException();
+    public void resetInput()  {
+       //nicht nötig
     }
 
     @Override
@@ -19,6 +19,7 @@ public class InputNeuron extends Neuron {
 
     @Override
     public double calculateOutput() {
-        return lastInputValue / 255d;
+        lastOutputValue =  ((Double)lastInputValue) / 255d;
+        return lastOutputValue;
     }
 }
