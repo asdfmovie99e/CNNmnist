@@ -13,6 +13,7 @@ public class LearnObserver {
 
 
     public static void watchResults(Integer label, ArrayList<OutputNeuron> outputNeurons) {
+        try{
         OutputNeuron biggestNeuron = null;
         for(OutputNeuron outputNeuron: outputNeurons){
             if(biggestNeuron == null || outputNeuron.calculateOutput() > biggestNeuron.calculateOutput()){
@@ -29,13 +30,14 @@ public class LearnObserver {
         if(biggestNeuron.getIdentNumber() == label) {
             timesSuccessfull[biggestNeuron.getIdentNumber()] += 1;
         }
-        System.out.println(pictureCounter / 600 + " Prozent abgeschlossen.");
+        System.out.println(pictureCounter / 600 + " Prozent abgeschlossen.  "+ (100 * IntStream.of(timesSuccessfull).sum() / IntStream.of(timesTried).sum()) + " Prozent richtig");
         for(int i = 0; i < 10;i++){
-            try {
+
                 System.out.println("Die Zahl " + (i + 1) + " war zu " + 100 * timesSuccessfull[i] / timesTried[i] + " Prozent richtig.");
-            }catch (Exception e){
-                System.out.println("Noch nicht genügend Zahlen");
+
             }
-            }
+        }catch (Exception e){
+            System.out.println("Noch nicht genügend Zahlen");
+        }
     }
 }

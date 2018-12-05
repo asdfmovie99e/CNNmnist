@@ -11,7 +11,7 @@ public class NetworkController {
     private static final int ANZAHL_HIDDEN_ONE = 748;
     private static final int ANZAHL_HIDDEN_TWO = 100;
     private static final int ANZAHL_OUTPUT_NEURON = 10;
-    public static final double EPSILON = 0.05d;
+    public static final double EPSILON = 0.03d;
     private static final int ANZAHL_BILDER = 60000;
     private static ArrayList<InputNeuron> inputNeurons = new ArrayList<InputNeuron>();
     private static ArrayList<HiddenNeuron> hiddenNeuronsOne = new ArrayList<HiddenNeuron>();
@@ -23,7 +23,8 @@ public class NetworkController {
         instantiateNeurons();
         instantiateEdges();
 
-        for(int pictureNumber = 0; pictureNumber < ANZAHL_BILDER; pictureNumber++){
+        for(int gesamtPictureNumber = 0; gesamtPictureNumber < ANZAHL_BILDER * 10; gesamtPictureNumber++){
+            int pictureNumber = gesamtPictureNumber % ANZAHL_BILDER;
         resetAllNeurons();
         sendForward(pictureNumber);
         LearnObserver.watchResults(PictureCoder.getLabel(pictureNumber), outputNeurons);
@@ -65,8 +66,8 @@ public class NetworkController {
     }
 
     private static void instantiateEdges() {
-        InputNeuron[] inputNeuronsArray = (InputNeuron[]) inputNeurons.toArray();
-        HiddenNeuron[] hiddenNeuronsOneArray = (HiddenNeuron[]) arrayListToArrayByIdent(hiddenNeuronsOne);
+        InputNeuron[] inputNeuronsArray =  inputNeurons.toArray(new InputNeuron[inputNeurons.size()]);
+        HiddenNeuron[] hiddenNeuronsOneArray = hiddenNeuronsOne.toArray(new HiddenNeuron[hiddenNeuronsOne.size()]);
 
             for(HiddenNeuron hiddenNeuron : hiddenNeuronsOne){
                 for(int x = -1; x <= 1; x++){
