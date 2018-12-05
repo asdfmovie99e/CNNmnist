@@ -21,7 +21,7 @@ public class Main extends Application {
     public static void main(String[] args) {
        // launch(args);
         MathHelper.start();
-        PictureCoderOld.readMnistFiles();
+        PictureCoder.readMnistFiles();
         NetworkController.startLearning();
 
     }

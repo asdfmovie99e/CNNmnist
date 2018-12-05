@@ -1,21 +1,23 @@
 package main;
 
-public class OutputNeuron extends Neuron {
+public class OutputNeuron extends Neuron{
 
-    public OutputNeuron(int id) {
-        super(id);
+    public OutputNeuron(int identNumber) {
+        super(identNumber);
     }
 
+    @Override
+    public void resetInput() {
+        lastInputValue = 0;
+    }
 
-    //deltalernregel noch in Bearbeitung
+    @Override
+    public void receiveInput(double input) {
+        lastOutputValue += input;
+    }
 
-
-
-    public void sendDeltaToEdge(int targetWeight){
-        smallDelta  = targetWeight - getOutputvalue();
-        for(Edge edge: incomingEdgeSet){
-            edge.modWeight(smallDelta);
-        }
-
+    @Override
+    public double calculateOutput() {
+        return lastInputValue;
     }
 }
