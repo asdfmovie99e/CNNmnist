@@ -33,7 +33,7 @@ public class LearnObserver {
         System.out.println(pictureCounter / 600 + " Prozent abgeschlossen.  "+ (100 * IntStream.of(timesSuccessfull).sum() / IntStream.of(timesTried).sum()) + " Prozent richtig");
         for(int i = 0; i < 10;i++){
 
-                System.out.println("Die Zahl " + (i + 1) + " war zu " + 100 * timesSuccessfull[i] / timesTried[i] + " Prozent richtig.");
+                System.out.println("Die Zahl " + (i) + " war zu " + 100 * timesSuccessfull[i] / timesTried[i] + " Prozent richtig.");
 
             }
         }catch (Exception e){
