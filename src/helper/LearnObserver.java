@@ -21,12 +21,12 @@ public class LearnObserver {
             }
         }
 
-        timesTried[label] += 1;
         pictureCounter++;
         if(pictureCounter % 5000 == 0){
             timesSuccessfull = new int[10];
             timesTried = new int[10];
         }
+            timesTried[label] += 1;
         if(biggestNeuron.getIdentNumber() == label) {
             timesSuccessfull[biggestNeuron.getIdentNumber()] += 1;
         }
