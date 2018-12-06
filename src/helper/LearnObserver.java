@@ -16,7 +16,7 @@ public class LearnObserver {
         try{
         OutputNeuron biggestNeuron = null;
         for(OutputNeuron outputNeuron: outputNeurons){
-            if(biggestNeuron == null || outputNeuron.calculateOutput() > biggestNeuron.calculateOutput()){
+            if(biggestNeuron == null || outputNeuron.calculateOutput() >= biggestNeuron.calculateOutput()){
                 biggestNeuron = outputNeuron;
             }
         }
