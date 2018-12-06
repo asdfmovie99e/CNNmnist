@@ -1,60 +1,53 @@
 package main;
-/*
- @author Niklas Bruns
- @version 1.0
- */
-import helper.MathHelper;
 
-import java.util.HashMap;
 import java.util.HashSet;
 
 public abstract class Neuron {
-protected int id;
-protected double inputSum = 0;
-protected double outputValue = 0;
-protected double smallDelta;
-protected HashSet<Edge> incomingEdgeSet; //
-protected HashSet<Edge> outgoingEdgeSet;
+    protected double lastInputValue = 0;
+    protected double lastOutputValue = 0;
+    protected double lastSmallDelta;
+    protected HashSet<Edge> incomingEdges = new HashSet<Edge>();
+    protected HashSet<Edge> outgoingEdges = new HashSet<Edge>();
+    protected int identNumber;
 
-    Neuron(int id){
-        outgoingEdgeSet = new HashSet<Edge>();
-        incomingEdgeSet = new HashSet<Edge>();
-        this.id = id;
+    public int getIdentNumber() {
+        return identNumber;
     }
 
-    public void receiveOutputFromPreviousEdge(Double prevOutput) {
-        inputSum += prevOutput;
+    public Neuron(int identNumber){
+        this.identNumber = identNumber;
     }
 
-    //Übergibt Outputwert an Edge
-    public Double getOutputvalue() {
-        outputValue= MathHelper.getSigmoidApprox(inputSum);
-        return outputValue;
+    public double getLastInputValue() {
+        return lastInputValue;
     }
 
-    public int getId(){
-        return id;
+    public double getLastOutputValue() {
+        return lastOutputValue;
     }
 
-    public double getSmallDelta(){
-        return smallDelta;
+    public abstract void resetInput();
+
+    public abstract void receiveInput(double input);
+
+    public abstract double calculateOutput();
+
+    public double getLastSmallDelta(){
+        return lastSmallDelta;
     }
 
-    public void resetInputSum()
-    {
-        inputSum = 0;
-    }
-
-    public void activateOutgoingEdges(){
-        for(Edge edge: outgoingEdgeSet){
-            edge.giveToNextNeuron();
+    public void sendOutputToNextEdge(){
+        calculateOutput();
+        for(Edge outgoingEdge: outgoingEdges){
+            outgoingEdge.receiveInput(lastOutputValue);
         }
     }
 
-   public void addIncomingEdge(Edge edge){
-        incomingEdgeSet.add(edge);
-   }
     public void addOutgoingEdge(Edge edge){
-        outgoingEdgeSet.add(edge);
+        outgoingEdges.add(edge);
+    }
+
+    public void addIncomingEdge(Edge edge){
+        incomingEdges.add(edge);
     }
 }
