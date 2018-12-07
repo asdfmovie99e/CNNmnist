@@ -35,4 +35,19 @@ public class PasswortController {
 
     }
 
+    public Button getClicklogin() {
+        return clicklogin;
+    }
+
+    public TextField getURL() {
+        return URL;
+    }
+
+    public TextField getUser() {
+        return User;
+    }
+
+    public PasswordField getPasswort() {
+        return Passwort;
+    }
 }
