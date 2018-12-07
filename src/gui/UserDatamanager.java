@@ -20,12 +20,17 @@ public static void SaveUserData(String url, String user)
 
     //liest Datei aus     noch in Bearbeitung
 public static void readSavedUserData()
-    {
+    {  String url;
+       String user;
+
       try {
           new FileReader("userdata.txt");
+
             }
             catch (IOException ioe)
             {
+              url = "";
+              user = "";
             }
 
 
