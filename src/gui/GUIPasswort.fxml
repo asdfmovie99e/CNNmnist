@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="191.0" prefWidth="343.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <CheckBox layoutX="44.0" layoutY="135.0" mnemonicParsing="false" text="Anmeldedaten speichern" />
+      <Button layoutX="229.0" layoutY="131.0" mnemonicParsing="false" text="anmelden" />
+      <TextField layoutX="139.0" layoutY="54.0" prefHeight="25.0" prefWidth="165.0" />
+      <PasswordField layoutX="139.0" layoutY="88.0" prefHeight="25.0" prefWidth="165.0" />
+      <Label layoutX="43.0" layoutY="58.0" text="Nutzer:" />
+      <Label layoutX="44.0" layoutY="92.0" text="Passwort:" />
+      <TextField layoutX="139.0" layoutY="20.0" prefHeight="25.0" prefWidth="165.0" />
+      <Label layoutX="43.0" layoutY="24.0" text="URL:" />
+   </children>
+</Pane>
