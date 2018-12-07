@@ -16,17 +16,17 @@ public class LearnObserver {
         try{
         OutputNeuron biggestNeuron = null;
         for(OutputNeuron outputNeuron: outputNeurons){
-            if(biggestNeuron == null || outputNeuron.calculateOutput() > biggestNeuron.calculateOutput()){
+            if(biggestNeuron == null || outputNeuron.calculateOutput() >= biggestNeuron.calculateOutput()){
                 biggestNeuron = outputNeuron;
             }
         }
 
-        timesTried[label] += 1;
         pictureCounter++;
         if(pictureCounter % 5000 == 0){
             timesSuccessfull = new int[10];
             timesTried = new int[10];
         }
+            timesTried[label] += 1;
         if(biggestNeuron.getIdentNumber() == label) {
             timesSuccessfull[biggestNeuron.getIdentNumber()] += 1;
         }
