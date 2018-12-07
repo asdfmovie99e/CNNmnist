@@ -1,18 +1,20 @@
 package helper;
 
-import java.sql.Connection;
 import java.util.Scanner;
+
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
-
-
+//import java.sql.*;
 
 public class DBConnect {
 
-    String user;
-    String pass;
+
+    public String user;
+    public String pass;
+    public String url = "jdbc:mysql://loclhost:3306/neuronaldata";
     private Connection connection;
     private String driver ="com.mysql.jdbc.Driver";
 
@@ -31,14 +33,14 @@ public class DBConnect {
         pass = scanPass.nextLine();
         return pass;
     }
-}
+
 
     //Methode zum verbinden
     public void connect(String URL, String user, String pass){
         try {
-            Class.forName(this.driver);
-            this.connection = DriverManager.getConnection("jdbc:mysql://loclhost:3306/neuronaldata",user,pass);
-            } catch (Exception e) {
+            Class.forName("org.mariadb.jdbc.Driver");
+            this.connection = DriverManager.getConnection(url,user,pass);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -66,7 +68,7 @@ public class DBConnect {
                 return true;
             }
             return false;
-            } catch (Exception e) {
+        } catch (Exception e) {
             return false;
         }
     }
@@ -106,24 +108,29 @@ public class DBConnect {
 
         try {
             conn = DriverManager.getConnection(
-                    'jdbc:mysql://localhost:3306/neuronaldata' , user, pass);
-            }
-            catch (SQLException se) {
+                    "jdbc:mysql://localhost:3306/neuronaldata" , user, pass);
+        }
+        catch (SQLException se) {
             se.printStackTrace();
             System.out.println("Das sollte nicht passieren");
-            }
+        }
 
+        try {
             stmt = conn.createStatement();
 
-                String sql = "Create Table Test"
-                        + " (Save_Nr Integer, "
-                        + " Input_Neuron_One Integer, "
-                        + " Input_Neuron_Two Integer, "
-                        + " Input_Neuron_Three Integer, "
-                        + " Input_Neuron_Four Integer, "
-                        + " Input_Neuron_Five Integer, "
-                        + " Primary Key (Save_Nr))";
+            String sql = "Create Table Test"
+                    + " (Save_Nr Integer, "
+                    + " Input_Neuron_One Integer, "
+                    + " Input_Neuron_Two Integer, "
+                    + " Input_Neuron_Three Integer, "
+                    + " Input_Neuron_Four Integer, "
+                    + " Input_Neuron_Five Integer, "
+                    + " Primary Key (Save_Nr))";
             stmt.executeUpdate(sql);
+        } catch (SQLException e) {
+            return ;
+        }
 
-            System.out.println("Die Tabelle 'HiddenLayer' wurde in der Datenbank wird erstellt!");
+        System.out.println("Die Tabelle 'HiddenLayer' wurde in der Datenbank wird erstellt!");
     }
+}
