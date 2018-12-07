@@ -31,7 +31,7 @@ public class DBConnect {
         pass = scanPass.nextLine();
         return pass;
     }
-}
+
 
     //Methode zum verbinden
     public void connect(String URL, String user, String pass){
@@ -106,7 +106,7 @@ public class DBConnect {
 
         try {
             conn = DriverManager.getConnection(
-                    'jdbc:mysql://localhost:3306/neuronaldata' , user, pass);
+                    "jdbc:mysql://localhost:3306/neuronaldata" , user, pass);
             }
             catch (SQLException se) {
             se.printStackTrace();
@@ -127,3 +127,5 @@ public class DBConnect {
 
             System.out.println("Die Tabelle 'HiddenLayer' wurde in der Datenbank wird erstellt!");
     }
+}
+
