@@ -5,6 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/GUIPasswort.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/GUIPasswort.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/PasswortController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/PasswortController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/UserDatamanager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/UserDatamanager.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -131,13 +132,13 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="fxml" value="5" />
-          <entry key="java" value="13" />
+          <entry key="java" value="14" />
           <entry key="sql" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="13" />
+          <entry key="JAVA" value="14" />
           <entry key="SQL" value="1" />
           <entry key="XML" value="5" />
         </counts>
@@ -145,13 +146,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="fxml" value="12" />
-          <entry key="java" value="411" />
+          <entry key="java" value="757" />
           <entry key="txt" value="149" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="411" />
+          <entry key="JAVA" value="757" />
           <entry key="PLAIN_TEXT" value="149" />
           <entry key="XML" value="12" />
         </counts>
@@ -205,6 +206,15 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/helper/MathHelper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="425">
+              <caret line="25" selection-start-line="25" selection-end-line="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gui/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1505">
@@ -228,21 +238,13 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gui/PasswortController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="4" />
+            <state relative-caret-position="454">
+              <caret line="38" selection-start-line="38" selection-end-line="38" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#625#626#0" expanded="true" />
-                <element signature="e#658#659#0" expanded="true" />
-                <element signature="e#691#692#0" expanded="true" />
-                <element signature="e#717#718#0" expanded="true" />
-                <element signature="e#751#752#0" expanded="true" />
-                <element signature="e#778#779#0" expanded="true" />
-                <element signature="e#630#631#0" expanded="true" />
-                <element signature="e#661#662#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -257,18 +259,21 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gui/GUIPasswort.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+            <state relative-caret-position="119">
+              <caret line="7" column="35" lean-forward="true" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
             </state>
           </provider>
           <provider editor-type-id="JavaFX-Scene-Builder" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gui/UserDatamanager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="5" lean-forward="true" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
+            <state relative-caret-position="272">
+              <caret line="16" column="38" lean-forward="true" selection-start-line="16" selection-start-column="38" selection-end-line="16" selection-end-column="38" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -329,9 +334,9 @@
         <option value="$PROJECT_DIR$/src/main/NetworkController.java" />
         <option value="$PROJECT_DIR$/src/gui/LoadController.java" />
         <option value="$PROJECT_DIR$/src/gui/Controller.java" />
-        <option value="$PROJECT_DIR$/src/gui/UserDatamanager.java" />
         <option value="$PROJECT_DIR$/src/gui/GUIPasswort.fxml" />
         <option value="$PROJECT_DIR$/src/gui/PasswortController.java" />
+        <option value="$PROJECT_DIR$/src/gui/UserDatamanager.java" />
       </list>
     </option>
   </component>
@@ -349,10 +354,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="420" />
-    <option name="y" value="100" />
-    <option name="width" value="1350" />
-    <option name="height" value="690" />
+    <option name="x" value="52" />
+    <option name="y" value="-18" />
+    <option name="width" value="1920" />
+    <option name="height" value="1030" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -414,7 +419,7 @@
     <property name="OverrideImplement.combined" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544222263634" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544224353800" />
     <property name="dynamic.classpath" value="false" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -548,7 +553,7 @@
       <workItem from="1544095881791" duration="2256000" />
       <workItem from="1544200638509" duration="324000" />
       <workItem from="1544214012421" duration="56000" />
-      <workItem from="1544219133016" duration="3118000" />
+      <workItem from="1544219133016" duration="5195000" />
     </task>
     <task id="LOCAL-00001" summary="Übernahme von GUI und Controller aus altem Projekt">
       <created>1542701323939</created>
@@ -725,17 +730,24 @@
       <option name="project" value="LOCAL" />
       <updated>1544222029589</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="-">
+      <created>1544222273128</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1544222273128</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59039000" />
+    <option name="totallyTimeSpent" value="61116000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="0" y="0" width="1536" height="824" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.28053692" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.28319782" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -832,13 +844,6 @@
         </state>
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/helper/MathHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/PoolHiddenNeuron.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/net/URLClassLoader.java">
@@ -937,6 +942,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1505">
+          <caret line="150" selection-start-line="150" selection-end-line="150" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/OutputNeuron.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -948,32 +963,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/GUILoad.fxml">
-      <provider selected="true" editor-type-id="text-editor" />
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/UserDatamanager.java">
+    <entry file="file://$PROJECT_DIR$/src/helper/MathHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="5" lean-forward="true" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/GUIPasswort.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1505">
-          <caret line="150" selection-start-line="150" selection-end-line="150" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="425">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
         </state>
       </provider>
     </entry>
@@ -989,18 +982,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/PasswortController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="4" />
+        <state relative-caret-position="454">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#625#626#0" expanded="true" />
-            <element signature="e#658#659#0" expanded="true" />
-            <element signature="e#691#692#0" expanded="true" />
-            <element signature="e#717#718#0" expanded="true" />
-            <element signature="e#751#752#0" expanded="true" />
-            <element signature="e#778#779#0" expanded="true" />
-            <element signature="e#630#631#0" expanded="true" />
-            <element signature="e#661#662#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/GUIPasswort.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="35" lean-forward="true" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/GUILoad.fxml">
+      <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/UserDatamanager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="38" lean-forward="true" selection-start-line="16" selection-start-column="38" selection-end-line="16" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

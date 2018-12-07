@@ -17,37 +17,28 @@ public class PasswortController {
     private Button clicklogin;
 
     @FXML
+    private TextField URL;
+
+    @FXML
     private TextField User;
 
     @FXML
     private PasswordField Passwort;
 
-    @FXML
-    private TextField URL;
+
 
     @FXML
     void clicklogin(ActionEvent event) {
+        String url = URL.toString();
+        String user = User.toString();
+        String passwort = Passwort.toString();
+    if (savelogin.isSelected()==true)
+        {
+            UserDatamanager.saveuserdata(url,user,passwort);
+        }
 
+        UserDatamanager.login(url,user,passwort);
     }
 
-    @FXML
-    void savelogin(ActionEvent event) {
 
-    }
-
-    public Button getClicklogin() {
-        return clicklogin;
-    }
-
-    public TextField getURL() {
-        return URL;
-    }
-
-    public TextField getUser() {
-        return User;
-    }
-
-    public PasswordField getPasswort() {
-        return Passwort;
-    }
 }
