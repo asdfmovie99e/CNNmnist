@@ -1,25 +1,37 @@
 package gui;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 
 public class UserDatamanager {
 
-public static void saveuserdata(String url, String user, String passwort)
+
+    //Speichert URL und Username
+public static void SaveUserData(String url, String user)
     {
         PrintWriter pWriter = null;
         try {
-            pWriter = new PrintWriter(new BufferedWriter(new FileWriter("passwort.txt")));
+            pWriter = new PrintWriter(new BufferedWriter(new FileWriter("userdata.txt")));
             pWriter.println(url);
             pWriter.println(user);
-            pWriter.println(passwort);
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }
 
+    //liest Datei aus     noch in Bearbeitung
+public static void readSavedUserData()
+    {
+      try {
+          new FileReader("userdata.txt");
+            }
+            catch (IOException ioe)
+            {
+            }
+
+
+    }
+
+    //Übergibt Logindaten zum anmelden
 public static void login(String url, String user, String passwort)
     {
 

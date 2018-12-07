@@ -32,13 +32,20 @@ public class PasswortController {
         String url = URL.toString();
         String user = User.toString();
         String passwort = Passwort.toString();
-    if (savelogin.isSelected()==true)
+    if (savelogin.isSelected())
         {
-            UserDatamanager.saveuserdata(url,user,passwort);
+            UserDatamanager.SaveUserData(url,user);
         }
 
         UserDatamanager.login(url,user,passwort);
     }
 
 
+    //Fuellt URL und Username mit gespeicherten Daten
+public void fillSavedData (String url, String user)
+{
+
+    URL.setText(url);
+    User.setText(user);
+}
 }
