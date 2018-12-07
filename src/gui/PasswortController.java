@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 public class PasswortController {
 
     @FXML
-    private CheckBox safelogin;
+    private CheckBox savelogin;
 
     @FXML
     private Button clicklogin;
@@ -31,7 +31,7 @@ public class PasswortController {
     }
 
     @FXML
-    void safelogin(ActionEvent event) {
+    void savelogin(ActionEvent event) {
 
     }
 
