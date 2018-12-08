@@ -1,6 +1,7 @@
 package gui;
 
 
+import helper.DBConnect;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -37,15 +38,15 @@ public class PasswortController {
             UserDatamanager.SaveUserData(url,user);
         }
 
-        UserDatamanager.login(url,user,passwort);
+        //aufrufen der connect methode
     }
 
 
     //Fuellt URL und Username mit gespeicherten Daten
 public void fillSavedData (String url, String user)
-{
+{    String[] ret = UserDatamanager.readSavedUserData();
 
-    URL.setText(url);
-    User.setText(user);
+    URL.setText(ret[0]);
+    User.setText(ret[1]);
 }
 }

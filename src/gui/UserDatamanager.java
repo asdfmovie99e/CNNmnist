@@ -18,28 +18,30 @@ public static void SaveUserData(String url, String user)
         }
     }
 
-    //liest Datei aus     noch in Bearbeitung
-public static void readSavedUserData()
-    {  String url;
-       String user;
+    //liest Datei aus
+public static String [] readSavedUserData() {
+    String url;
+    String user;
 
-      try {
-          new FileReader("userdata.txt");
+    FileReader fr = null;
+    BufferedReader br = null;
 
-            }
-            catch (IOException ioe)
-            {
-              url = "";
-              user = "";
-            }
+    try {
+        String fileName = "userdata.txt";
+        File file = new File(fileName);
+        fr = new FileReader(file);
+        br = new BufferedReader(fr);
 
+        url = br.readLine();
+        user = br.readLine();
+        }
+         catch (IOException ex) {
+        System.out.println(ex);
 
+        url = "";
+        user = "";
+
+        }
+    return new String[] {url, user};
     }
-
-    //Übergibt Logindaten zum anmelden
-public static void login(String url, String user, String passwort)
-    {
-
-    }
-
 }
