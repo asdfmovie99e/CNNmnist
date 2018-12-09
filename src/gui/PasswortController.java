@@ -39,10 +39,15 @@ public class PasswortController {
         }
 
         //aufrufen der connect methode
+
+        //schließen Gui
+
+
+
     }
 
 
-    //Fuellt URL und Username mit gespeicherten Daten
+    //Fuellt URL und Username in GUI mit gespeicherten Daten
 public void fillSavedData (String url, String user)
 {    String[] ret = UserDatamanager.readSavedUserData();
 
