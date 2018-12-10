@@ -4,10 +4,16 @@ package gui;
 import helper.DBConnect;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class PasswordController {
 
@@ -30,6 +36,7 @@ public class PasswordController {
 
     @FXML
     void clicklogin(ActionEvent event) {
+        openMainGui();
         String url = URL.toString();
         String user = User.toString();
         String password = Password.toString();
@@ -53,5 +60,19 @@ public void fillSavedData (String url, String user)
 
     URL.setText(ret[0]);
     User.setText(ret[1]);
+}
+
+
+private void openMainGui(){
+    Parent root = null;
+    try {
+        root = FXMLLoader.load(getClass().getResource("../gui/GUI.fxml"));
+        Stage mainStage = new Stage();
+        mainStage.setTitle("Zahlenerkennung");
+        mainStage.setScene(new Scene(root, 840, 500));
+        mainStage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
 }
 }

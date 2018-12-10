@@ -10,11 +10,11 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage passwordStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("../gui/GUIPassword.fxml"));
-        primaryStage.setTitle("Zahlenerkennung");
-        primaryStage.setScene(new Scene(root, 840, 500));
-        primaryStage.show();
+        passwordStage.setTitle("Zahlenerkennung");
+        passwordStage.setScene(new Scene(root, 840, 500));
+        passwordStage.show();
     }
 
 
