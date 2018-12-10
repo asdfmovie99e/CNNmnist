@@ -9,7 +9,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-public class PasswortController {
+public class PasswordController {
 
     @FXML
     private CheckBox savelogin;
@@ -24,7 +24,7 @@ public class PasswortController {
     private TextField User;
 
     @FXML
-    private PasswordField Passwort;
+    private PasswordField Password;
 
 
 
@@ -32,14 +32,14 @@ public class PasswortController {
     void clicklogin(ActionEvent event) {
         String url = URL.toString();
         String user = User.toString();
-        String passwort = Passwort.toString();
+        String password = Password.toString();
     if (savelogin.isSelected())
         {
             UserDatamanager.SaveUserData(url,user);
         }
 
         //aufrufen der connect methode
-
+        DBConnect.connect(url,user,password);
         //schließen Gui
 
 

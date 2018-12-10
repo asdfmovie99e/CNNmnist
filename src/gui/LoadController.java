@@ -37,11 +37,14 @@ public class LoadController {
 
     @FXML
     void clickdelete(ActionEvent event) {
+    //Delete Methode zum löschen in der Db einfuegen
 
     }
 
     @FXML
     void clickload(ActionEvent event) {
+
+
 
     }
 
