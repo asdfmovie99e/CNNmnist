@@ -7,19 +7,19 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
-//import java.sql.*;
+import java.sql.*;
 
 public class DBConnect {
 
-
-    public String user;
-    public String pass;
-    public String url = "jdbc:mysql://loclhost:3306/neuronaldata";
-    private Connection connection;
-    private String driver ="com.mysql.jdbc.Driver";
+    static final String jdbcDriver = "org.mariadb.jdbc.Driver";
+    public static String user;
+    public static String pass;
+    public static String url = "jdbc:mysql://localhost:3306/neuronaldata";
+    private static Connection connection;
+    private static String driver ="com.mysql.jdbc.Driver";
 
     //Methode zum Einlesen des Usernamens
-    public String einlesenUser(){
+    public static String einlesenUser(){
         System.out.println("Geben Sie ihren Benutzernamen ein.");
         Scanner scanUser = new Scanner(System.in);
         user = scanUser.nextLine();
@@ -27,29 +27,29 @@ public class DBConnect {
     }
 
     //Methode zum Einlesen des Passwortes
-    public String einlesenPass(){
+    public static String einlesenPass(){
         System.out.println("Geben Sie ihr Passwort ein.");
         Scanner scanPass = new Scanner(System.in);
         pass = scanPass.nextLine();
         return pass;
     }
 
-
     //Methode zum verbinden
-    public void connect(String URL, String user, String pass){
+    public static void connect(String URL, String user, String pass){
         try {
-            Class.forName("org.mariadb.jdbc.Driver");
-            this.connection = DriverManager.getConnection(url,user,pass);
+            Class.forName(jdbcDriver);
+            connection = DriverManager.getConnection(url,user,pass);
+            System.out.println("Sie sind jetzt verbunden.");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     //Methode zum trennen
-    public void close(){
-        if (this.connection != null) {
+    public static void close(){
+        if (connection != null) {
             try {
-                this.connection.close();
+                connection.close();
             }catch (Exception e) {
                 e.printStackTrace();
             }
@@ -57,10 +57,10 @@ public class DBConnect {
     }
 
     //Methode zum prüfen einer bestehenden Verbindung
-    public boolean isConnected(){
+    public static boolean isConnected(){
 
         try {
-            ResultSet rs = this.abfrage("SELECT 1;");
+            ResultSet rs = abfrage("SELECT 1;");
             if (rs == null){
                 return false;
             }
@@ -74,9 +74,9 @@ public class DBConnect {
     }
 
     //Methode zur Abfrage aus der DB
-    public ResultSet abfrage(String query) {
+    public static ResultSet abfrage(String query) {
         try {
-            Statement stmt = this.connection.createStatement();
+            Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             return rs;
         } catch (SQLException e) {
@@ -86,9 +86,9 @@ public class DBConnect {
 
     //Methode zum Eintragen in die DB
 
-    public boolean setEintrag(String query) {
+    public static boolean setEintrag(String query) {
         try {
-            Statement stmt = this.connection.createStatement();
+            Statement stmt = connection.createStatement();
             return stmt.execute(query);
         } catch (Exception e) {
             e.printStackTrace();
@@ -97,7 +97,7 @@ public class DBConnect {
     }
 
 
-    public void hiddenLayerTabelleErstellen(){
+    public static void hiddenLayerTabelleErstellen(){
         Connection conn = null;
         Statement stmt = null;
 
