@@ -4,6 +4,9 @@ import java.io.*;
 
 public class UserDatamanager {
 
+   private static String dburl;
+   private static String dbuser;
+   private static String dbpassword;
 
     //Speichert URL und Username
 public static void SaveUserData(String url, String user)
@@ -44,5 +47,29 @@ public static String [] readSavedUserData() {
 
         }
     return new String[] {url, user};
+    }
+
+    public static String getDburl() {
+        return dburl;
+    }
+
+    public static void setDburl(String dburl) {
+        dburl = dburl;
+    }
+
+    public static String getDbuser() {
+        return dbuser;
+    }
+
+    public static void setDbuser(String dbuser) {
+        dbuser = dbuser;
+    }
+
+    public static String getDbpassword() {
+        return dbpassword;
+    }
+
+    public static void setDbpassword(String dbpassword) {
+        dbpassword = dbpassword;
     }
 }

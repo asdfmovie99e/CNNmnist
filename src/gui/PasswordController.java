@@ -47,6 +47,12 @@ public class PasswordController {
 
         //aufrufen der connect methode
         DBConnect.connect(url,user,password);
+
+        //Übergabe an die Variabeln im UserDatamanager zum späteren Aufruf
+        UserDatamanager.setDburl(url);
+        UserDatamanager.setDbuser(user);
+        UserDatamanager.setDbpassword(password);
+
         //schließen Gui
 
 
@@ -54,12 +60,15 @@ public class PasswordController {
     }
 
 
+
+
     //Fuellt URL und Username in GUI mit gespeicherten Daten
 public void fillSavedData (String url, String user)
 {    String[] ret = UserDatamanager.readSavedUserData();
-
     URL.setText(ret[0]);
     User.setText(ret[1]);
+
+
 }
 
 
