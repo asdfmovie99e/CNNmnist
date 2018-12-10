@@ -24,8 +24,8 @@ public static void SaveUserData(String url, String user)
 
     //liest Datei aus
 public static String [] readSavedUserData() {
-    String url;
-    String user;
+    String url = null;
+    String user = null ;
 
     FileReader fr = null;
     BufferedReader br = null;
@@ -40,12 +40,13 @@ public static String [] readSavedUserData() {
         user = br.readLine();
         }
          catch (IOException ex) {
-        System.out.println(ex);
-
-        url = "";
-        user = "";
-
+        ex.printStackTrace();
+    }
+        if (url == null || url.equals(""))
+        {
+            url = "jdbc:mysql://";
         }
+
     return new String[] {url, user};
     }
 
@@ -53,23 +54,24 @@ public static String [] readSavedUserData() {
         return dburl;
     }
 
-    public static void setDburl(String dburl) {
-        dburl = dburl;
+    public static void setDburl(String url) {
+        dburl = url;
     }
 
     public static String getDbuser() {
         return dbuser;
     }
 
-    public static void setDbuser(String dbuser) {
-        dbuser = dbuser;
+    public static void setDbuser(String user) {
+        dbuser = user;
     }
 
     public static String getDbpassword() {
         return dbpassword;
     }
 
-    public static void setDbpassword(String dbpassword) {
-        dbpassword = dbpassword;
+    public static void setDbpassword(String password)
+    {
+        dbpassword = password;
     }
 }
