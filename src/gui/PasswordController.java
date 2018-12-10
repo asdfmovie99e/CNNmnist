@@ -12,6 +12,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import main.Main;
 
 import java.io.IOException;
 
@@ -53,7 +54,6 @@ public class PasswordController {
         UserDatamanager.setDbuser(user);
         UserDatamanager.setDbpassword(password);
 
-        //schließen Gui
 
 
 
@@ -73,6 +73,9 @@ public void fillSavedData (String url, String user)
 
 
 private void openMainGui(){
+
+    Main.getPasswordStage().close();
+
     Parent root = null;
     try {
         root = FXMLLoader.load(getClass().getResource("../gui/GUI.fxml"));
@@ -83,5 +86,7 @@ private void openMainGui(){
     } catch (IOException e) {
         e.printStackTrace();
     }
+
 }
+
 }

@@ -5,15 +5,21 @@ package gui;
  @version 1.0
  */
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
+import main.Main;
 
 
 public class Controller {
@@ -94,7 +100,11 @@ public class Controller {
 
     @FXML
     void onGewichteladenclicked(ActionEvent event) {
+        openGuiLoad();
+
     }
+
+
 
     @FXML
     void onLernenClicked(ActionEvent event) {
@@ -146,11 +156,28 @@ public class Controller {
     }
     public void setTextausgabe(String s){
         // textausgabe.setText(s);
+
     }
 
+    private void openGuiLoad(){
+
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("../gui/GUILoad.fxml"));
+            Stage loadStage = new Stage();
+            loadStage.setTitle("Zahlenerkennung");
+            loadStage.setScene(new Scene(root, 400, 380));
+            loadStage.show();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
 
+
+    }
 
 }
 
