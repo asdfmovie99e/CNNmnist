@@ -37,8 +37,8 @@ public class PasswordController {
     @FXML
     void clicklogin(ActionEvent event) {
         openMainGui();
-        String url = URL.toString();
-        String user = User.toString();
+        String url = URL.getText();
+        String user = User.getText();
         String password = Password.toString();
     if (savelogin.isSelected())
         {

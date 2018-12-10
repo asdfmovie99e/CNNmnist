@@ -10,9 +10,10 @@ public static void SaveUserData(String url, String user)
     {
         PrintWriter pWriter = null;
         try {
-            pWriter = new PrintWriter(new BufferedWriter(new FileWriter("userdata.txt")));
+            pWriter = new PrintWriter(new BufferedWriter(new FileWriter(System.getenv("APPDATA")+ "\\mnist\\userdata.txt")));
             pWriter.println(url);
             pWriter.println(user);
+            pWriter.close();
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
@@ -27,7 +28,7 @@ public static String [] readSavedUserData() {
     BufferedReader br = null;
 
     try {
-        String fileName = "userdata.txt";
+        String fileName = System.getenv("APPDATA")+ "\\mnist\\userdata.txt";
         File file = new File(fileName);
         fr = new FileReader(file);
         br = new BufferedReader(fr);
