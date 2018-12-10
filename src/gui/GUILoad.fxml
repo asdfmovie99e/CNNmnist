@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView fx:id="table" layoutX="50.0" layoutY="30.0" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn fx:id="nr" prefWidth="67.20001220703125" text="Nr" />
+          <TableColumn fx:id="succesrate" prefWidth="131.19998931884766" text="Erfolgsrate" />
+        </columns>
+      </TableView>
+      <TextField fx:id="Nr" layoutX="69.0" layoutY="279.0" prefHeight="25.0" prefWidth="44.0" />
+      <Label layoutX="33.0" layoutY="283.0" text="Nr:" />
+      <Button fx:id="clickload" layoutX="152.0" layoutY="279.0" mnemonicParsing="false" onAction="#clickload" text="laden" />
+      <Button fx:id="clickdelete" layoutX="221.0" layoutY="279.0" mnemonicParsing="false" onAction="#clickdelete" text="löschen" />
+   </children>
+</Pane>

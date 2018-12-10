@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="latest commit before deleting network and learning alorithm">
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="-">
+      <change afterPath="$PROJECT_DIR$/src/gui/WeightData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/NetworkController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/NetworkController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/GUILoad.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/GUILoad.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/LoadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/LoadController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/PasswortController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/PasswortController.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -119,36 +122,42 @@
     <session id="-586622793">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="8" />
           <entry key="project.open.time.0" value="1" />
-          <entry key="project.open.time.11" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.11" value="5" />
+          <entry key="project.open.time.12" value="1" />
+          <entry key="project.open.time.2" value="1" />
+          <entry key="project.open.time.9" value="1" />
+          <entry key="project.opened" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="fxml" value="2" />
-          <entry key="java" value="4" />
+          <entry key="fxml" value="5" />
+          <entry key="java" value="23" />
+          <entry key="sql" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="4" />
-          <entry key="XML" value="2" />
+          <entry key="JAVA" value="23" />
+          <entry key="SQL" value="1" />
+          <entry key="XML" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="fxml" value="10" />
-          <entry key="java" value="278" />
-          <entry key="txt" value="60" />
+          <entry key="fxml" value="12" />
+          <entry key="java" value="2332" />
+          <entry key="txt" value="149" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="278" />
-          <entry key="PLAIN_TEXT" value="60" />
-          <entry key="XML" value="10" />
+          <entry key="JAVA" value="2332" />
+          <entry key="PLAIN_TEXT" value="149" />
+          <entry key="XML" value="12" />
         </counts>
       </usages-collector>
     </session>
@@ -178,19 +187,22 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/Main.java">
+        <entry file="file://$PROJECT_DIR$/src/gui/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="24" selection-start-line="24" selection-end-line="24" />
+            <state relative-caret-position="621">
+              <caret line="150" selection-start-line="150" selection-end-line="150" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/NetworkController.java">
+        <entry file="file://$PROJECT_DIR$/src/gui/LoadController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="45" selection-start-line="13" selection-start-column="45" selection-end-line="13" selection-end-column="45" />
+            <state relative-caret-position="570">
+              <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="61" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -199,74 +211,38 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/helper/TestPictureCreator.java">
+        <entry file="file://$PROJECT_DIR$/src/gui/WeightData.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+            <state relative-caret-position="204">
+              <caret line="12" column="34" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/helper/LearnObserver.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="629">
-              <caret line="40" column="9" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="9" />
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/src/gui/GUILoad.fxml">
+          <provider selected="true" editor-type-id="text-editor" />
+          <provider editor-type-id="JavaFX-Scene-Builder" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/OutputNeuron.java">
+        <entry file="file://$PROJECT_DIR$/src/gui/GUIPasswort.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="23" selection-start-line="23" selection-end-line="23" />
+            <state relative-caret-position="119">
+              <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
+            </state>
+          </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gui/PasswortController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="493">
+              <caret line="50" column="6" selection-start-line="50" selection-start-column="6" selection-end-line="50" selection-end-column="6" />
               <folding>
-                <element signature="e#300#301#0" expanded="true" />
-                <element signature="e#339#340#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/HiddenNeuron.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="37" column="48" selection-start-line="37" selection-start-column="48" selection-end-line="37" selection-end-column="48" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/InputNeuron.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
-              <folding>
-                <element signature="e#99#100#0" expanded="true" />
-                <element signature="e#133#134#0" expanded="true" />
-                <element signature="e#267#268#0" expanded="true" />
-                <element signature="e#310#311#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/Neuron.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="30" column="50" selection-start-line="30" selection-start-column="50" selection-end-line="30" selection-end-column="50" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/Edge.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="29" column="45" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -316,6 +292,13 @@
         <option value="$PROJECT_DIR$/src/main/Edge.java" />
         <option value="$PROJECT_DIR$/src/main/HiddenNeuron.java" />
         <option value="$PROJECT_DIR$/src/main/NetworkController.java" />
+        <option value="$PROJECT_DIR$/src/gui/Controller.java" />
+        <option value="$PROJECT_DIR$/src/gui/GUIPasswort.fxml" />
+        <option value="$PROJECT_DIR$/src/helper/DBConnect.java" />
+        <option value="$PROJECT_DIR$/src/gui/UserDatamanager.java" />
+        <option value="$PROJECT_DIR$/src/gui/PasswortController.java" />
+        <option value="$PROJECT_DIR$/src/gui/WeightData.java" />
+        <option value="$PROJECT_DIR$/src/gui/LoadController.java" />
       </list>
     </option>
   </component>
@@ -333,10 +316,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="420" />
-    <option name="y" value="100" />
-    <option name="width" value="1350" />
-    <option name="height" value="690" />
+    <option name="x" value="50" />
+    <option name="y" value="-20" />
+    <option name="width" value="1920" />
+    <option name="height" value="1030" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -348,32 +331,44 @@
         <subPane>
           <expand>
             <path>
-              <item name="cnnmnist" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cnnmnist" type="462c0819:PsiDirectoryNode" />
+              <item name="CNNmnist" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNNmnist" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="cnnmnist" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cnnmnist" type="462c0819:PsiDirectoryNode" />
+              <item name="CNNmnist" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNNmnist" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="cnnmnist" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cnnmnist" type="462c0819:PsiDirectoryNode" />
+              <item name="CNNmnist" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNNmnist" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="gui" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CNNmnist" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNNmnist" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="helper" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="cnnmnist" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cnnmnist" type="462c0819:PsiDirectoryNode" />
+              <item name="CNNmnist" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNNmnist" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CNNmnist" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CNNmnist" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="mnist" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -386,7 +381,7 @@
     <property name="OverrideImplement.combined" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544029121103" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544382450492" />
     <property name="dynamic.classpath" value="false" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -395,17 +390,18 @@
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\nikla\IdeaProjects\CNNmnist\src\gui" />
+      <recent name="C:\Users\JensLaptop\IdeaProjects\CNNmnist\src\mnist" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="helper" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\nikla\IdeaProjects\CNNmnist\src\sample" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
       <recent name="main" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\JensLaptop\IdeaProjects\CNNmnist\src\mnist" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\nikla\IdeaProjects\CNNmnist\src\sample" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -516,6 +512,14 @@
       <workItem from="1543907233735" duration="992000" />
       <workItem from="1544008816238" duration="20158000" />
       <workItem from="1544047130117" duration="950000" />
+      <workItem from="1544095881791" duration="2256000" />
+      <workItem from="1544200638509" duration="324000" />
+      <workItem from="1544214012421" duration="56000" />
+      <workItem from="1544219133016" duration="7528000" />
+      <workItem from="1544278375860" duration="4388000" />
+      <workItem from="1544356321243" duration="254000" />
+      <workItem from="1544356787076" duration="8735000" />
+      <workItem from="1544373174902" duration="3025000" />
     </task>
     <task id="LOCAL-00001" summary="Übernahme von GUI und Controller aus altem Projekt">
       <created>1542701323939</created>
@@ -643,17 +647,101 @@
       <option name="project" value="LOCAL" />
       <updated>1544015733710</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Add Guiladen and GuiPasswort">
+      <created>1544219209738</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1544219209738</updated>
+    </task>
+    <task id="LOCAL-00020" summary="rename Guiladen to GuiLoad">
+      <created>1544219317663</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1544219317663</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Add Controller">
+      <created>1544220843235</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1544220843235</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Add Controller">
+      <created>1544220887507</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1544220887507</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Add UserDatamanager">
+      <created>1544221461303</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1544221461303</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Add UserDatamanager">
+      <created>1544221480914</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1544221480914</updated>
+    </task>
+    <task id="LOCAL-00025" summary="-">
+      <created>1544222029589</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1544222029589</updated>
+    </task>
+    <task id="LOCAL-00026" summary="-">
+      <created>1544222273128</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1544222273128</updated>
+    </task>
+    <task id="LOCAL-00027" summary="-">
+      <created>1544224466526</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1544224466526</updated>
+    </task>
+    <task id="LOCAL-00028" summary="-">
+      <created>1544226016596</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1544226016596</updated>
+    </task>
+    <task id="LOCAL-00029" summary="-">
+      <created>1544226623659</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1544226623659</updated>
+    </task>
+    <task id="LOCAL-00030" summary="-">
+      <created>1544282219106</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1544282219107</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53285000" />
+    <option name="totallyTimeSpent" value="79851000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.26439232" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.2966443" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -662,7 +750,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3275488" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32719547" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -688,6 +776,42 @@
       <window_info anchor="right" id="Theme Preview" order="9" />
       <window_info anchor="right" id="Coverage" order="10" side_tool="true" />
     </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.28456375" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info id="Favorites" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="Image Layers" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Capture Tool" order="6" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32719547" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Application Servers" order="7" />
+      <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Problems" order="9" />
+      <window_info anchor="bottom" id="Changes" order="10" />
+      <window_info anchor="bottom" id="Profiler" order="11" />
+      <window_info anchor="bottom" id="Event Log" order="12" />
+      <window_info anchor="bottom" id="Messages" order="13" weight="0.3286119" />
+      <window_info anchor="bottom" id="Database Changes" order="14" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="15" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="JetGradle" order="3" />
+      <window_info anchor="right" id="Maven Projects" order="4" weight="0.3295302" />
+      <window_info anchor="right" id="Database" order="5" weight="0.3295302" />
+      <window_info anchor="right" id="Palette" order="6" />
+      <window_info anchor="right" id="Capture Analysis" order="7" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info anchor="right" id="Theme Preview" order="9" />
+      <window_info anchor="right" id="Coverage" order="10" side_tool="true" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -710,7 +834,12 @@
     <MESSAGE value="laptop" />
     <MESSAGE value="auswertung fixed" />
     <MESSAGE value="alles weggeschmissen und schon halb neu gemacht" />
-    <option name="LAST_COMMIT_MESSAGE" value="alles weggeschmissen und schon halb neu gemacht" />
+    <MESSAGE value="Add Guiladen and GuiPasswort" />
+    <MESSAGE value="rename Guiladen to GuiLoad" />
+    <MESSAGE value="Add Controller" />
+    <MESSAGE value="Add UserDatamanager" />
+    <MESSAGE value="-" />
+    <option name="LAST_COMMIT_MESSAGE" value="-" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -738,34 +867,13 @@
     <entry file="file://$PROJECT_DIR$/src/sample/Controller.java" />
     <entry file="file://$PROJECT_DIR$/src/sample/Main.java" />
     <entry file="file://$PROJECT_DIR$/src/main/NetoworkController.java" />
-    <entry file="file://$PROJECT_DIR$/src/gui/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/GUI.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="867">
           <caret line="51" column="13" selection-start-line="51" selection-start-column="13" selection-end-line="51" selection-end-column="13" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/helper/MathHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/helper/DatabaseController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/PoolHiddenNeuron.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/net/URLClassLoader.java">
@@ -779,18 +887,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="29" column="97" selection-start-line="29" selection-start-column="97" selection-end-line="29" selection-end-column="97" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1184#1185#0" expanded="true" />
-            <element signature="e#1229#1230#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/main/NetworkController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        <state relative-caret-position="221">
+          <caret line="14" column="46" selection-start-line="14" selection-start-column="46" selection-end-line="14" selection-end-column="46" />
         </state>
       </provider>
     </entry>
@@ -801,10 +904,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/helper/LearnObserver.java">
+    <entry file="file://$PROJECT_DIR$/src/main/Edge.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="40" column="9" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="9" />
+        <state relative-caret-position="425">
+          <caret line="29" column="45" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/helper/Database.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Neuron.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="30" column="50" selection-start-line="30" selection-start-column="50" selection-end-line="30" selection-end-column="50" />
         </state>
       </provider>
     </entry>
@@ -815,48 +928,112 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/OutputNeuron.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/helper/MathHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/helper/DatabaseController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/helper/LearnObserver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="40" column="9" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/javafx-src.zip!/javafx/scene/Node.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="383" column="22" selection-start-line="383" selection-start-column="22" selection-end-line="383" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/GUIPasswort.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/GUILoad.fxml">
+      <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/InputNeuron.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="150" selection-start-line="150" selection-end-line="150" />
           <folding>
-            <element signature="e#99#100#0" expanded="true" />
-            <element signature="e#133#134#0" expanded="true" />
-            <element signature="e#267#268#0" expanded="true" />
-            <element signature="e#310#311#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Neuron.java">
+    <entry file="file://$PROJECT_DIR$/src/helper/DBConnect.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="30" column="50" selection-start-line="30" selection-start-column="50" selection-end-line="30" selection-end-column="50" />
+        <state relative-caret-position="-442">
+          <caret line="38" column="34" selection-start-line="38" selection-start-column="34" selection-end-line="38" selection-end-column="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Edge.java">
+    <entry file="file://$PROJECT_DIR$/src/gui/UserDatamanager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="29" column="45" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
+        <state relative-caret-position="272">
+          <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/OutputNeuron.java">
+    <entry file="file://$PROJECT_DIR$/src/gui/PasswortController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        <state relative-caret-position="493">
+          <caret line="50" column="6" selection-start-line="50" selection-start-column="6" selection-end-line="50" selection-end-column="6" />
           <folding>
-            <element signature="e#300#301#0" expanded="true" />
-            <element signature="e#339#340#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/NetworkController.java">
+    <entry file="file://$PROJECT_DIR$/src/gui/WeightData.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="45" selection-start-line="13" selection-start-column="45" selection-end-line="13" selection-end-column="45" />
+        <state relative-caret-position="204">
+          <caret line="12" column="34" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/LoadController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="61" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
