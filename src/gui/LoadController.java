@@ -38,19 +38,20 @@ public class LoadController {
     @FXML
     void clickdelete(ActionEvent event) {
     //Delete Methode zum löschen in der Db einfuegen
-
+    filltable();
     }
 
     @FXML
     void clickload(ActionEvent event) {
 
-
+        Controller.getLoadStage().close();
 
     }
 
+
     private ObservableList<WeightData> inhalt = FXCollections.observableArrayList();
 
-    public void filltable(Integer nr, Double succesrate) {
+    public void fillrow(Integer nr, Double succesrate) {
         inhalt.add(new WeightData(nr,succesrate));
 
 
@@ -58,6 +59,13 @@ public class LoadController {
         this.succesrate.setCellValueFactory(new PropertyValueFactory<WeightData, Double>("Erfolgsrate"));
 
         table.setItems(inhalt);
+    }
+
+    public void filltable()
+    {
+        fillrow(1,2.2);
+        fillrow(2, 1.1);
+        fillrow(3, 3.1);
     }
 
 

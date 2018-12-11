@@ -19,10 +19,13 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import main.Main;
+
+
 
 
 public class Controller {
+
+    private static Stage loadStage;
 
     @FXML
     private ResourceBundle resources;
@@ -168,17 +171,17 @@ public class Controller {
             loadStage.setTitle("Zahlenerkennung");
             loadStage.setScene(new Scene(root, 400, 380));
             loadStage.show();
-
+            this.loadStage = loadStage;
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-
-
-
     }
 
+    public static Stage getLoadStage() {
+        return loadStage;
+    }
 }
 
 
