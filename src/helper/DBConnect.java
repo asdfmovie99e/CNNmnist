@@ -137,9 +137,9 @@ public class DBConnect {
 
     //AB HIER HAB ICH MAL EIN PAAR METHODEN ERSTELLT DIE DU FÜLLEN MUSST DAMIT ICH SCHONMAL WEITERMACHEN KANN ~ Jens
 
-    public static Integer countRowsInMainTable(){
+    public static Integer[] getAllSaveNumbers(){
         /*
-        @return Gibt zurück wie viele Speicherstände existieren
+        @return Gibt ein Array mit allen SaveNummern aus. Niklas braucht die um die aufzulisten.
          */
         return null;
     }
