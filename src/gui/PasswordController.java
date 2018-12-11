@@ -7,10 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import main.Main;
 
@@ -25,6 +22,10 @@ public class PasswordController {
     @FXML
     private Button clicklogin;
 
+
+    @FXML
+    private Label LoginFail;
+
     @FXML
     private TextField URL;
 
@@ -38,7 +39,7 @@ public class PasswordController {
 
     @FXML
     void clicklogin(ActionEvent event) {
-        openMainGui();
+         openMainGui();
         String url = URL.getText();
         String user = User.getText();
         String password = Password.toString();
@@ -49,6 +50,8 @@ public class PasswordController {
 
         //aufrufen der connect methode
         DBConnect.connect(url,user,password);
+
+       LoginFail.setVisible(true);
 
         //Übergabe an die Variabeln im UserDatamanager zum späteren Aufruf
         UserDatamanager.setDburl(url);
