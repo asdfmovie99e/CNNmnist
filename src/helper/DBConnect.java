@@ -137,6 +137,12 @@ public class DBConnect {
 
     //AB HIER HAB ICH MAL EIN PAAR METHODEN ERSTELLT DIE DU FÜLLEN MUSST DAMIT ICH SCHONMAL WEITERMACHEN KANN ~ Jens
 
+    public static Integer countRowsInMainTable(){
+        /*
+        @return Gibt zurück wie viele Speicherstände existieren
+         */
+        return null;
+    }
 
     public static Object[] getMainTable(Integer SaveNr){
         /*
