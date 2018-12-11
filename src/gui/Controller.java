@@ -166,12 +166,15 @@ public class Controller {
 
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("../gui/GUILoad.fxml"));
+            FXMLLoader loader =new FXMLLoader(getClass().getResource("../gui/GUILoad.fxml"));
+            root = loader.load();
             Stage loadStage = new Stage();
             loadStage.setTitle("Zahlenerkennung");
-            loadStage.setScene(new Scene(root, 400, 380));
+            Scene scene = new Scene(root);
+            loadStage.setScene(scene);
+            LoadController loadController = loader.getController();
+            loadController.filltable();
             loadStage.show();
-            this.loadStage = loadStage;
 
         } catch (IOException e) {
             e.printStackTrace();
