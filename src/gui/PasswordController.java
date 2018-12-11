@@ -51,6 +51,7 @@ public class PasswordController {
         //aufrufen der connect methode
         DBConnect.connect(url,user,password);
 
+        //Bei Fehlerhafter anmeldung wird eine Nachricht angezeigt
        LoginFail.setVisible(true);
 
         //Übergabe an die Variabeln im UserDatamanager zum späteren Aufruf
