@@ -7,7 +7,7 @@ public class Edge {
     protected Neuron nextNeuron;
 
     public Edge(Neuron previousNeuron, Neuron nextNeuron){
-        currentWeight = Math.random() - 0.5d;
+        currentWeight = Math.random() - 0.5d; //MUSS NOCH GEÄNDERT WERDEN DAMIT DIE GEWICHTE DIE AUS DER DB GELADEN WERDEN NICHT WIEDER GELÖSCHT WERDEN
         this.previousNeuron = previousNeuron;
         this.nextNeuron = nextNeuron;
     }

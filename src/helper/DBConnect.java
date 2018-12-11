@@ -135,16 +135,16 @@ public class DBConnect {
     }
 
 
-    //AB HIER HAB ICH MAL EIN PAAR METHODEN ERSTELLT DIE DU FÜLLEN MUSST DAMIT ICH SCHONMAL WEITERMACHEN KANN ~ Jens
+    //AB HIER HAB ICH MAL EIN PAAR METHODEN ERSTELLT DIE DU FÜLLEN MUSST DAMIT ICH SCHONMAL WEITERMACHEN KANN ~ Jens~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     public static Integer[] getAllSaveNumbers(){
         /*
-        @return Gibt ein Array mit allen SaveNummern aus. Niklas braucht die um die aufzulisten.
+        @return Gibt ein Array mit allen SaveNummern aus.
          */
         return null;
     }
 
-    public static Object[] getMainTable(Integer SaveNr){
+    public static Object[] getMainTableEntry(Integer SaveNr){
         /*
         @params Die SaveNr des Standes der ausgegeben werden soll
         @return Es wird ein ObjectArray ausgegeben mit [Save_Nr, Input_Neuron, Hidden_Neuron_One,...HiddenNeuronFive, OutputNeuron, SuccessRate]
@@ -153,10 +153,37 @@ public class DBConnect {
             return null;
     }
 
-    public static void addMainTableEntry(Integer InputNeurons, Integer HiddenNeuronsOne,Integer HiddenNeuronsTwo, Integer HiddenNeuronsThree, Integer HiddenNeuronsFour,Integer HiddenNeuronsFive, Integer OutputNeurons, Double SuccessRate){
+    public static void addMainTableEntry(Integer InputNeurons, Integer HiddenNeuronsOne,Integer HiddenNeuronsTwo, Integer HiddenNeuronsThree, Integer HiddenNeuronsFour,Integer HiddenNeuronsFive, Integer OutputNeurons, Double SuccessRate) {
         /*
         @params Sind selbsterklärend
          */
 
     }
+
+    public static void addEdge(Integer SaveNr,Integer LayerNumber,Integer EdgeNumber, Integer previousNeuronID, Integer nextNeuronID, Double Weight){
+        /*
+        @params Sind selbsterklärend
+         */
+    }
+
+    public static Object[] getEdgeEntry(Integer SaveNr, Integer Layernumber, Integer EdgeNumber){
+        /*
+        @params Die spezifikationen welche edge gemeint ist
+        @return Ein ObjectArray mit [PreviousNeuron, NextNeuron, Weight]
+                Die beiden Neuronen sind integer werte weight ist double
+         */
+        return null;
+    }
+
+    public static Integer getEgeCountInLayer(Integer SaveNr, Integer Layernumber){
+        /*
+        @params Die SaveNr und der Layernumber der zu zählenden Edges
+        @return die anzahl der edges auf die das zutrifft
+         */
+        return null;
+    }
+
+
+
+
 }
