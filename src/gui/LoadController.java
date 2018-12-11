@@ -54,9 +54,8 @@ public class LoadController {
     public void fillrow(Integer nr, Double succesrate) {
         inhalt.add(new WeightData(nr,succesrate));
 
-
-        this.nr.setCellValueFactory(new PropertyValueFactory<WeightData, Integer>("Nr"));
-        this.succesrate.setCellValueFactory(new PropertyValueFactory<WeightData, Double>("Erfolgsrate"));
+        this.nr.setCellValueFactory(new PropertyValueFactory<WeightData, Integer>("nr"));
+        this.succesrate.setCellValueFactory(new PropertyValueFactory<WeightData, Double>("succesrate"));
 
         table.setItems(inhalt);
     }

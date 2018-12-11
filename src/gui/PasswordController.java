@@ -64,7 +64,7 @@ public class PasswordController {
 
 
     //Fuellt URL und Username in GUI mit gespeicherten Daten
-public void fillSavedData (String url, String user)
+public void fillSavedData ()
 {    String[] ret = UserDatamanager.readSavedUserData();
     URL.setText(ret[0]);
     User.setText(ret[1]);
