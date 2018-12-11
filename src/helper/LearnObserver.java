@@ -9,6 +9,7 @@ public class LearnObserver {
     private static int[] timesSuccessfull = new int[10];
     private static int[] timesTried = new int[10];
     private static int pictureCounter = 0;
+    private static Double successRate = null;
 
 
 
@@ -22,7 +23,7 @@ public class LearnObserver {
         }
 
         pictureCounter++;
-        if(pictureCounter % 5000 == 0){
+        if(pictureCounter % 5000 == 1){
             timesSuccessfull = new int[10];
             timesTried = new int[10];
         }
@@ -30,7 +31,8 @@ public class LearnObserver {
         if(biggestNeuron.getIdentNumber() == label) {
             timesSuccessfull[biggestNeuron.getIdentNumber()] += 1;
         }
-        System.out.println(pictureCounter / 600 + " Prozent abgeschlossen.  "+ (100 * IntStream.of(timesSuccessfull).sum() / IntStream.of(timesTried).sum()) + " Prozent richtig");
+        successRate = (100 * ((double)IntStream.of(timesSuccessfull).sum()) / ((double)IntStream.of(timesTried).sum()));
+        System.out.println(pictureCounter / 600 + " Prozent abgeschlossen.  "+ successRate + " Prozent richtig");
         for(int i = 0; i < 10;i++){
 
                 System.out.println("Die Zahl " + (i) + " war zu " + 100 * timesSuccessfull[i] / timesTried[i] + " Prozent richtig.");
@@ -39,5 +41,10 @@ public class LearnObserver {
         }catch (Exception e){
             System.out.println("Noch nicht genügend Zahlen");
         }
+    }
+
+    public static Double getSuccesRate(){
+
+        return successRate;
     }
 }

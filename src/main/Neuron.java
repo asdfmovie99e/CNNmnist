@@ -50,4 +50,13 @@ public abstract class Neuron {
     public void addIncomingEdge(Edge edge){
         incomingEdges.add(edge);
     }
+
+
+    public HashSet<Edge> getIncomingEdges() {
+        return incomingEdges;
+    }
+
+    public HashSet<Edge> getOutgoingEdges() {
+        return outgoingEdges;
+    }
 }

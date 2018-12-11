@@ -1,17 +1,19 @@
 package main;
 
+import helper.DBConnect;
 import helper.LearnObserver;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 
 public class NetworkController {
 
     private static final int ANZAHL_INPUT_NEURONS = 28 * 28;
     private static final int ANZAHL_HIDDEN_ONE = 748;
-    private static final int ANZAHL_HIDDEN_TWO = 100;
+    private static final int ANZAHL_HIDDEN_TWO = 120;
     private static final int ANZAHL_OUTPUT_NEURON = 10;
-    public static final double EPSILON = 0.0523d;
+    public static final double EPSILON = 0.049d;
     private static final int ANZAHL_BILDER = 60000;
     private static ArrayList<InputNeuron> inputNeurons = new ArrayList<InputNeuron>();
     private static ArrayList<HiddenNeuron> hiddenNeuronsOne = new ArrayList<HiddenNeuron>();
@@ -23,13 +25,14 @@ public class NetworkController {
         instantiateNeurons();
         instantiateEdges();
 
-        for(int gesamtPictureNumber = 0; gesamtPictureNumber < ANZAHL_BILDER * 10; gesamtPictureNumber++){
+        for(int gesamtPictureNumber = 0; gesamtPictureNumber < ANZAHL_BILDER ; gesamtPictureNumber++){
             int pictureNumber = gesamtPictureNumber % ANZAHL_BILDER;
         resetAllNeurons();
         sendForward(pictureNumber);
         LearnObserver.watchResults(PictureCoder.getLabel(pictureNumber), outputNeurons);
         doBackPropagation(PictureCoder.getLabel(pictureNumber));
         }
+        saveCurrentNetwork();
     }
 
     private static void sendForward(int pictureNumber) {
@@ -94,7 +97,7 @@ public class NetworkController {
         }
 
     }
-
+    @Deprecated
     private static <NeuronType extends Neuron> Object[] arrayListToArrayByIdent(ArrayList<NeuronType> neuronList) {
         NeuronType[] resultArray =(NeuronType[]) new Object[neuronList.size()];
         for(int i = 0; i < neuronList.size(); i++){
@@ -146,6 +149,47 @@ public class NetworkController {
             hiddenNeuron.modWeight();
 
         }
+    }
+
+    private static void saveCurrentNetwork(){
+        //Freie Save Nummer finden
+        Integer[] occupiedSaveNumbers = DBConnect.getAllSaveNumbers();
+        Integer saveNr = 0;
+        while(Arrays.asList(occupiedSaveNumbers).contains(saveNr)){
+            saveNr++;
+        }
+        //in den Haupttable Schreiben
+        DBConnect.addMainTableEntry(ANZAHL_INPUT_NEURONS,ANZAHL_HIDDEN_ONE,ANZAHL_HIDDEN_TWO,
+                                    0, 0, 0,
+                                    ANZAHL_OUTPUT_NEURON,LearnObserver.getSuccesRate());
+
+        for(InputNeuron inputNeuron:inputNeurons){
+            HashSet<Edge> outgoingEdges = inputNeuron.getOutgoingEdges();
+            Integer edgeNumber = 0;
+            for(Edge edge: outgoingEdges){
+                DBConnect.addEdge(saveNr, 0,edgeNumber,edge.getPreviousNeuron().getIdentNumber(), edge.getNextNeuron().getIdentNumber(), edge.getCurrentWeight());
+                edgeNumber++;
+            }
+        }
+        for(HiddenNeuron hiddenNeuronOne: hiddenNeuronsOne){
+            HashSet<Edge> outgoingEdges = hiddenNeuronOne.getOutgoingEdges();
+            Integer edgeNumber = 0;
+            for(Edge edge: outgoingEdges){
+                DBConnect.addEdge(saveNr,1,edgeNumber,edge.getPreviousNeuron().getIdentNumber(), edge.getNextNeuron().getIdentNumber(), edge.getCurrentWeight());
+                edgeNumber++;
+            }
+        }
+        for(HiddenNeuron hiddenNeuronTwo: hiddenNeuronsTwo){
+            HashSet<Edge> outgoingEdges = hiddenNeuronTwo.getOutgoingEdges();
+            Integer edgeNumber = 0;
+            for(Edge edge: outgoingEdges){
+                DBConnect.addEdge(saveNr,0,edgeNumber,edge.getPreviousNeuron().getIdentNumber(), edge.getNextNeuron().getIdentNumber(), edge.getCurrentWeight());
+                edgeNumber++;
+            }
+        }
+
+
+
     }
 
 }
