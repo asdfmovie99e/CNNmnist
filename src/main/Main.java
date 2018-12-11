@@ -30,10 +30,10 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        // launch(args);
-        MathHelper.start();
-        PictureCoder.readMnistFiles();
-        NetworkController.startLearning();
+        launch(args);
+        //MathHelper.start();
+        //PictureCoder.readMnistFiles();
+        //NetworkController.startLearning();
 
         System.exit(1);
     }
