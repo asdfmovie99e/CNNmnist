@@ -133,4 +133,24 @@ public class DBConnect {
 
         System.out.println("Die Tabelle 'HiddenLayer' wurde in der Datenbank wird erstellt!");
     }
+
+
+    //AB HIER HAB ICH MAL EIN PAAR METHODEN ERSTELLT DIE DU FÜLLEN MUSST DAMIT ICH SCHONMAL WEITERMACHEN KANN ~ Jens
+
+
+    public static Object[] getMainTable(Integer SaveNr){
+        /*
+        @params Die SaveNr des Standes der ausgegeben werden soll
+        @return Es wird ein ObjectArray ausgegeben mit [Save_Nr, Input_Neuron, Hidden_Neuron_One,...HiddenNeuronFive, OutputNeuron, SuccessRate]
+                Alles ist Integer, ausser SuccessRate, das ist Double
+        */
+            return null;
+    }
+
+    public static void addMainTableEntry(Integer InputNeurons, Integer HiddenNeuronsOne,Integer HiddenNeuronsTwo, Integer HiddenNeuronsThree, Integer HiddenNeuronsFour,Integer HiddenNeuronsFive, Integer OutputNeurons, Double SuccessRate){
+        /*
+        @params Sind selbsterklärend
+         */
+
+    }
 }
