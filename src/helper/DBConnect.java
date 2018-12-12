@@ -119,7 +119,8 @@ public class DBConnect {
             stmt = conn.createStatement();
 
             String sql = "Create Table Test"
-                    + " (Save_Nr Integer, "
+                    + " (Save_Nr Integer Auto_Increment, "
+                    + "Erfolgsrate DOUBLE"
                     + " Input_Neuron_One Integer, "
                     + " Input_Neuron_Two Integer, "
                     + " Input_Neuron_Three Integer, "
