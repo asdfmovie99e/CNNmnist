@@ -192,4 +192,8 @@ public class NetworkController {
 
     }
 
+    public static void loadDataFrom (Integer SaveNr)
+    {
+
+    }
 }
