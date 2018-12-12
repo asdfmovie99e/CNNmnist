@@ -173,7 +173,7 @@ public class Controller {
             Scene scene = new Scene(root);
             loadStage.setScene(scene);
             LoadController loadController = loader.getController();
-            loadController.filltable();
+           // loadController.fillTable();
             loadStage.show();
 
         } catch (IOException e) {

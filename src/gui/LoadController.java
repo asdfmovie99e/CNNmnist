@@ -1,80 +1,72 @@
 package gui;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 
-
-
-public class LoadController {
+public class LoadController implements Initializable {
 
 
     @FXML
     private TableView<WeightData> table;
+    @FXML private TableColumn saveNrCol ;
+    @FXML private TableColumn genauigkeitCol ;
 
-    @FXML
-    private TableColumn<WeightData, Integer> nr;
 
-    @FXML
-    private TableColumn<WeightData, Double> succesrate;
+    private final ObservableList<WeightData> data = FXCollections.observableArrayList();
 
-    @FXML
-    private TextField Nr;
 
-    @FXML
-    private Button clickload;
-
-    @FXML
-    private Button clickdelete;
-
-    @FXML
-    void clickdelete(ActionEvent event) {
-    //Delete Methode zum löschen in der Db einfuegen
-
+    private void addEntry(Integer saveNr, Double genauigkeit) {
+        //NIKLAS !!  DAS HIER IST DIE FUNKTION MIT DER MAN NEUE EINTRÄGE HINZUFÜGEN KANN
+        System.out.println("Entry added");
+        table.getItems().add(new WeightData(
+                saveNr,
+                genauigkeit));
     }
 
-    @FXML
-    void clickload(ActionEvent event) {
-
-        Controller.getLoadStage().close();
-
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        //NIKLAS!! DAS HIER IST DIE FUNKTION DIE AM ANFANG AUFGERUFEN WIRD. DU KANNST ALSO VON HIER AUS DIE DATEN AUS DER DATENBANK ABRUFEN UND MIT addEntry(s,g) DIREKT SICHTBAR MACHEN
+        saveNrCol.setMinWidth(100);
+        genauigkeitCol.setMinWidth(100);
+        table.getItems().setAll(this.data);
+        addEntry(534,2344d);
     }
 
+    public static class WeightData {
 
-    private ObservableList<WeightData> inhalt = FXCollections.observableArrayList(
-            new WeightData(4,5.5),
-            new WeightData(5,3.3)
+        private final SimpleIntegerProperty saveNr;
+        private final SimpleDoubleProperty genauigkeit;
 
+        private WeightData(Integer sNr, Double genauigkeit) {
+            this.saveNr = new SimpleIntegerProperty(sNr);
+            this.genauigkeit = new SimpleDoubleProperty(genauigkeit);
+        }
 
+        public Integer getSaveNr() {
+            return saveNr.get();
+        }
 
-    );
+        public void setSaveNr(Integer sNr) {
+            saveNr.set(sNr);
+        }
 
-    public void fillrow(Integer nr, Double succesrate) {
-        inhalt.add(new WeightData(nr,succesrate));
+        public Double getGenauigkeit(){
+            return genauigkeit.getValue();
+        }
 
-
-
-
-    }
-
-    public void filltable()
-    {
-        this.nr.setCellValueFactory(new PropertyValueFactory<WeightData, Integer>("nr"));
-        this.succesrate.setCellValueFactory(new PropertyValueFactory<WeightData, Double>("succesrate"));
-        table.setItems(inhalt);
-        //fillrow(1,2.2);
-       // fillrow(2, 1.1);
-      //  fillrow(3, 3.1);
-    }
-
+        public void setGenaugikeit(Double gn) {
+            genauigkeit.set(gn);
+        }
 
 
+}
 }
