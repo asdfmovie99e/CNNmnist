@@ -23,14 +23,13 @@ public class DBConnect {
     private static String driver ="com.mysql.jdbc.Driver";
 
     //Methode zum verbinden
-    public static void connect(String URL, String user, String pass) throws Exception{
+    public static void connect(String URL, String user, String pass){
         try {
             Class.forName(jdbcDriver);
             connection = DriverManager.getConnection(url,"root","m+m071213");
             System.out.println("Sie sind jetzt verbunden.");
         } catch (Exception e) {
             e.printStackTrace();
-            throw new Exception();
         }
     }
 
@@ -64,11 +63,7 @@ public class DBConnect {
 
     public static void checkConnection() {
         if (!isConnected()) {
-            try {
-                connect(UserDatamanager.getDburl(),UserDatamanager.getDbuser(), UserDatamanager.getDbpassword());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            connect(UserDatamanager.getDburl(),UserDatamanager.getDbuser(), UserDatamanager.getDbpassword());
         }
     }
 
@@ -250,11 +245,6 @@ public class DBConnect {
         }
         return null;
     }
-
-    public static void checkCredentials() throws Exception{
-        connect(UserDatamanager.getDburl(),UserDatamanager.getDbuser(), UserDatamanager.getDbpassword());
-    }
-
 
     public static Integer getEgeCountInLayer(Integer SaveNr, Integer Layernumber){
         /*
