@@ -26,7 +26,7 @@ public class DBConnect {
     public static void connect(String URL, String user, String pass) throws Exception{
         try {
             Class.forName(jdbcDriver);
-            connection = DriverManager.getConnection(UserDatamanager.getDburl(),UserDatamanager.getDbuser(),UserDatamanager.getDbpassword());
+            connection = DriverManager.getConnection(url,"root","m+m071213");
             System.out.println("Sie sind jetzt verbunden.");
         } catch (Exception e) {
             e.printStackTrace();
