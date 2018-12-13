@@ -167,13 +167,13 @@ public class Controller {
 
         Parent root = null;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/GUILoad.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/guidbLoad.fxml"));
             root = loader.load();
             Stage loadStage = new Stage();
             loadStage.setTitle("Zahlenerkennung");
             Scene scene = new Scene(root);
             loadStage.setScene(scene);
-            LoadController loadController = loader.getController();
+           // LoadController loadController = loader.getController();
             loadStage.show();
 
             this.loadStage = loadStage;
