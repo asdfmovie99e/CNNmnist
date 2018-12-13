@@ -183,17 +183,22 @@ public class DBConnect {
         try {
             stmt = connection.createStatement();
             rs = stmt.executeQuery("SELECT * FROM MAINTABLE WHERE SAVE_NR =" + SaveNr);
-            Object [] ObArray = new Object[9];
+            Object [] obArray = new Object[9];
+
             while (rs.next()) {
-                result = rs.getObject(1);
-                resultList.add(result);
+                obArray[0] = rs.getInt("SAVE_NR");
+                obArray[1] = rs.getDouble("ACCURACY");
+                obArray[2] = rs.getInt("INPUT_NEURON");
+                obArray[3] = rs.getInt("HIDDEN_NEURON_ONE");
+                obArray[4] = rs.getInt("HIDDEN_NEURON_TWO");
+                obArray[5] = rs.getInt("HIDDEN_NEURON_THREE");
+                obArray[6] = rs.getInt("HIDDEN_NEURON_FOUR");
+                obArray[7] = rs.getInt("HIDDEN_NEURON_FIVE");
+                obArray[8] = rs.getInt("OUTOUT_NEURON");
+
+
             }
-            Integer[] resultArray = new Integer[resultList.size()];
-            Object[] objectArray = resultList.toArray();
-            for(int i = 0 ; i < resultList.size(); i++){
-                resultArray[i] = (Integer) (objectArray[i]);
-            }
-            return resultArray;
+            return obArray;
 
         } catch (SQLException e) {
             e.printStackTrace();
