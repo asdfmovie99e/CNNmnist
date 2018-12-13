@@ -76,7 +76,7 @@ public class LoadController implements Initializable {
       Integer nrlength = DBConnect.getAllSaveNumbers().length;
       Integer [] savednr = DBConnect.getAllSaveNumbers();
 
-      for (Integer i = 0; i <= nrlength; i++)
+      for (Integer i = 0; i < nrlength; i++)
       {
         Object [] tableEntry = DBConnect.getMainTableEntry(savednr[i]);
         Integer nr = (Integer) tableEntry[0];
