@@ -35,7 +35,7 @@ public class Main extends Application {
         //MathHelper.start();
         //PictureCoder.readMnistFiles();
         //NetworkController.startLearning();
-       Integer[] test =  DBConnect.getAllSaveNumbers();
+        DBConnect.getAllSaveNumbers();
         System.exit(1);
     }
 }
