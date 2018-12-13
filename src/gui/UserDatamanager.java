@@ -33,6 +33,21 @@ public static String [] readSavedUserData() {
     try {
         String fileName = System.getenv("APPDATA")+ "\\mnist\\userdata.txt";
         File file = new File(fileName);
+        if (file.exists())
+        {
+
+        }
+        else
+        {
+            PrintWriter pWriter = null;
+            try {
+                pWriter = new PrintWriter(new BufferedWriter(new FileWriter(System.getenv("APPDATA")+ "\\mnist\\userdata.txt")));
+                pWriter.close();
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+        }
+
         fr = new FileReader(file);
         br = new BufferedReader(fr);
 

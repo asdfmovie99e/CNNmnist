@@ -1,80 +1,115 @@
 package gui;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 
+import helper.DBConnect;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
+import main.NetworkController;
 
-
-
-public class LoadController {
+public class LoadController implements Initializable {
 
 
     @FXML
     private TableView<WeightData> table;
+    @FXML private TableColumn saveNrCol ;
+    @FXML private TableColumn genauigkeitCol ;
 
     @FXML
-    private TableColumn<WeightData, Integer> nr;
+    private Button loadbutton;
 
     @FXML
-    private TableColumn<WeightData, Double> succesrate;
-
-    @FXML
-    private TextField Nr;
-
-    @FXML
-    private Button clickload;
-
-    @FXML
-    private Button clickdelete;
+    private Button deletebutton;
 
     @FXML
     void clickdelete(ActionEvent event) {
-    //Delete Methode zum löschen in der Db einfuegen
-
+        table.getItems().removeAll(table.getSelectionModel().getSelectedItem());
     }
+
 
     @FXML
+    private TextField nrload;
+
+    @FXML
+    //liest nr des ausgewählten Gewichtes aus
     void clickload(ActionEvent event) {
-
-        Controller.getLoadStage().close();
-
-    }
-
-
-    private ObservableList<WeightData> inhalt = FXCollections.observableArrayList(
-            new WeightData(4,5.5),
-            new WeightData(5,3.3)
-
-
-
-    );
-
-    public void fillrow(Integer nr, Double succesrate) {
-        inhalt.add(new WeightData(nr,succesrate));
-
-
-
-
-    }
-
-    public void filltable()
-    {
-        this.nr.setCellValueFactory(new PropertyValueFactory<WeightData, Integer>("nr"));
-        this.succesrate.setCellValueFactory(new PropertyValueFactory<WeightData, Double>("succesrate"));
-        table.setItems(inhalt);
-        //fillrow(1,2.2);
-       // fillrow(2, 1.1);
-      //  fillrow(3, 3.1);
+       WeightData selectedItem = table.getSelectionModel().getSelectedItem();
+       NetworkController.loadDataFrom(selectedItem.getSaveNr());
+       Controller.getLoadStage().close();
     }
 
 
 
+    private final ObservableList<WeightData> data = FXCollections.observableArrayList();
+
+
+    private void addEntry(Integer saveNr, Double genauigkeit) {
+        // DAS HIER IST DIE FUNKTION MIT DER MAN NEUE EINTRÄGE HINZUFÜGEN KANN
+        System.out.println("Entry added");
+        table.getItems().add(new WeightData(
+                saveNr,
+                genauigkeit));
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        //DAS HIER IST DIE FUNKTION DIE AM ANFANG AUFGERUFEN WIRD. DU KANNST ALSO VON HIER AUS DIE DATEN AUS DER DATENBANK ABRUFEN UND MIT addEntry(s,g) DIREKT SICHTBAR MACHEN
+        saveNrCol.setMinWidth(100);
+        genauigkeitCol.setMinWidth(100);
+        table.getItems().setAll(this.data);
+        putDBEntrysToTable();
+        addEntry(534,2344d);
+        addEntry(535,2.3);
+    }
+
+    private void putDBEntrysToTable() {
+      Integer nrlength = DBConnect.getAllSaveNumbers().length;
+
+      for (Integer i = 0; i < nrlength; i++)
+      {
+        Object [] tableEntry = DBConnect.getMainTableEntry(i);
+        Integer nr = (Integer) tableEntry[5];
+        double succesrate = (Double) tableEntry [0];
+        addEntry(nr, succesrate);
+      }
+    }
+
+    public static class WeightData {
+
+        private final SimpleIntegerProperty saveNr;
+        private final SimpleDoubleProperty genauigkeit;
+
+        private WeightData(Integer sNr, Double genauigkeit) {
+            this.saveNr = new SimpleIntegerProperty(sNr);
+            this.genauigkeit = new SimpleDoubleProperty(genauigkeit);
+        }
+
+        public Integer getSaveNr() {
+            return saveNr.get();
+        }
+
+        public void setSaveNr(Integer sNr) {
+            saveNr.set(sNr);
+        }
+
+        public Double getGenauigkeit(){
+            return genauigkeit.getValue();
+        }
+
+        public void setGenaugikeit(Double gn) {
+            genauigkeit.set(gn);
+        }
+
+
+}
 }

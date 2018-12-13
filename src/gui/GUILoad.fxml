@@ -5,19 +5,24 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LoadController">
-   <children>
-      <TableView fx:id="table" layoutX="50.0" layoutY="30.0" prefHeight="200.0" prefWidth="200.0">
-        <columns>
-          <TableColumn fx:id="nr" prefWidth="67.20001220703125" text="Nr" />
-          <TableColumn fx:id="succesrate" prefWidth="131.19998931884766" text="Erfolgsrate" />
-        </columns>
-      </TableView>
-      <TextField fx:id="Nr" layoutX="69.0" layoutY="279.0" prefHeight="25.0" prefWidth="44.0" />
-      <Label layoutX="33.0" layoutY="283.0" text="Nr:" />
-      <Button fx:id="clickload" layoutX="152.0" layoutY="279.0" mnemonicParsing="false" onAction="#clickload" text="laden" />
-      <Button fx:id="clickdelete" layoutX="221.0" layoutY="279.0" mnemonicParsing="false" onAction="#clickdelete" text="löschen" />
-   </children>
-</Pane>
+<AnchorPane id="AnchorPane" prefHeight="324.0" prefWidth="253.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LoadController">
+    <children>
+        <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
+        <TableView fx:id="table" layoutX="26.0" layoutY="29.0" prefHeight="221.0" prefWidth="200.0">
+            <columns>
+                <TableColumn fx:id="saveNrCol" prefWidth="98.40002632141113" text="Save Nr">
+                    <cellValueFactory><PropertyValueFactory property="saveNr" /></cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="genauigkeitCol" prefWidth="102.39995574951172" text="Genauigkeit">
+                    <cellValueFactory><PropertyValueFactory property="genauigkeit" /></cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+      <Button fx:id="loadbutton" layoutX="161.0" layoutY="267.0" mnemonicParsing="false" onAction="#clickload" text="laden" />
+      <Button fx:id="deletebutton" layoutX="88.0" layoutY="267.0" mnemonicParsing="false" onAction="#clickdelete" text="löschen" />
+      <TextField fx:id="nrload" layoutX="26.0" layoutY="266.0" prefHeight="26.0" prefWidth="46.0" />
+    </children>
+</AnchorPane>
