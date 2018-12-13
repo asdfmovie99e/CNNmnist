@@ -1,5 +1,9 @@
 package helper;
 
+import gui.UserDatamanager;
+
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import java.sql.Connection;
@@ -18,27 +22,11 @@ public class DBConnect {
     private static Connection connection;
     private static String driver ="com.mysql.jdbc.Driver";
 
-    //Methode zum Einlesen des Usernamens
-    public static String einlesenUser(){
-        System.out.println("Geben Sie ihren Benutzernamen ein.");
-        Scanner scanUser = new Scanner(System.in);
-        user = scanUser.nextLine();
-        return user;
-    }
-
-    //Methode zum Einlesen des Passwortes
-    public static String einlesenPass(){
-        System.out.println("Geben Sie ihr Passwort ein.");
-        Scanner scanPass = new Scanner(System.in);
-        pass = scanPass.nextLine();
-        return pass;
-    }
-
     //Methode zum verbinden
     public static void connect(String URL, String user, String pass){
         try {
             Class.forName(jdbcDriver);
-            connection = DriverManager.getConnection(url,user,pass);
+            connection = DriverManager.getConnection(url,"root","m+m071213");
             System.out.println("Sie sind jetzt verbunden.");
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,6 +61,12 @@ public class DBConnect {
         }
     }
 
+    public static void checkConnection() {
+        if (!isConnected()) {
+            connect(UserDatamanager.getDburl(),UserDatamanager.getDbuser(), UserDatamanager.getDbpassword());
+        }
+    }
+
     //Methode zur Abfrage aus der DB
     public static ResultSet abfrage(String query) {
         try {
@@ -103,8 +97,7 @@ public class DBConnect {
 
         DBConnect User1 = new DBConnect();
 
-        User1.einlesenUser();
-        User1.einlesenPass();
+
 
         try {
             conn = DriverManager.getConnection(
@@ -118,14 +111,16 @@ public class DBConnect {
         try {
             stmt = conn.createStatement();
 
-            String sql = "Create Table Test"
+            String sql = "Create Table MAINTABLE"
                     + " (Save_Nr Integer Auto_Increment, "
-                    + "Erfolgsrate DOUBLE"
-                    + " Input_Neuron_One Integer, "
-                    + " Input_Neuron_Two Integer, "
-                    + " Input_Neuron_Three Integer, "
-                    + " Input_Neuron_Four Integer, "
-                    + " Input_Neuron_Five Integer, "
+                    + " Input_Neuron Integer, "
+                    + " HIDDEN_NEURON_ONE Integer, "
+                    + " HIDDEN_NEURON_TWO Integer, "
+                    + " HIDDEN_NEURON_THREE Integer, "
+                    + " HIDDEN_NEURON_FOUR Integer, "
+                    + " HIDDEN_NEURON_FIVE INTEGER, "
+                    + " OUTPUT_NEURON INTEGER, "
+                    + " ACCURACY DOUBLE, "
                     + " Primary Key (Save_Nr))";
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
@@ -138,11 +133,30 @@ public class DBConnect {
 
     //AB HIER HAB ICH MAL EIN PAAR METHODEN ERSTELLT DIE DU FÜLLEN MUSST DAMIT ICH SCHONMAL WEITERMACHEN KANN ~ Jens~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    public static Integer[] getAllSaveNumbers(){
+    public static Integer[] getAllSaveNumbers() {
         /*
         @return Gibt ein Array mit allen SaveNummern aus.
          */
-        return null;
+        checkConnection();
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            String s = "(SELECT SAVE_NR FROM MAINTABLE)";
+            stmt = connection.createStatement();
+            rs = stmt.executeQuery(s);
+            ArrayList<Integer> resultList = new ArrayList<Integer>();
+            Integer result;
+            while (rs.next()) {
+                result = rs.getInt(1);
+                resultList.add(result);
+            }
+
+            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public static Object[] getMainTableEntry(Integer SaveNr){
@@ -151,13 +165,39 @@ public class DBConnect {
         @return Es wird ein ObjectArray ausgegeben mit [Save_Nr, Input_Neuron, Hidden_Neuron_One,...HiddenNeuronFive, OutputNeuron, SuccessRate]
                 Alles ist Integer, ausser SuccessRate, das ist Double
         */
-            return null;
+        checkConnection();
+        Statement stmt = null;
+        ResultSet rst = null;
+
+        try {
+            stmt = connection.createStatement();
+            rst = stmt.executeQuery("SELECT * FROM MAINTABLE WHERE SAVE_NR =" + SaveNr);
+          //  Object [] ObArray = new Object[];
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static void addMainTableEntry(Integer InputNeurons, Integer HiddenNeuronsOne,Integer HiddenNeuronsTwo, Integer HiddenNeuronsThree, Integer HiddenNeuronsFour,Integer HiddenNeuronsFive, Integer OutputNeurons, Double SuccessRate) {
         /*
         @params Sind selbsterklärend
          */
+        Statement stmt = null;
+        ResultSet rst = null;
+        //ResultSet rst2 =null;
+        checkConnection();
+        try {
+            String s = "INSERT INTO MAINTABLE (INPUT_NEURON, HIDDEN_NEURON_ONE, HIDDEN_NEURON_TWO, HIDDEN_NEURON_THREE, HIDDEN_NEURON_FOUR, HIDDEN_NEURON_FIVE, OUTPUT_NEURON,ACCURACY) VALUES " +
+                    "(" + InputNeurons + "," + HiddenNeuronsOne + "," + HiddenNeuronsTwo + "," + HiddenNeuronsThree + "," + HiddenNeuronsFour + "," + HiddenNeuronsFive + "," + OutputNeurons + "," + SuccessRate +")" ;
+            stmt = connection.createStatement();
+            rst = stmt.executeQuery(s);
+          //  rst2 = stmt.executeQuery("INSERT INTO HIDDENLAYER")
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
 
     }
 
@@ -165,6 +205,19 @@ public class DBConnect {
         /*
         @params Sind selbsterklärend
          */
+        Statement stmt = null;
+        ResultSet rst = null;
+        checkConnection();
+
+        try {
+            String s = "INSERT INTO EDGETABLE (SAVE_NR, LAYER_NR, EDGE_NR, PRE_NEURON_IDENT, NEXT_NEURON_IDENT, WEIGHT) VALUES" +
+                    "( " + SaveNr +"," + LayerNumber + "," + EdgeNumber + "," + previousNeuronID + "," + nextNeuronID + "," + Weight + ")";
+            stmt = connection.createStatement();
+            rst = stmt.executeQuery(s);
+
+        } catch (SQLException e) {
+            return ;
+        }
     }
 
     public static Object[] getEdgeEntry(Integer SaveNr, Integer Layernumber, Integer EdgeNumber){
@@ -173,6 +226,19 @@ public class DBConnect {
         @return Ein ObjectArray mit [PreviousNeuron, NextNeuron, Weight]
                 Die beiden Neuronen sind integer werte weight ist double
          */
+        Statement stmt = null;
+        ResultSet rst = null;
+        checkConnection();
+        try {
+            String s = "SELECT PRE_NEURON_IDENT, NEXT_NEURON_IDENT, ACCURACY FROM EDGETABELLE WHERE " +
+                    "SAVE_NR = "+ SaveNr+ " and LAYER_NR ="+ Layernumber +" and EDGE_NR = "+ EdgeNumber;
+            stmt = connection.createStatement();
+            rst = stmt.executeQuery(s);
+
+
+        }catch (SQLException e){
+            return null;
+        }
         return null;
     }
 
@@ -181,10 +247,19 @@ public class DBConnect {
         @params Die SaveNr und der Layernumber der zu zählenden Edges
         @return die anzahl der edges auf die das zutrifft
          */
+        Statement stmt = null;
+        ResultSet rst = null;
+        checkConnection();
+        try {
+            String s = ("SELECT COUNT(EDGE_NR) FROM EDGETABLE WHERE SAVE_NR = " + SaveNr + " and LAYER_NR = " + Layernumber);
+            stmt = connection.createStatement();
+            rst = stmt.executeQuery(s);
+
+        }catch (SQLException e){
+            return null;
+        }
         return null;
     }
-
-
-
-
 }
+//ResultSet kann nur in toString umgewandelt werden
+// ? kann mit Statement.setString befüllt werden
