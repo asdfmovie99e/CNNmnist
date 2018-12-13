@@ -23,13 +23,14 @@ public class DBConnect {
     private static String driver ="com.mysql.jdbc.Driver";
 
     //Methode zum verbinden
-    public static void connect(String URL, String user, String pass){
+    public static void connect(String URL, String user, String pass) throws Exception{
         try {
             Class.forName(jdbcDriver);
-            connection = DriverManager.getConnection(url,"root","m+m071213");
+            connection = DriverManager.getConnection(UserDatamanager.getDburl(),UserDatamanager.getDbuser(),UserDatamanager.getDbpassword());
             System.out.println("Sie sind jetzt verbunden.");
         } catch (Exception e) {
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -63,7 +64,11 @@ public class DBConnect {
 
     public static void checkConnection() {
         if (!isConnected()) {
-            connect(UserDatamanager.getDburl(),UserDatamanager.getDbuser(), UserDatamanager.getDbpassword());
+            try {
+                connect(UserDatamanager.getDburl(),UserDatamanager.getDbuser(), UserDatamanager.getDbpassword());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -151,8 +156,12 @@ public class DBConnect {
                 result = rs.getInt(1);
                 resultList.add(result);
             }
-
-            return null;
+            Integer[] resultArray = new Integer[resultList.size()];
+            Object[] objectArray = resultList.toArray();
+            for(int i = 0 ; i < resultList.size(); i++){
+                resultArray[i] = (Integer) (objectArray[i]);
+            }
+            return resultArray;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -167,12 +176,24 @@ public class DBConnect {
         */
         checkConnection();
         Statement stmt = null;
-        ResultSet rst = null;
+        ResultSet rs = null;
+        Object result;
+        ArrayList<Object> resultList = new ArrayList<Object>();
 
         try {
             stmt = connection.createStatement();
-            rst = stmt.executeQuery("SELECT * FROM MAINTABLE WHERE SAVE_NR =" + SaveNr);
-          //  Object [] ObArray = new Object[];
+            rs = stmt.executeQuery("SELECT * FROM MAINTABLE WHERE SAVE_NR =" + SaveNr);
+            Object [] ObArray = new Object[9];
+            while (rs.next()) {
+                result = rs.getObject(1);
+                resultList.add(result);
+            }
+            Integer[] resultArray = new Integer[resultList.size()];
+            Object[] objectArray = resultList.toArray();
+            for(int i = 0 ; i < resultList.size(); i++){
+                resultArray[i] = (Integer) (objectArray[i]);
+            }
+            return resultArray;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -186,7 +207,6 @@ public class DBConnect {
          */
         Statement stmt = null;
         ResultSet rst = null;
-        //ResultSet rst2 =null;
         checkConnection();
         try {
             String s = "INSERT INTO MAINTABLE (INPUT_NEURON, HIDDEN_NEURON_ONE, HIDDEN_NEURON_TWO, HIDDEN_NEURON_THREE, HIDDEN_NEURON_FOUR, HIDDEN_NEURON_FIVE, OUTPUT_NEURON,ACCURACY) VALUES " +
@@ -202,9 +222,7 @@ public class DBConnect {
     }
 
     public static void addEdge(Integer SaveNr,Integer LayerNumber,Integer EdgeNumber, Integer previousNeuronID, Integer nextNeuronID, Double Weight){
-        /*
-        @params Sind selbsterklärend
-         */
+
         Statement stmt = null;
         ResultSet rst = null;
         checkConnection();
@@ -221,26 +239,39 @@ public class DBConnect {
     }
 
     public static Object[] getEdgeEntry(Integer SaveNr, Integer Layernumber, Integer EdgeNumber){
-        /*
-        @params Die spezifikationen welche edge gemeint ist
-        @return Ein ObjectArray mit [PreviousNeuron, NextNeuron, Weight]
-                Die beiden Neuronen sind integer werte weight ist double
-         */
+
         Statement stmt = null;
-        ResultSet rst = null;
+        ResultSet rs = null;
         checkConnection();
+        Object result;
+        ArrayList <Object> resultList = new ArrayList<Object>();
         try {
             String s = "SELECT PRE_NEURON_IDENT, NEXT_NEURON_IDENT, ACCURACY FROM EDGETABELLE WHERE " +
                     "SAVE_NR = "+ SaveNr+ " and LAYER_NR ="+ Layernumber +" and EDGE_NR = "+ EdgeNumber;
             stmt = connection.createStatement();
-            rst = stmt.executeQuery(s);
+            rs = stmt.executeQuery(s);
+            Object [] ObArray = new Object[6];
+            while (rs.next()) {
+                result = rs.getObject(1);
+                resultList.add(result);
+            }
+            Integer[] resultArray = new Integer[resultList.size()];
+            Object[] objectArray = resultList.toArray();
+            for(int i = 0 ; i < resultList.size(); i++){
+                resultArray[i] = (Integer) (objectArray[i]);
+            }
+            return resultArray;
 
 
         }catch (SQLException e){
             return null;
         }
-        return null;
     }
+
+    public static void checkCredentials() throws Exception{
+        connect(UserDatamanager.getDburl(),UserDatamanager.getDbuser(), UserDatamanager.getDbpassword());
+    }
+
 
     public static Integer getEgeCountInLayer(Integer SaveNr, Integer Layernumber){
         /*
@@ -261,5 +292,3 @@ public class DBConnect {
         return null;
     }
 }
-//ResultSet kann nur in toString umgewandelt werden
-// ? kann mit Statement.setString befüllt werden
