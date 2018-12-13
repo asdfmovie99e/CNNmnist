@@ -68,8 +68,8 @@ public class LoadController implements Initializable {
         genauigkeitCol.setMinWidth(100);
         table.getItems().setAll(this.data);
         putDBEntrysToTable();
-        addEntry(534,2344d);
-        addEntry(535,2.3);
+        //addEntry(534,2344d);
+        //addEntry(535,2.3);
     }
 
     private void putDBEntrysToTable() {

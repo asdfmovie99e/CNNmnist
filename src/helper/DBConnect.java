@@ -30,7 +30,7 @@ public class DBConnect {
             System.out.println("Sie sind jetzt verbunden.");
         } catch (Exception e) {
             e.printStackTrace();
-            throw new Exception();
+            throw e;
         }
     }
 
