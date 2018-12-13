@@ -162,6 +162,7 @@ public class Controller {
 
     }
 
+
     private void openGuiLoad(){
 
         Parent root = null;
@@ -173,8 +174,9 @@ public class Controller {
             Scene scene = new Scene(root);
             loadStage.setScene(scene);
             LoadController loadController = loader.getController();
-           // loadController.fillTable();
             loadStage.show();
+
+            this.loadStage = loadStage;
 
         } catch (IOException e) {
             e.printStackTrace();

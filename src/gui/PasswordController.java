@@ -81,6 +81,8 @@ private void openMainGui(){
 
     Main.getPasswordStage().close();
 
+
+
     Parent root = null;
     try {
         root = FXMLLoader.load(getClass().getResource("../gui/GUI.fxml"));

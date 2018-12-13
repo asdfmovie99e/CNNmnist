@@ -3,6 +3,7 @@ package gui;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import helper.DBConnect;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -66,8 +67,21 @@ public class LoadController implements Initializable {
         saveNrCol.setMinWidth(100);
         genauigkeitCol.setMinWidth(100);
         table.getItems().setAll(this.data);
+        putDBEntrysToTable();
         addEntry(534,2344d);
         addEntry(535,2.3);
+    }
+
+    private void putDBEntrysToTable() {
+      Integer nrlength = DBConnect.getAllSaveNumbers().length;
+
+      for (Integer i = 0; i < nrlength; i++)
+      {
+        Object [] tableEntry = DBConnect.getMainTableEntry(i);
+        Integer nr = (Integer) tableEntry[5];
+        double succesrate = (Double) tableEntry [0];
+        addEntry(nr, succesrate);
+      }
     }
 
     public static class WeightData {
