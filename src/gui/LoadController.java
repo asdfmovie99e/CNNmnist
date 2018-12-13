@@ -74,10 +74,11 @@ public class LoadController implements Initializable {
 
     private void putDBEntrysToTable() {
       Integer nrlength = DBConnect.getAllSaveNumbers().length;
+      Integer [] savednr = DBConnect.getAllSaveNumbers();
 
       for (Integer i = 0; i <= nrlength; i++)
       {
-        Object [] tableEntry = DBConnect.getMainTableEntry(i);
+        Object [] tableEntry = DBConnect.getMainTableEntry(savednr[i]);
         Integer nr = (Integer) tableEntry[0];
         double succesrate = (Double) tableEntry [1];
         addEntry(nr, succesrate);
