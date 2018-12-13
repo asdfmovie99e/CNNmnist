@@ -39,31 +39,28 @@ public class PasswordController {
 
     @FXML
     void clicklogin(ActionEvent event) {
-
+         openMainGui();
         String url = URL.getText();
         String user = User.getText();
         String password = Password.toString();
-        //Übergabe an die Variabeln im UserDatamanager zum späteren Aufruf
-        UserDatamanager.setDburl(url);
-        UserDatamanager.setDbuser(user);
-        UserDatamanager.setDbpassword(password);
     if (savelogin.isSelected())
         {
             UserDatamanager.SaveUserData(url,user);
         }
 
-    try {
-        DBConnect.checkCredentials();
+        //aufrufen der connect methode
+        DBConnect.connect(url,user,password);
 
-    }
-    catch (Exception e)
-    {
-        e.printStackTrace();
         //Bei Fehlerhafter anmeldung wird eine Nachricht angezeigt
-        LoginFail.setVisible(true);
-        return;
-    }
-        openMainGui();
+       LoginFail.setVisible(true);
+
+        //Übergabe an die Variabeln im UserDatamanager zum späteren Aufruf
+        UserDatamanager.setDburl(url);
+        UserDatamanager.setDbuser(user);
+        UserDatamanager.setDbpassword(password);
+
+
+
 
     }
 
