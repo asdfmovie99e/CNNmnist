@@ -42,7 +42,7 @@ public class PasswordController {
 
         String url = URL.getText();
         String user = User.getText();
-        String password = Password.toString();
+        String password = Password.getText();
         //Übergabe an die Variabeln im UserDatamanager zum späteren Aufruf
         UserDatamanager.setDburl(url);
         UserDatamanager.setDbuser(user);
