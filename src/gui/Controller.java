@@ -167,7 +167,8 @@ public class Controller {
 
         Parent root = null;
         try {
-            FXMLLoader loader =new FXMLLoader(getClass().getResource("../gui/GUILoad.fxml"));
+           // FXMLLoader loader =new FXMLLoader(getClass().getResource("../gui/GUILoad.fxml"));
+            FXMLLoader loader =new FXMLLoader(getClass().getResource("../gui/TableSample.fxml"));
             root = loader.load();
             Stage loadStage = new Stage();
             loadStage.setTitle("Zahlenerkennung");
