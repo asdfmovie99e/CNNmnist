@@ -151,8 +151,12 @@ public class DBConnect {
                 result = rs.getInt(1);
                 resultList.add(result);
             }
-
-            return null;
+            Integer[] resultArray = new Integer[resultList.size()];
+            Object[] objectArray = resultList.toArray();
+            for(int i = 0 ; i < resultList.size(); i++){
+                resultArray[i] = (Integer) (objectArray[i]);
+            }
+            return resultArray;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -261,5 +265,3 @@ public class DBConnect {
         return null;
     }
 }
-//ResultSet kann nur in toString umgewandelt werden
-// ? kann mit Statement.setString befüllt werden
