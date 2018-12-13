@@ -44,6 +44,7 @@ public class LoadController implements Initializable {
     void clickload(ActionEvent event) {
        WeightData selectedItem = table.getSelectionModel().getSelectedItem();
        NetworkController.loadDataFrom(selectedItem.getSaveNr());
+       Controller.getLoadStage().close();
     }
 
 
