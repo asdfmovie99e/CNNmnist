@@ -35,6 +35,7 @@ public class PasswordController {
     @FXML
     private PasswordField Password;
 
+    private Stage mainStage = null;
 
 
     @FXML
@@ -88,15 +89,22 @@ private void openMainGui(){
 
     Parent root = null;
     try {
-        root = FXMLLoader.load(getClass().getResource("../gui/GUI.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/GUI.fxml"));
+        root = loader.load();
         Stage mainStage = new Stage();
         mainStage.setTitle("Zahlenerkennung");
         mainStage.setScene(new Scene(root, 840, 500));
+        Controller controller = loader.getController();
+        controller.setThisStage(mainStage);
         mainStage.show();
+        this.mainStage = mainStage;
     } catch (IOException e) {
         e.printStackTrace();
     }
 
 }
 
+    public Stage getMainStage() {
+        return mainStage;
+    }
 }

@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
+import helper.MathHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,8 +20,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
-
+import main.NetworkController;
+import main.PictureCoder;
 
 
 public class Controller {
@@ -70,7 +71,7 @@ public class Controller {
     @FXML
     private TextField textausgabe;
 
-
+    private Stage thisStage = null;
 
 
     @FXML
@@ -78,8 +79,9 @@ public class Controller {
 
     }
 
-
-
+    public void setThisStage(Stage stage){
+        this.thisStage = stage;
+    }
 
     @FXML
     void onDeleteAction(ActionEvent event) {
@@ -111,7 +113,10 @@ public class Controller {
 
     @FXML
     void onLernenClicked(ActionEvent event) {
-
+        thisStage.close();
+        MathHelper.start();
+        PictureCoder.readMnistFiles();
+        NetworkController.startLearning();
     }
 
 

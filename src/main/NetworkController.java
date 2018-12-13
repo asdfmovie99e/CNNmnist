@@ -159,33 +159,32 @@ public class NetworkController {
             saveNr++;
         }
         //in den Haupttable Schreiben
-        DBConnect.addMainTableEntry(ANZAHL_INPUT_NEURONS,ANZAHL_HIDDEN_ONE,ANZAHL_HIDDEN_TWO,
+        DBConnect.addMainTableEntry(saveNr, ANZAHL_INPUT_NEURONS,ANZAHL_HIDDEN_ONE,ANZAHL_HIDDEN_TWO,
                                     0, 0, 0,
                                     ANZAHL_OUTPUT_NEURON,LearnObserver.getSuccesRate());
-
+        Integer edgeNumber = 0;
         for(InputNeuron inputNeuron:inputNeurons){
             HashSet<Edge> outgoingEdges = inputNeuron.getOutgoingEdges();
-            Integer edgeNumber = 0;
             for(Edge edge: outgoingEdges){
                 DBConnect.addEdge(saveNr, 0,edgeNumber,edge.getPreviousNeuron().getIdentNumber(), edge.getNextNeuron().getIdentNumber(), edge.getCurrentWeight());
-                edgeNumber++;
             }
+            edgeNumber++;
         }
+        edgeNumber = 0;
         for(HiddenNeuron hiddenNeuronOne: hiddenNeuronsOne){
             HashSet<Edge> outgoingEdges = hiddenNeuronOne.getOutgoingEdges();
-            Integer edgeNumber = 0;
             for(Edge edge: outgoingEdges){
                 DBConnect.addEdge(saveNr,1,edgeNumber,edge.getPreviousNeuron().getIdentNumber(), edge.getNextNeuron().getIdentNumber(), edge.getCurrentWeight());
-                edgeNumber++;
             }
+            edgeNumber++;
         }
+        edgeNumber = 0;
         for(HiddenNeuron hiddenNeuronTwo: hiddenNeuronsTwo){
             HashSet<Edge> outgoingEdges = hiddenNeuronTwo.getOutgoingEdges();
-            Integer edgeNumber = 0;
             for(Edge edge: outgoingEdges){
-                DBConnect.addEdge(saveNr,0,edgeNumber,edge.getPreviousNeuron().getIdentNumber(), edge.getNextNeuron().getIdentNumber(), edge.getCurrentWeight());
-                edgeNumber++;
+                DBConnect.addEdge(saveNr,2,edgeNumber,edge.getPreviousNeuron().getIdentNumber(), edge.getNextNeuron().getIdentNumber(), edge.getCurrentWeight());
             }
+            edgeNumber++;
         }
 
 
