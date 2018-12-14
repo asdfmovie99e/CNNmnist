@@ -117,7 +117,7 @@ public class DBConnect {
             stmt = conn.createStatement();
 
             String sql = "Create Table MAINTABLE"
-                    + " (Save_Nr Integer Auto_Increment, "
+                    + " (Save_Nr Integer , "
                     + " Input_Neuron Integer, "
                     + " HIDDEN_NEURON_ONE Integer, "
                     + " HIDDEN_NEURON_TWO Integer, "
@@ -194,7 +194,7 @@ public class DBConnect {
                 obArray[5] = rs.getInt("HIDDEN_NEURON_THREE");
                 obArray[6] = rs.getInt("HIDDEN_NEURON_FOUR");
                 obArray[7] = rs.getInt("HIDDEN_NEURON_FIVE");
-                obArray[8] = rs.getInt("OUTOUT_NEURON");
+                obArray[8] = rs.getInt("OUTPUT_NEURON");
 
 
             }
@@ -248,29 +248,25 @@ public class DBConnect {
         Statement stmt = null;
         ResultSet rs = null;
         checkConnection();
-        Object result;
-        ArrayList <Object> resultList = new ArrayList<Object>();
+        Object [] obArray = new Object[3];
         try {
-            String s = "SELECT PRE_NEURON_IDENT, NEXT_NEURON_IDENT, ACCURACY FROM EDGETABELLE WHERE " +
+            String s = "SELECT PRE_NEURON_IDENT, NEXT_NEURON_IDENT, WEIGHT FROM EDGETABlE WHERE " +
                     "SAVE_NR = "+ SaveNr+ " and LAYER_NR ="+ Layernumber +" and EDGE_NR = "+ EdgeNumber;
             stmt = connection.createStatement();
             rs = stmt.executeQuery(s);
-            Object [] ObArray = new Object[6];
             while (rs.next()) {
-                result = rs.getObject(1);
-                resultList.add(result);
+                obArray[0] = rs.getInt("PRE_NEURON_IDENT");
+                obArray[1] = rs.getInt("NEXT_NEURON_IDENT");
+                obArray[2] = rs.getDouble("WEIGHT");
             }
-            Integer[] resultArray = new Integer[resultList.size()];
-            Object[] objectArray = resultList.toArray();
-            for(int i = 0 ; i < resultList.size(); i++){
-                resultArray[i] = (Integer) (objectArray[i]);
-            }
-            return resultArray;
+
 
 
         }catch (SQLException e){
+            e.printStackTrace();
             return null;
         }
+        return obArray;
     }
 
     public static void checkCredentials() throws Exception{
@@ -285,15 +281,20 @@ public class DBConnect {
          */
         Statement stmt = null;
         ResultSet rst = null;
+        Integer result = null;
         checkConnection();
         try {
-            String s = ("SELECT COUNT(EDGE_NR) FROM EDGETABLE WHERE SAVE_NR = " + SaveNr + " and LAYER_NR = " + Layernumber);
+            String s = ("SELECT COUNT(EDGE_NR) AS EDGECOUNT FROM EDGETABLE WHERE SAVE_NR = " + SaveNr + " and LAYER_NR = " + Layernumber);
             stmt = connection.createStatement();
             rst = stmt.executeQuery(s);
+
+            while (rst.next()) {
+                result = rst.getInt("EDGECOUNT");
+            }
 
         }catch (SQLException e){
             return null;
         }
-        return null;
+        return result;
     }
 }
