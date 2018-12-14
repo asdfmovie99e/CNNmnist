@@ -93,7 +93,7 @@ public class NetworkController {
                 for(int y = -1; y <= 1; y++){
                     int inputNr = inputNeuron.getIdentNumber();
                     int targetNr = inputNeuron.getIdentNumber() + x + y * 28;
-                    if(targetNr < 0 || targetNr > 28 * 28 || (targetNr % 28 == 0 && x == 1) || (targetNr % 28 == 27 && x== -1)){
+                    if(targetNr < 0 || targetNr >= 28 * 28 || (targetNr % 28 == 0 && x == 1) || (targetNr % 28 == 27 && x== -1)){
                         continue;
                     }
                     connectNeurons(inputNeuron, hiddenNeuronsOneArray[targetNr]);
