@@ -5,12 +5,14 @@ package gui;
  @version 1.0
  */
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 
 import helper.MathHelper;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,9 +21,12 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import main.NetworkController;
 import main.PictureCoder;
+
+import javax.imageio.ImageIO;
 
 
 public class Controller {
@@ -77,6 +82,14 @@ public class Controller {
     @FXML
     void onAuswertenClicked(ActionEvent event) {
 
+        Image snapshot = canvas.snapshot(null,null);
+        try {
+            ImageIO.write(SwingFXUtils.fromFXImage(snapshot,null), "png", new File(System.getenv("APPDATA") + "\\mnist\\" + "paint.png"));
+            Thread.sleep(500);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        PictureCoder.readSelfDrawnImage();
     }
 
     public void setThisStage(Stage stage){

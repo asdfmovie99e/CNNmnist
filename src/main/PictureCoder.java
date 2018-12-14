@@ -1,5 +1,8 @@
 package main;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -72,5 +75,25 @@ public class PictureCoder {
     }
 
 
-
+    public static void readSelfDrawnImage() {
+        BufferedImage img = null;
+        try {
+            img= ImageIO.read(new File(System.getenv("APPDATA") + "\\mnist\\" + "paint.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            ImageIO.write(img,"png",new File(System.getenv("APPDATA") + "\\mnist\\" + "asdf.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Integer[] colorArray = new Integer[196 * 196];
+        for(int y = 0 ; y < 196; y++){
+            for(int x = 0; x < 196; x++){
+                Color c = new Color(img.getRGB(x, y), true);
+                colorArray[x + y * 196] = 255 - c.getRed(); //umdrehen damit weiss 0 und schwarz 255 ist
+            }
+        }
+int debug = 0;
+    }
 }
