@@ -11,9 +11,9 @@ public class NetworkController {
 
     private static int ANZAHL_INPUT_NEURONS = 28 * 28;
     private static int ANZAHL_HIDDEN_ONE = 784;
-    private static int ANZAHL_HIDDEN_TWO = 115;
+    private static int ANZAHL_HIDDEN_TWO = 150;
     private static int ANZAHL_OUTPUT_NEURON = 10;
-    public static final double EPSILON = 0.05d;
+    public static final double EPSILON = 0.057d;
     private static final int ANZAHL_BILDER = 60000;
     private static ArrayList<InputNeuron> inputNeurons = new ArrayList<InputNeuron>();
     private static ArrayList<HiddenNeuron> hiddenNeuronsOne = new ArrayList<HiddenNeuron>();
