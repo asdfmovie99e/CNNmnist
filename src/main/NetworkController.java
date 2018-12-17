@@ -7,6 +7,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 
+
+/**
+ * Steuert das gesamte Neuronale Netzwerk.
+ * @
+ * @author Jens Krüger
+ * @author Niklas Bruns
+ * @author Marc Seibel
+ * @version 1.0
+ *
+ */
 public class NetworkController {
 
     private static int ANZAHL_INPUT_NEURONS = 28 * 28;
@@ -21,6 +31,9 @@ public class NetworkController {
     private static ArrayList<OutputNeuron> outputNeurons = new ArrayList<OutputNeuron>();
 
 
+    /**
+     * Diese Methode steuert den Lernprozess.
+     */
     public static void startLearning() {
         instantiateNeurons();
         instantiateEdges();
@@ -33,6 +46,10 @@ public class NetworkController {
         saveCurrentNetwork();
     }
 
+    /**
+     * Diese Methode steuert den Lernprozess.
+     * @param pixelArray Ein 2 Dimensionales array, in dem die einzelnen Pixel mit Werten zwischen 0 und 255 gespeichert sind
+     */
     private static void sendForward(int[][] pixelArray) {
         resetAllNeurons();
         for(InputNeuron inputNeuron: inputNeurons){
@@ -53,6 +70,9 @@ public class NetworkController {
         }
     }
 
+    /**
+     * Setzt in allen Neuronen alle Werte zurück.
+     */
     private static void resetAllNeurons() {
         for(HiddenNeuron hiddenNeuron : hiddenNeuronsOne){
             hiddenNeuron.resetInput();
@@ -66,11 +86,13 @@ public class NetworkController {
 
     }
 
+    /**
+     * Erstellt die Objekte der Klasse Edge, die die Neuronen miteinander verbinden.
+     */
     private static void instantiateEdges() {
         if(inputNeurons.get(0).outgoingEdges.size()> 0) return; // bricht hier ab falls es schon edges gibt
         InputNeuron[] inputNeuronsArray =  inputNeurons.toArray(new InputNeuron[inputNeurons.size()]);
         HiddenNeuron[] hiddenNeuronsOneArray = hiddenNeuronsOne.toArray(new HiddenNeuron[hiddenNeuronsOne.size()]);
-
 
         for(InputNeuron inputNeuron: inputNeurons){
             int debugNr = inputNeuron.getIdentNumber(); // DELETE!! ONLY FOR DEBUG PURPOSES
@@ -86,7 +108,6 @@ public class NetworkController {
             }
         }
 
-        //von hiddenOne zum output
         for(HiddenNeuron hiddenNeuron1 : hiddenNeuronsOne){
             for(HiddenNeuron hiddenNeuron2: hiddenNeuronsTwo){
                 connectNeurons(hiddenNeuron1, hiddenNeuron2);
@@ -100,7 +121,9 @@ public class NetworkController {
 
     }
 
-
+    /**
+     * Erstellt die Neuronen schicht für Schicht.
+     */
     private static void instantiateNeurons() {
         if(inputNeurons.size() > 0) return; // falls die neuronen schon existerien  passiert hier nichts
         for(int i = 0; i < ANZAHL_INPUT_NEURONS; i++){
@@ -121,7 +144,12 @@ public class NetworkController {
         }
     }
 
-
+    /**
+     * Verbindet 2 Neuronen durch eine Edge miteinander. Diese Edge wird hier neu erstellt.
+     * @param previousNeuron Das Neuron, von dem die Verbindung ausgeht.
+     * @param nextNeuron Das Neuron, an welches die Verbindung gerichtet ist.
+     * @return Die in dieser Methode erstellte Edge
+     */
     private static Edge connectNeurons(Neuron previousNeuron, Neuron nextNeuron){
        Edge edge = new Edge(previousNeuron,nextNeuron);
        previousNeuron.addOutgoingEdge(edge);
@@ -129,6 +157,10 @@ public class NetworkController {
        return edge;
     }
 
+    /**
+     * Korrigiert die Gewichte der Edges auf Basis der erratenen ZAhl und der Zahl die richtig gewesen wäre.
+     * @param label Die Zahl, die richtig gewesen wäre.
+     */
     private static void doBackPropagation(int label){
         //es werden immer funktionen in den neuronen hinter den edges aufgerufen die angepasst werden
         for(OutputNeuron outputNeuron: outputNeurons){
@@ -147,6 +179,9 @@ public class NetworkController {
         }
     }
 
+    /**
+     * Speichert den momentanen Zustand des Netzwerkes in der Datenbank ab.
+     */
     private static void saveCurrentNetwork(){
         //Freie Save Nummer finden
         Integer[] occupiedSaveNumbers = DBConnect.getAllSaveNumbers();
@@ -187,6 +222,10 @@ public class NetworkController {
 
     }
 
+    /**
+     * Lädt einen alten Zustand des Netzwerkes aus der Datenbank.
+     * @param saveNr Die Nummber des Sepciherstandes, der geladen werden soll.
+     */
     public static void loadDataFromDb (Integer saveNr)
     {
        Object[] obArray = DBConnect.getMainTableEntry(saveNr);
@@ -244,6 +283,11 @@ public class NetworkController {
 
     }
 
+    /**
+     * Sendet das in der GUI gezeichnete Bild durch das Netzwerk.
+     * @param pixelArray Ein 2 Dimensionales array, in dem die einzelnen Pixel mit Werten zwischen 0 und 255 gespeichert sind
+     * @return Ein Array in dem die ergebniswerte zu den einzelnen Zahlen stehen. z.B. resultArray[4] == 0.8 bedeutet, dass die gezeichnete Zahl sehr wahrscheinlich als 4 erkannt wurde
+     */
     public static double[] sendDrawnImageToNeurons(int[][] pixelArray){
         resetAllNeurons();
         sendForward(pixelArray);
