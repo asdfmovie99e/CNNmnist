@@ -161,22 +161,23 @@ public class Controller {
 
 
 
-    private void showpb(double[] pbarray)
+    public void showpb(double[] pbarray, double maxOutput)
     {
 
-        pb0.setProgress(pbarray[0]);
-        pb1.setProgress(pbarray[1]);
-        pb2.setProgress(pbarray[2]);
-        pb3.setProgress(pbarray[3]);
-        pb4.setProgress(pbarray[4]);
-        pb5.setProgress(pbarray[5]);
-        pb6.setProgress(pbarray[6]);
-        pb7.setProgress(pbarray[7]);
-        pb8.setProgress(pbarray[8]);
-        pb9.setProgress(pbarray[9]);
+        pb0.setProgress(pbarray[0] / maxOutput);
+        pb1.setProgress(pbarray[1] / maxOutput);
+        pb2.setProgress(pbarray[2] / maxOutput);
+        pb3.setProgress(pbarray[3] / maxOutput);
+        pb4.setProgress(pbarray[4] / maxOutput);
+        pb5.setProgress(pbarray[5] / maxOutput);
+        pb6.setProgress(pbarray[6] / maxOutput);
+        pb7.setProgress(pbarray[7] / maxOutput);
+        pb8.setProgress(pbarray[8] / maxOutput);
+        pb9.setProgress(pbarray[9] / maxOutput);
     }
-    public void setTextausgabe(String s){
-        // textausgabe.setText(s);
+    public void setTextausgabe(int biggestNeuronIdent){
+        String s = Integer.toString(biggestNeuronIdent);
+         textausgabe.setText(s);
 
     }
 

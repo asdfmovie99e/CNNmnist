@@ -27,7 +27,6 @@ public class NetworkController {
 
         for(int gesamtPictureNumber = 0; gesamtPictureNumber < ANZAHL_BILDER ; gesamtPictureNumber++){
             int pictureNumber = gesamtPictureNumber % ANZAHL_BILDER;
-        resetAllNeurons();
         sendForward(pictureNumber);
         LearnObserver.watchResults(PictureCoder.getLabel(pictureNumber), outputNeurons);
         doBackPropagation(PictureCoder.getLabel(pictureNumber));
@@ -36,6 +35,7 @@ public class NetworkController {
     }
 
     private static void sendForward(int pictureNumber) {
+        resetAllNeurons();
         int[][] pixelArray = PictureCoder.get2DPictureArray(pictureNumber);
         for(InputNeuron inputNeuron: inputNeurons){
             int x = inputNeuron.getIdentNumber() % 28;
@@ -268,6 +268,7 @@ public class NetworkController {
     }
 
     public static void sendDrawnImageToNeurons(int[][] colorArray){
+        resetAllNeurons();
         int[][] pixelArray = colorArray;
         for(InputNeuron inputNeuron: inputNeurons){
             int x = inputNeuron.getIdentNumber() % 28;
@@ -285,6 +286,15 @@ public class NetworkController {
         for(OutputNeuron outputNeuron: outputNeurons){
             outputNeuron.calculateOutput();
         }
-        int debug = 0;
+        double[] resultArray = new double[10];
+        OutputNeuron biggestNeuron = null;
+        for(int i = 0 ; i < 10; i++){
+            resultArray[i] = outputNeurons.get(i).getLastOutputValue();
+            if(biggestNeuron == null || outputNeurons.get(i).getLastOutputValue() > biggestNeuron.getLastOutputValue()){
+                biggestNeuron = outputNeurons.get(i);
+            }
+        }
+        Main.getPasswordController().getMainController().showpb(resultArray, biggestNeuron.getLastOutputValue());
+        Main.getPasswordController().getMainController().setTextausgabe(biggestNeuron.getIdentNumber());
     }
 }

@@ -37,6 +37,8 @@ public class PasswordController {
 
     private Stage mainStage = null;
 
+    private Controller mainController;
+
 
     @FXML
     void clicklogin(ActionEvent event) {
@@ -98,11 +100,16 @@ private void openMainGui(){
         controller.setThisStage(mainStage);
         mainStage.show();
         this.mainStage = mainStage;
+        this.mainController = controller;
     } catch (IOException e) {
         e.printStackTrace();
     }
 
 }
+
+    public Controller getMainController() {
+        return mainController;
+    }
 
     public Stage getMainStage() {
         return mainStage;

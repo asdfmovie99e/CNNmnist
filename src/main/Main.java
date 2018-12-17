@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private static Stage passwordStage;
+    private static PasswordController passwordController;
     Parent root = null;
     @Override
     public void start(Stage passwordStage) throws Exception{
@@ -24,10 +25,15 @@ public class Main extends Application {
         passwordStage.show();
 
         this.passwordStage=passwordStage;
+        this.passwordController = passwordController;
     }
 
     public static Stage getPasswordStage() {
         return passwordStage;
+    }
+
+    public static PasswordController getPasswordController() {
+        return passwordController;
     }
 
     public static void main(String[] args) {
@@ -36,4 +42,7 @@ public class Main extends Application {
       // Integer[] test =  DBConnect.getAllSaveNumbers();
         System.exit(1);
     }
+
+
+
 }
