@@ -11,10 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import main.NetworkController;
 
 public class LoadController implements Initializable {
@@ -29,6 +26,9 @@ public class LoadController implements Initializable {
     private Button loadbutton;
 
     @FXML
+    private ProgressBar loadbar;
+
+    @FXML
     private Button deletebutton;
 
     @FXML
@@ -37,8 +37,6 @@ public class LoadController implements Initializable {
     }
 
 
-    @FXML
-    private TextField nrload;
 
     @FXML
     //liest nr des ausgewählten Gewichtes aus
@@ -68,8 +66,6 @@ public class LoadController implements Initializable {
         genauigkeitCol.setMinWidth(100);
         table.getItems().setAll(this.data);
         putDBEntrysToTable();
-        //addEntry(534,2344d);
-        //addEntry(535,2.3);
     }
 
     private void putDBEntrysToTable() {
