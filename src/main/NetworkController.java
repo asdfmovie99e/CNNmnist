@@ -266,4 +266,25 @@ public class NetworkController {
 
 
     }
+
+    public static void sendDrawnImageToNeurons(int[][] colorArray){
+        int[][] pixelArray = colorArray;
+        for(InputNeuron inputNeuron: inputNeurons){
+            int x = inputNeuron.getIdentNumber() % 28;
+            int y = (inputNeuron.getIdentNumber() - inputNeuron.getIdentNumber() % 28) / 28;
+            int pixelValue = pixelArray[x][y];
+            inputNeuron.receiveInput(pixelValue);
+            inputNeuron.sendOutputToNextEdge();
+        }
+        for(HiddenNeuron hiddenNeuron : hiddenNeuronsOne){
+            hiddenNeuron.sendOutputToNextEdge();
+        }
+        for(HiddenNeuron hiddenNeuron : hiddenNeuronsTwo){
+            hiddenNeuron.sendOutputToNextEdge();
+        }
+        for(OutputNeuron outputNeuron: outputNeurons){
+            outputNeuron.calculateOutput();
+        }
+        int debug = 0;
+    }
 }
