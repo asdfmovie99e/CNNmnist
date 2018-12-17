@@ -23,6 +23,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import main.Main;
 import main.NetworkController;
 import main.PictureCoder;
 
@@ -31,13 +32,6 @@ import javax.imageio.ImageIO;
 
 public class Controller {
 
-    private static Stage loadStage;
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private Canvas canvas;
@@ -76,7 +70,6 @@ public class Controller {
     @FXML
     private TextField textausgabe;
 
-    private Stage thisStage = null;
 
 
     @FXML
@@ -89,12 +82,19 @@ public class Controller {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        PictureCoder.readSelfDrawnImage();
+        int[][] scaledDownArray = PictureCoder.readSelfDrawnImage();
+        double[]resultArray = NetworkController.sendDrawnImageToNeurons(scaledDownArray);
+        int biggestNeuronIdent = 0;
+        for(int i = 0; i < 10; i ++){
+            if(resultArray[biggestNeuronIdent] < resultArray[i]) {
+                biggestNeuronIdent = i;
+            }
+        }
+        Main.getMainController().showpb(resultArray, resultArray[biggestNeuronIdent]);
+        Main.getMainController().setTextausgabe(biggestNeuronIdent);
     }
 
-    public void setThisStage(Stage stage){
-        this.thisStage = stage;
-    }
+
 
     @FXML
     void onDeleteAction(ActionEvent event) {
@@ -126,7 +126,7 @@ public class Controller {
 
     @FXML
     void onLernenClicked(ActionEvent event) {
-        thisStage.close();
+        Main.getMainStage().close();
         MathHelper.start();
         PictureCoder.readMnistFiles();
         NetworkController.startLearning();
@@ -149,12 +149,6 @@ public class Controller {
 
 
 
-    }
-
-
-    private void shownumber()
-    {
-        textausgabe.setText("2");
     }
 
 
@@ -192,10 +186,9 @@ public class Controller {
             loadStage.setTitle("Zahlenerkennung");
             Scene scene = new Scene(root);
             loadStage.setScene(scene);
-           // LoadController loadController = loader.getController();
+            Main.setLoadController(loader.getController());
             loadStage.show();
-
-            this.loadStage = loadStage;
+            Main.setLoadStage(loadStage);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -203,9 +196,7 @@ public class Controller {
 
     }
 
-    public static Stage getLoadStage() {
-        return loadStage;
-    }
+
 }
 
 

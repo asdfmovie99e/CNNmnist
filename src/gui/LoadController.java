@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import main.Main;
 import main.NetworkController;
 
 public class LoadController implements Initializable {
@@ -51,7 +52,7 @@ public class LoadController implements Initializable {
         loadbar.setVisible(true);
        WeightData selectedItem = table.getSelectionModel().getSelectedItem();
        NetworkController.loadDataFromDb(selectedItem.getSaveNr());
-       Controller.getLoadStage().close();
+        Main.getLoadStage().close();
     }
 
 

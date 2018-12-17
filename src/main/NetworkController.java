@@ -11,9 +11,9 @@ public class NetworkController {
 
     private static int ANZAHL_INPUT_NEURONS = 28 * 28;
     private static int ANZAHL_HIDDEN_ONE = 784;
-    private static int ANZAHL_HIDDEN_TWO = 150;
+    private static int ANZAHL_HIDDEN_TWO = 100;
     private static int ANZAHL_OUTPUT_NEURON = 10;
-    public static final double EPSILON = 0.057d;
+    public static final double EPSILON = 0.053d;
     private static final int ANZAHL_BILDER = 60000;
     private static ArrayList<InputNeuron> inputNeurons = new ArrayList<InputNeuron>();
     private static ArrayList<HiddenNeuron> hiddenNeuronsOne = new ArrayList<HiddenNeuron>();
@@ -24,19 +24,17 @@ public class NetworkController {
     public static void startLearning() {
         instantiateNeurons();
         instantiateEdges();
-
         for(int gesamtPictureNumber = 0; gesamtPictureNumber < ANZAHL_BILDER ; gesamtPictureNumber++){
             int pictureNumber = gesamtPictureNumber % ANZAHL_BILDER;
-        sendForward(pictureNumber);
+        sendForward(PictureCoder.get2DPictureArray(pictureNumber));
         LearnObserver.watchResults(PictureCoder.getLabel(pictureNumber), outputNeurons);
         doBackPropagation(PictureCoder.getLabel(pictureNumber));
         }
         saveCurrentNetwork();
     }
 
-    private static void sendForward(int pictureNumber) {
+    private static void sendForward(int[][] pixelArray) {
         resetAllNeurons();
-        int[][] pixelArray = PictureCoder.get2DPictureArray(pictureNumber);
         for(InputNeuron inputNeuron: inputNeurons){
             int x = inputNeuron.getIdentNumber() % 28;
             int y = (inputNeuron.getIdentNumber() - inputNeuron.getIdentNumber() % 28) / 28;
@@ -72,20 +70,7 @@ public class NetworkController {
         if(inputNeurons.get(0).outgoingEdges.size()> 0) return; // bricht hier ab falls es schon edges gibt
         InputNeuron[] inputNeuronsArray =  inputNeurons.toArray(new InputNeuron[inputNeurons.size()]);
         HiddenNeuron[] hiddenNeuronsOneArray = hiddenNeuronsOne.toArray(new HiddenNeuron[hiddenNeuronsOne.size()]);
-/*
-            for(HiddenNeuron hiddenNeuron : hiddenNeuronsOne){
-                for(int x = -1; x <= 1; x++){
-                    for(int y = -1; y <= 1;y++){
-                        int inputNeuronIdent = hiddenNeuron.getIdentNumber() + x + y * 28;
-                        if(hiddenNeuron.getIdentNumber() >=28 && hiddenNeuron.getIdentNumber() <= 27*28 && hiddenNeuron.getIdentNumber() % 28 != 0 && hiddenNeuron.getIdentNumber() % 28 != 27) {
-                            connectNeurons(inputNeuronsArray[inputNeuronIdent], hiddenNeuron);
-                        }
-                    }
-                }
 
-            }
-
-*/
 
         for(InputNeuron inputNeuron: inputNeurons){
             int debugNr = inputNeuron.getIdentNumber(); // DELETE!! ONLY FOR DEBUG PURPOSES
@@ -114,15 +99,7 @@ public class NetworkController {
         }
 
     }
-    @Deprecated
-    private static <NeuronType extends Neuron> Object[] arrayListToArrayByIdent(ArrayList<NeuronType> neuronList) {
-        NeuronType[] resultArray =(NeuronType[]) new Object[neuronList.size()];
-        for(int i = 0; i < neuronList.size(); i++){
-            resultArray[((NeuronType)neuronList.get(i)).getIdentNumber()] = (NeuronType) neuronList.get(i);
-        }
 
-        return resultArray;
-    }
 
     private static void instantiateNeurons() {
         if(inputNeurons.size() > 0) return; // falls die neuronen schon existerien  passiert hier nichts
@@ -267,25 +244,9 @@ public class NetworkController {
 
     }
 
-    public static void sendDrawnImageToNeurons(int[][] colorArray){
+    public static double[] sendDrawnImageToNeurons(int[][] pixelArray){
         resetAllNeurons();
-        int[][] pixelArray = colorArray;
-        for(InputNeuron inputNeuron: inputNeurons){
-            int x = inputNeuron.getIdentNumber() % 28;
-            int y = (inputNeuron.getIdentNumber() - inputNeuron.getIdentNumber() % 28) / 28;
-            int pixelValue = pixelArray[x][y];
-            inputNeuron.receiveInput(pixelValue);
-            inputNeuron.sendOutputToNextEdge();
-        }
-        for(HiddenNeuron hiddenNeuron : hiddenNeuronsOne){
-            hiddenNeuron.sendOutputToNextEdge();
-        }
-        for(HiddenNeuron hiddenNeuron : hiddenNeuronsTwo){
-            hiddenNeuron.sendOutputToNextEdge();
-        }
-        for(OutputNeuron outputNeuron: outputNeurons){
-            outputNeuron.calculateOutput();
-        }
+        sendForward(pixelArray);
         double[] resultArray = new double[10];
         OutputNeuron biggestNeuron = null;
         for(int i = 0 ; i < 10; i++){
@@ -294,7 +255,7 @@ public class NetworkController {
                 biggestNeuron = outputNeurons.get(i);
             }
         }
-        Main.getPasswordController().getMainController().showpb(resultArray, biggestNeuron.getLastOutputValue());
-        Main.getPasswordController().getMainController().setTextausgabe(biggestNeuron.getIdentNumber());
+
+        return resultArray;
     }
 }

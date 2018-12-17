@@ -75,24 +75,24 @@ public class PictureCoder {
     }
 
 
-    public static void readSelfDrawnImage() {
+    public static int[][] readSelfDrawnImage() {
         BufferedImage img = null;
         try {
             img= ImageIO.read(new File(System.getenv("APPDATA") + "\\mnist\\" + "paint.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Integer[][] colorArray = new Integer[196][196];
+        int[][] colorArray = new int[196][196];
         for(int y = 0 ; y < 196; y++){
             for(int x = 0; x < 196; x++){
                 Color c = new Color(img.getRGB(x, y), true);
                 colorArray[x][y] = 255 - c.getRed(); //umdrehen damit weiss 0 und schwarz 255 ist
             }
         }
-        scaleColorArrayDown(colorArray);
+        return scaleColorArrayDown(colorArray);
     }
 
-    private static void scaleColorArrayDown(Integer[][] colorArray) {
+    private static int[][] scaleColorArrayDown(int[][] colorArray) {
         int[][] scaledDownArray = new int[28][28];
         BufferedImage shrunkImage = new BufferedImage(28, 28, BufferedImage.TYPE_INT_RGB);
         for(int outerY = 0 ; outerY < 28; outerY++){
@@ -114,7 +114,6 @@ public class PictureCoder {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        NetworkController.sendDrawnImageToNeurons(scaledDownArray);
+        return scaledDownArray;
     }
-
 }

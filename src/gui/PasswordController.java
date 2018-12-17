@@ -50,68 +50,50 @@ public class PasswordController {
         UserDatamanager.setDburl(url);
         UserDatamanager.setDbuser(user);
         UserDatamanager.setDbpassword(password);
-    if (savelogin.isSelected())
-        {
-            UserDatamanager.SaveUserData(url,user);
+        if (savelogin.isSelected()) {
+            UserDatamanager.SaveUserData(url, user);
         }
 
-    try {
-        DBConnect.checkCredentials();
+        try {
+            DBConnect.checkCredentials();
 
-    }
-    catch (Exception e)
-    {
-        e.printStackTrace();
-        //Bei Fehlerhafter anmeldung wird eine Nachricht angezeigt
-        LoginFail.setVisible(true);
-        return;
-    }
+        } catch (Exception e) {
+            e.printStackTrace();
+            //Bei Fehlerhafter anmeldung wird eine Nachricht angezeigt
+            LoginFail.setVisible(true);
+            return;
+        }
         openMainGui();
 
     }
 
 
-
-
     //Fuellt URL und Username in GUI mit gespeicherten Daten
-public void fillSavedData ()
-{    String[] ret = UserDatamanager.readSavedUserData();
-    URL.setText(ret[0]);
-    User.setText(ret[1]);
+    public void fillSavedData() {
+        String[] ret = UserDatamanager.readSavedUserData();
+        URL.setText(ret[0]);
+        User.setText(ret[1]);
 
 
-}
-
-
-private void openMainGui(){
-
-    Main.getPasswordStage().close();
-
-
-
-    Parent root = null;
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/GUI.fxml"));
-        root = loader.load();
-        Stage mainStage = new Stage();
-        mainStage.setTitle("Zahlenerkennung");
-        mainStage.setScene(new Scene(root, 840, 500));
-        Controller controller = loader.getController();
-        controller.setThisStage(mainStage);
-        mainStage.show();
-        this.mainStage = mainStage;
-        this.mainController = controller;
-    } catch (IOException e) {
-        e.printStackTrace();
     }
 
-}
 
-    public Controller getMainController() {
-        return mainController;
+    private void openMainGui() {
+        Main.getPasswordStage().close();
+        Parent root = null;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/GUI.fxml"));
+            root = loader.load();
+            Stage mainStage = new Stage();
+            mainStage.setTitle("Zahlenerkennung");
+            mainStage.setScene(new Scene(root, 840, 500));
+            Main.setMainController(loader.getController());
+            Main.setMainStage(mainStage);
+            mainStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
-    public Stage getMainStage() {
-        return mainStage;
-    }
 }
