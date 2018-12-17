@@ -11,7 +11,7 @@
 <AnchorPane id="AnchorPane" prefHeight="324.0" prefWidth="253.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LoadController">
     <children>
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
-        <TableView fx:id="table" layoutX="26.0" layoutY="29.0" prefHeight="221.0" prefWidth="200.0">
+        <TableView fx:id="table" layoutX="26.0" layoutY="27.0" prefHeight="221.0" prefWidth="200.0">
             <columns>
                 <TableColumn fx:id="saveNrCol" prefWidth="98.40002632141113" text="Save Nr">
                     <cellValueFactory><PropertyValueFactory property="saveNr" /></cellValueFactory>
@@ -22,7 +22,7 @@
             </columns>
         </TableView>
         <Button fx:id="loadbutton" layoutX="180.0" layoutY="267.0" mnemonicParsing="false" onAction="#clickload" text="laden" />
-        <Button fx:id="deletebutton" layoutX="116.0" layoutY="266.0" mnemonicParsing="false" onAction="#clickdelete" text="löschen" />
+        <Button fx:id="deletebutton" layoutX="115.0" layoutY="267.0" mnemonicParsing="false" onAction="#clickdelete" prefHeight="26.0" prefWidth="59.0" text="löschen" />
       <ProgressBar fx:id="loadbar" layoutX="26.0" layoutY="270.0" prefHeight="18.0" prefWidth="76.0" progress="0.0" visible="false" />
     </children>
 </AnchorPane>

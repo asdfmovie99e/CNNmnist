@@ -37,10 +37,18 @@ public class LoadController implements Initializable {
     }
 
 
+    public void setBar (Double barValue)
+    {
+
+        loadbar.setProgress(barValue);
+
+    }
+
 
     @FXML
     //liest nr des ausgewählten Gewichtes aus
     void clickload(ActionEvent event) {
+        loadbar.setVisible(true);
        WeightData selectedItem = table.getSelectionModel().getSelectedItem();
        NetworkController.loadDataFromDb(selectedItem.getSaveNr());
        Controller.getLoadStage().close();
