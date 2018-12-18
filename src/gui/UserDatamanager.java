@@ -15,7 +15,7 @@ public class UserDatamanager {
    private static String dburl;
    private static String dbuser;
    private static String dbpassword;
-
+   private static String port;
     /**
      * Speichert Url und Username in der Datei 'userdata.txt'.
      * @param url Url zum anmelden an die DB.
@@ -103,4 +103,14 @@ public static String [] readSavedUserData() {
     {
         dbpassword = password;
     }
+
+    public static void setPort(String portNew) {
+    port = portNew;
+    }
+
+    public static String getPort() {
+        return port;
+    }
+
+
 }

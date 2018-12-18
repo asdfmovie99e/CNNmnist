@@ -44,9 +44,9 @@ public class PasswordController {
     @FXML
     private PasswordField Password;
 
-    private Stage mainStage = null;
+    @FXML
+    private TextField portField;
 
-    private Controller mainController;
 
 
     @FXML
@@ -60,10 +60,12 @@ public class PasswordController {
         String url = URL.getText();
         String user = User.getText();
         String password = Password.getText();
+        String port = portField.getText();
         //Übergabe an die Variabeln im UserDatamanager zum späteren Aufruf
         UserDatamanager.setDburl(url);
         UserDatamanager.setDbuser(user);
         UserDatamanager.setDbpassword(password);
+        UserDatamanager.setPort(port);
         if (savelogin.isSelected()) {
             UserDatamanager.SaveUserData(url, user);
         }

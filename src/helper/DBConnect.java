@@ -16,11 +16,8 @@ import java.sql.*;
 public class DBConnect {
 
     static final String jdbcDriver = "org.mariadb.jdbc.Driver";
-    public static String user;
-    public static String pass;
     public static String url = "jdbc:mysql://localhost:3306/neuronaldata";
     private static Connection connection;
-    private static String driver ="com.mysql.jdbc.Driver";
     private static Object[][][] preparedEdgeArray = null;
     private static Integer preparedSaveNr = null;
 
@@ -28,7 +25,7 @@ public class DBConnect {
     public static void connect(String URL, String user, String pass) throws Exception{
         try {
             Class.forName(jdbcDriver);
-            connection = DriverManager.getConnection(UserDatamanager.getDburl(),UserDatamanager.getDbuser(),UserDatamanager.getDbpassword());
+            connection = DriverManager.getConnection("jdbc:mysql://" + UserDatamanager.getDburl() + ":" + UserDatamanager.getPort() + "/neuronaldata",UserDatamanager.getDbuser(),UserDatamanager.getDbpassword());
             System.out.println("Sie sind jetzt verbunden.");
         } catch (Exception e) {
             e.printStackTrace();
@@ -96,9 +93,9 @@ public class DBConnect {
             return false;
         }
     }
-
+/*
 @Deprecated
-    public static void createMainTable(){
+    public static void createMainTable() {
         Connection conn = null;
         Statement stmt = null;
 
@@ -137,7 +134,7 @@ public class DBConnect {
         System.out.println("Die Tabelle 'HiddenLayer' wurde in der Datenbank wird erstellt!");
     }
 
-
+*/
 
     //AB HIER HAB ICH MAL EIN PAAR METHODEN ERSTELLT DIE DU FÜLLEN MUSST DAMIT ICH SCHONMAL WEITERMACHEN KANN ~ Jens~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
