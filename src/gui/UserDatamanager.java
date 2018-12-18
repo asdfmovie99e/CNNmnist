@@ -2,13 +2,25 @@ package gui;
 
 import java.io.*;
 
+/**
+ * Speichert die Anmeldedaten und liest diese auch wieder aus.
+ * @author Jens Krüger
+ * @author Niklas Bruns
+ * @author Marc Seibel
+ * @version 1.0
+ *
+ */
 public class UserDatamanager {
 
    private static String dburl;
    private static String dbuser;
    private static String dbpassword;
 
-    //Speichert URL und Username
+    /**
+     * Speichert Url und Username in der Datei 'userdata.txt'.
+     * @param url Url zum anmelden an die DB.
+     * @param user Username zum anmelden an die DB.
+     */
 public static void SaveUserData(String url, String user)
     {
         PrintWriter pWriter = null;
@@ -22,7 +34,9 @@ public static void SaveUserData(String url, String user)
         }
     }
 
-    //liest Datei aus
+    /**
+     * Liest die gespeicherten Anmeldedaten aus der Datei 'userdata.txt'.
+     */
 public static String [] readSavedUserData() {
     String url = null;
     String user = null ;

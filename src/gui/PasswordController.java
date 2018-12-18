@@ -13,6 +13,15 @@ import main.Main;
 
 import java.io.IOException;
 
+/**
+ * Die Controllerklasse für die PasswordGui (GUIPassword.fxml)
+ * @author Jens Krüger
+ * @author Niklas Bruns
+ * @author Marc Seibel
+ * @version 1.0
+ *
+ */
+
 public class PasswordController {
 
 
@@ -41,6 +50,11 @@ public class PasswordController {
 
 
     @FXML
+    /**
+     * Uebergibt URL und Username an den UserDatamanager und stellt Verbindung zur Db her.
+     * Sind die Anmeldedaten falsch oder ist Anmeldung aus anderen Gruenden nicht moeglich erfolgt eine Fehlermeldung.
+     * Bei erfolgreicher Anmeldung wird die MainGui (GUI.fxml) geoefffnet.
+     */
     void clicklogin(ActionEvent event) {
 
         String url = URL.getText();
@@ -68,7 +82,9 @@ public class PasswordController {
     }
 
 
-    //Fuellt URL und Username in GUI mit gespeicherten Daten
+    /**
+     * Fuellt Gui mit gespeicherten Anmeldedaten aus dem UserDatamanager.
+     */
     public void fillSavedData() {
         String[] ret = UserDatamanager.readSavedUserData();
         URL.setText(ret[0]);
@@ -77,7 +93,9 @@ public class PasswordController {
 
     }
 
-
+    /**
+     * Oeffnet MainGui (GUI.fxml).
+     */
     private void openMainGui() {
         Main.getPasswordStage().close();
         Parent root = null;
