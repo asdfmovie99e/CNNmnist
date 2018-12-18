@@ -127,7 +127,6 @@ public class Controller {
     @FXML
     void onLernenClicked(ActionEvent event) {
         Main.getMainStage().close();
-        MathHelper.start();
         PictureCoder.readMnistFiles();
         NetworkController.startLearning();
     }

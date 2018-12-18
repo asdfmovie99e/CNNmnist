@@ -312,7 +312,7 @@ public class DBConnect {
         Statement stmt = null;
         ResultSet rs = null;
         checkConnection();
-        Object [][][] obArray = new Object[100000][6][3]; // MUSS NOCH ANGEPASST WERDE MIT MAX EDGES PER LAYER
+        Object [][][] obArray = new Object[6][100000][3]; // MUSS NOCH ANGEPASST WERDE MIT MAX EDGES PER LAYER
         try {
             String s = "SELECT PRE_NEURON_IDENT, NEXT_NEURON_IDENT, WEIGHT, LAYER_NR, EDGE_NR FROM EDGETABlE WHERE " +
                     "SAVE_NR = "+ saveNr;
@@ -320,10 +320,13 @@ public class DBConnect {
             rs = stmt.executeQuery(s);
             while (rs.next()) {
                 int layerNr =rs.getInt("LAYER_NR");
-                int edgeNr = rs.getInt("LAYER_NR");
-                obArray[layerNr][edgeNr][0] = rs.getInt("PRE_NEURON_IDENT");
-                obArray[layerNr][edgeNr][1] = rs.getInt("NEXT_NEURON_IDENT");
-                obArray[layerNr][edgeNr][2]= rs.getDouble("WEIGHT");
+                int edgeNr = rs.getInt("EDGE_NR");
+                int preNeuronIdent = rs.getInt("PRE_NEURON_IDENT");
+                int nextNeuronIdent = rs.getInt("NEXT_NEURON_IDENT");
+                double weight = rs.getDouble("WEIGHT");
+                obArray[layerNr][edgeNr][0] = preNeuronIdent;
+                obArray[layerNr][edgeNr][1] = nextNeuronIdent;
+                obArray[layerNr][edgeNr][2]= weight;
             }
 
 
@@ -332,6 +335,7 @@ public class DBConnect {
             e.printStackTrace();
         }
         preparedEdgeArray = obArray;
+        preparedSaveNr = saveNr;
     }
 }
 //Bitte lade hoch
