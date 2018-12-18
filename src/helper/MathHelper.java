@@ -2,12 +2,23 @@ package helper;
 
 import java.util.HashMap;
 
+/**
+ * Enthält eine Sammlung an Mathe Funktionen.
+ * @author Jens Krüger
+ * @author Niklas Bruns
+ * @author Marc Seibel
+ * @version 1.0
+ *
+ */
 public class MathHelper {
 
     private static HashMap<Integer, Double> sigmoidMap;
     private static boolean sigmoidMapInitialized = false;
 
-    public static void start() {
+    /**
+     * Bereitet die HashMap vor, in der die Sigmoid Map gespeichert werden.
+     */
+    private static void start() {
         // wird ausgeführt um die HashMaps zu erstellen, welche die Berechnung verschnellern
         sigmoidMapInitialized = true;
         sigmoidMap = new HashMap<Integer, Double>();
@@ -18,6 +29,11 @@ public class MathHelper {
         }
     }
 
+    /**
+     * Gibt einen approximierten Wert der Sigmoid Funktion zurück. Spart Rechenzeit.
+     * @param sigmoidX Der x- Wert, zu dem der Sigmoidwert ausgegeben werden soll.
+     * @return Der Sigmoidwert zum eingegebenen x-Wert.
+     */
     public static Double getSigmoidApprox(Double sigmoidX){
         if (!sigmoidMapInitialized) MathHelper.start();
         if(sigmoidX > 7.9d) return 1d;

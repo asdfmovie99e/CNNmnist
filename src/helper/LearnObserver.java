@@ -5,13 +5,25 @@ import main.OutputNeuron;
 import java.util.ArrayList;
 import java.util.stream.IntStream;
 
+/**
+ * Überwacht den Lernprozess.
+ * @author Jens Krüger
+ * @author Niklas Bruns
+ * @author Marc Seibel
+ * @version 1.0
+ *
+ */
 public class LearnObserver {
     private static int[] timesSuccessfull = new int[10];
     private static int[] timesTried = new int[10];
     private static int pictureCounter = 0;
     private static Double successRate = null;
 
-
+    /**
+     * Wird bei jeder Lerniteration einmal aufgerufen um die Lernrate aktuell zu halten und dokumentiert den Prozess in der Konsole
+     * @param label Die Zahl die zu erkennen war.
+     * @param outputNeurons Alle Outputneuronen, um auszuwerten, welches Neuron das höchste war.
+     */
 
     public static void watchResults(Integer label, ArrayList<OutputNeuron> outputNeurons) {
         try{

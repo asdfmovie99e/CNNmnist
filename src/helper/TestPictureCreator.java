@@ -5,6 +5,14 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
  // nur für debug zwecke. Die ganze klasse
+
+/**
+ * FLIEGT RAUS BEVOR DAS PROJEKT ABGESCHLOSSEN WIRD
+ * FLIEGT RAUS BEVOR DAS PROJEKT ABGESCHLOSSEN WIRD
+ * FLIEGT RAUS BEVOR DAS PROJEKT ABGESCHLOSSEN WIRD
+ * FLIEGT RAUS BEVOR DAS PROJEKT ABGESCHLOSSEN WIRD
+ */
+@Deprecated
 public class TestPictureCreator {
 
     private static Double[] pixelArray = new Double[784];
@@ -13,7 +21,7 @@ public class TestPictureCreator {
         pixelArray[ident] = value;
     }
 
-
+@Deprecated
    public static void createPic(int size) {
            int colorInt;
            BufferedImage bufferedImage = new BufferedImage(size, size, BufferedImage.TYPE_INT_RGB); // hoehe auf 28x28 festgelegt, da nur mit dem mnist datensatz gearbeitet wird
@@ -38,7 +46,7 @@ public class TestPictureCreator {
 
     }
 
-
+@Deprecated
      static void doNothing() {
 
      }

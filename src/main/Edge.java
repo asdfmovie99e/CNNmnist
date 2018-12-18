@@ -1,5 +1,13 @@
 package main;
 
+/**
+ * Repräsentiert eine Kante zwischen 2 Neuronen
+ * @author Jens Krüger
+ * @author Niklas Bruns
+ * @author Marc Seibel
+ * @version 1.0
+ *
+ */
 public class Edge {
     protected double currentWeight;
     protected double lastInputValue;
