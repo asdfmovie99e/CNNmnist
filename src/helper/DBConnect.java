@@ -96,7 +96,7 @@ public class DBConnect {
     }
 
 
-    public static void hiddenLayerTabelleErstellen(){
+    public static void mainTableErstellen(){
         Connection conn = null;
         Statement stmt = null;
 
@@ -134,6 +134,7 @@ public class DBConnect {
 
         System.out.println("Die Tabelle 'HiddenLayer' wurde in der Datenbank wird erstellt!");
     }
+
 
 
     //AB HIER HAB ICH MAL EIN PAAR METHODEN ERSTELLT DIE DU FÜLLEN MUSST DAMIT ICH SCHONMAL WEITERMACHEN KANN ~ Jens~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -290,5 +291,18 @@ public class DBConnect {
             return null;
         }
         return null;
+    }
+
+    public static void deleteRows (Integer SaveNr){
+        Statement stmt = null;
+        ResultSet rst = null;
+        checkConnection();
+        try {
+            String s = "DELETE FROM MAINTABLE,EDGETABLE WHERE SAVE_NR =" + SaveNr;           stmt = connection.createStatement();
+            stmt = connection.createStatement();
+            rst = stmt.executeQuery(s);
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
