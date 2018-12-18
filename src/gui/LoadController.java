@@ -16,7 +16,7 @@ import main.Main;
 import main.NetworkController;
 
 /**
- * Die Controllerklasse für die LoadGui (guidbLoad.fxml)
+ * Die Controllerklasse fuer die LoadGui (guidbLoad.fxml)
  * @author Jens Krüger
  * @author Niklas Bruns
  * @author Marc Seibel
