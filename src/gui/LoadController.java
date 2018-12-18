@@ -26,8 +26,6 @@ public class LoadController implements Initializable {
     @FXML
     private Button loadbutton;
 
-    @FXML
-    private ProgressBar loadbar;
 
     @FXML
     private Button deletebutton;
@@ -42,12 +40,6 @@ public class LoadController implements Initializable {
     }
 
 
-    public void setBar (Double barValue)
-    {
-
-        loadbar.setProgress(barValue);
-
-    }
 
 
     @FXML
