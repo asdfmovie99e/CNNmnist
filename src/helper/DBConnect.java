@@ -306,7 +306,7 @@ public class DBConnect {
         ResultSet rst2 = null;
         checkConnection();
         try {
-            String s1 = "DELETE FROM MAINTABLE WHERE SAVE_NR =" + SaveNr;           stmt = connection.createStatement();
+            String s1 = "DELETE FROM MAINTABLE WHERE SAVE_NR =" + SaveNr;
             stmt1 = connection.createStatement();
             rst1 = stmt1.executeQuery(s1);
             String s2 = " DELETE FROM EDGETABLE WHERE SAVE_NR =" + SaveNr;
