@@ -23,6 +23,6 @@
         </TableView>
         <Button fx:id="loadbutton" layoutX="180.0" layoutY="267.0" mnemonicParsing="false" onAction="#clickload" text="laden" />
         <Button fx:id="deletebutton" layoutX="115.0" layoutY="267.0" mnemonicParsing="false" onAction="#clickdelete" prefHeight="26.0" prefWidth="59.0" text="löschen" />
-      <ProgressBar fx:id="loadbar" layoutX="26.0" layoutY="270.0" prefHeight="18.0" prefWidth="76.0" progress="0.0" visible="false" />
+      <ProgressBar fx:id="loadbar" layoutX="26.0" layoutY="270.0" prefHeight="18.0" prefWidth="76.0" progress="0.0" />
     </children>
 </AnchorPane>

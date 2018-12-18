@@ -33,7 +33,11 @@ public class LoadController implements Initializable {
     private Button deletebutton;
 
     @FXML
+    //löscht Datensätze
     void clickdelete(ActionEvent event) {
+
+        WeightData selectedItem = table.getSelectionModel().getSelectedItem();
+        DBConnect.deleteRows(selectedItem.getSaveNr());
         table.getItems().removeAll(table.getSelectionModel().getSelectedItem());
     }
 
@@ -49,7 +53,6 @@ public class LoadController implements Initializable {
     @FXML
     //liest nr des ausgewählten Gewichtes aus
     void clickload(ActionEvent event) {
-        loadbar.setVisible(true);
        WeightData selectedItem = table.getSelectionModel().getSelectedItem();
        NetworkController.loadDataFromDb(selectedItem.getSaveNr());
         Main.getLoadStage().close();
