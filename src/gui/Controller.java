@@ -1,17 +1,17 @@
 package gui;
 
-/*
- @author Niklas Bruns
- @version 1.0
+/**
+ * Die Controllerklasse für die MainGui (GUI.fxml)
+ * @author Jens Krüger
+ * @author Niklas Bruns
+ * @author Marc Seibel
+ * @version 1.0
+ *
  */
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
-
-import helper.MathHelper;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -73,6 +73,10 @@ public class Controller {
 
 
     @FXML
+    /**
+     * Erstellt vom Canvas Feld eine png Datei, speichert und wertet diese aus.
+     * Danach erfolgt eine Textausgabe des Ergebnisses.
+     */
     void onAuswertenClicked(ActionEvent event) {
 
         Image snapshot = canvas.snapshot(null,null);
@@ -97,6 +101,9 @@ public class Controller {
 
 
     @FXML
+    /**
+     * Setzt Canvasfeld und ProgressBars zurueck.
+     */
     void onDeleteAction(ActionEvent event) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.clearRect(0, 0, canvas.getWidth(),canvas.getHeight());
@@ -116,7 +123,11 @@ public class Controller {
         textausgabe.setText("");
     }
 
+
     @FXML
+    /**
+     * Startet die Load Gui (guidbLoad.fxml) zum laden bzw. löschen der gelernten Gewichte.
+     */
     void onGewichteladenclicked(ActionEvent event) {
         openGuiLoad();
 
@@ -125,6 +136,9 @@ public class Controller {
 
 
     @FXML
+    /**
+     * Die Main Gui wird geschlossen und das lernen startet.
+     */
     void onLernenClicked(ActionEvent event) {
         Main.getMainStage().close();
         PictureCoder.readMnistFiles();
@@ -134,6 +148,9 @@ public class Controller {
 
 
     @FXML
+    /**
+     *  Initialisiert das Canvas Feld zum Zeichnen.
+     */
     void initialize() {
         GraphicsContext g = canvas.getGraphicsContext2D();
         canvas.setOnMouseDragged(event ->{
@@ -152,7 +169,11 @@ public class Controller {
 
 
 
-
+    /**
+     * Uebergibt Werte an die ProgressBars
+     * @param pbarray Der Array enthaelt die Wahrscheinlichkeiten fuer die jeweiligen Zahlen.
+     * @param maxOutput Enthält die hoechste Wahrscheinlichkeit des Durchlaufes.
+     */
 
     public void showpb(double[] pbarray, double maxOutput)
     {
@@ -174,6 +195,9 @@ public class Controller {
 
     }
 
+    /**
+     * Startet die Load Gui.
+     */
 
     private void openGuiLoad(){
 
