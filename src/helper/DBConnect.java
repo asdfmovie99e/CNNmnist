@@ -96,7 +96,7 @@ public class DBConnect {
     }
 
 
-    public static void mainTableErstellen(){
+    public static void createMainTable(){
         Connection conn = null;
         Statement stmt = null;
 
