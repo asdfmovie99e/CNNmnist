@@ -219,7 +219,7 @@ public class DBConnect {
                     "(" + saveNr + "," + InputNeurons + "," + HiddenNeuronsOne + "," + HiddenNeuronsTwo + "," + HiddenNeuronsThree + "," + HiddenNeuronsFour + "," + HiddenNeuronsFive + "," + OutputNeurons + "," + SuccessRate +")" ;
             stmt = connection.createStatement();
             rst = stmt.executeQuery(s);
-          //  rst2 = stmt.executeQuery("INSERT INTO HIDDENLAYER")
+            //  rst2 = stmt.executeQuery("INSERT INTO HIDDENLAYER")
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -298,7 +298,6 @@ public class DBConnect {
         }
         return result;
     }
-}
 
     public static void deleteRows (Integer SaveNr){
         Statement stmt = null;

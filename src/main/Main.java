@@ -11,6 +11,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Die Hautpklasse des Projektes.
+ * @author Jens Krüger
+ * @author Niklas Bruns
+ * @author Marc Seibel
+ * @version 1.0
+ *
+ */
 public class Main extends Application {
 
     private static Stage passwordStage;
@@ -19,9 +27,14 @@ public class Main extends Application {
     private static Controller mainController;
     private static Stage LoadStage;
     private static LoadController loadController;
+    private Parent root = null;
 
-    Parent root = null;
+
     @Override
+    /**
+     * Startet die Passwort GUI.
+     * @param passwordStage Wird von JavaFX automatisch übergeben.
+     */
     public void start(Stage passwordStage) throws Exception{
         FXMLLoader loader =new FXMLLoader(getClass().getResource("../gui/GUIPassword.fxml"));
         root = loader.load();
@@ -35,7 +48,10 @@ public class Main extends Application {
     }
 
 
-
+    /**
+     * Hier findet der Aufruf der ersten GUI statt.
+     * @param args Parameter mit denen das Programm gestartet wird. Werden nicht beachtet.
+     */
     public static void main(String[] args) {
         launch(args);
 
