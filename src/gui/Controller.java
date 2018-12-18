@@ -23,7 +23,7 @@ import main.PictureCoder;
 import javax.imageio.ImageIO;
 
 /**
- * Die Controllerklasse für die MainGui (GUI.fxml)
+ * Die Controllerklasse fuer die MainGui (GUI.fxml)
  * @author Jens Krüger
  * @author Niklas Bruns
  * @author Marc Seibel

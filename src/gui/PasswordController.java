@@ -14,7 +14,7 @@ import main.Main;
 import java.io.IOException;
 
 /**
- * Die Controllerklasse für die PasswordGui (GUIPassword.fxml)
+ * Die Controllerklasse fuer die PasswordGui (GUIPassword.fxml)
  * @author Jens Krüger
  * @author Niklas Bruns
  * @author Marc Seibel
