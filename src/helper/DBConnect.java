@@ -93,50 +93,6 @@ public class DBConnect {
             return false;
         }
     }
-/*
-@Deprecated
-    public static void createMainTable() {
-        Connection conn = null;
-        Statement stmt = null;
-
-        DBConnect User1 = new DBConnect();
-
-
-
-        try {
-            conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/neuronaldata" , user, pass);
-        }
-        catch (SQLException se) {
-            se.printStackTrace();
-            System.out.println("Das sollte nicht passieren");
-        }
-
-        try {
-            stmt = conn.createStatement();
-
-            String sql = "Create Table MAINTABLE"
-                    + " (Save_Nr Integer , "
-                    + " Input_Neuron Integer, "
-                    + " HIDDEN_NEURON_ONE Integer, "
-                    + " HIDDEN_NEURON_TWO Integer, "
-                    + " HIDDEN_NEURON_THREE Integer, "
-                    + " HIDDEN_NEURON_FOUR Integer, "
-                    + " HIDDEN_NEURON_FIVE INTEGER, "
-                    + " OUTPUT_NEURON INTEGER, "
-                    + " ACCURACY DOUBLE, "
-                    + " Primary Key (Save_Nr))";
-            stmt.executeUpdate(sql);
-        } catch (SQLException e) {
-            return ;
-        }
-
-        System.out.println("Die Tabelle 'HiddenLayer' wurde in der Datenbank wird erstellt!");
-    }
-
-*/
-
-    //AB HIER HAB ICH MAL EIN PAAR METHODEN ERSTELLT DIE DU FÜLLEN MUSST DAMIT ICH SCHONMAL WEITERMACHEN KANN ~ Jens~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     public static Integer[] getAllSaveNumbers() {
         /*
