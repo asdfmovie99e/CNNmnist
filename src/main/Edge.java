@@ -44,4 +44,5 @@ public class Edge {
         Double bigDelta = smallDelta * ableitung * NetworkController.EPSILON * edgeInput;
         currentWeight += bigDelta;
     }
+
 }

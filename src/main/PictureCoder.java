@@ -1,5 +1,8 @@
 package main;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -72,5 +75,45 @@ public class PictureCoder {
     }
 
 
+    public static int[][] readSelfDrawnImage() {
+        BufferedImage img = null;
+        try {
+            img= ImageIO.read(new File(System.getenv("APPDATA") + "\\mnist\\" + "paint.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int[][] colorArray = new int[196][196];
+        for(int y = 0 ; y < 196; y++){
+            for(int x = 0; x < 196; x++){
+                Color c = new Color(img.getRGB(x, y), true);
+                colorArray[x][y] = 255 - c.getRed(); //umdrehen damit weiss 0 und schwarz 255 ist
+            }
+        }
+        return scaleColorArrayDown(colorArray);
+    }
 
+    private static int[][] scaleColorArrayDown(int[][] colorArray) {
+        int[][] scaledDownArray = new int[28][28];
+        BufferedImage shrunkImage = new BufferedImage(28, 28, BufferedImage.TYPE_INT_RGB);
+        for(int outerY = 0 ; outerY < 28; outerY++){
+            for(int outerX = 0; outerX < 28; outerX++){
+                int blockSum = 0;
+                for(int x = 0; x < 7;x++){
+                    for(int y = 0; y < 7; y++){
+                        blockSum += colorArray[x + outerX * 7][y + outerY * 7];
+                    }
+                }
+                scaledDownArray[outerX][outerY] =/*255 - */blockSum / 49;
+                Integer colorInt = scaledDownArray[outerX][outerY];
+                int rgb = (colorInt << 16 | colorInt << 8 | colorInt);
+                shrunkImage.setRGB(outerX,outerY,rgb);
+            }
+        }
+        try {
+            ImageIO.write(shrunkImage,"png",new File(System.getenv("APPDATA") + "\\mnist\\" + "asdf.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return scaledDownArray;
+    }
 }

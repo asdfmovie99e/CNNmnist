@@ -11,10 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import main.Main;
 import main.NetworkController;
 
 public class LoadController implements Initializable {
@@ -29,6 +27,9 @@ public class LoadController implements Initializable {
     private Button loadbutton;
 
     @FXML
+    private ProgressBar loadbar;
+
+    @FXML
     private Button deletebutton;
 
     @FXML
@@ -37,15 +38,21 @@ public class LoadController implements Initializable {
     }
 
 
-    @FXML
-    private TextField nrload;
+    public void setBar (Double barValue)
+    {
+
+        loadbar.setProgress(barValue);
+
+    }
+
 
     @FXML
     //liest nr des ausgewählten Gewichtes aus
     void clickload(ActionEvent event) {
+        loadbar.setVisible(true);
        WeightData selectedItem = table.getSelectionModel().getSelectedItem();
-       NetworkController.loadDataFrom(selectedItem.getSaveNr());
-       Controller.getLoadStage().close();
+       NetworkController.loadDataFromDb(selectedItem.getSaveNr());
+        Main.getLoadStage().close();
     }
 
 
@@ -68,16 +75,15 @@ public class LoadController implements Initializable {
         genauigkeitCol.setMinWidth(100);
         table.getItems().setAll(this.data);
         putDBEntrysToTable();
-        //addEntry(534,2344d);
-        //addEntry(535,2.3);
     }
 
     private void putDBEntrysToTable() {
       Integer nrlength = DBConnect.getAllSaveNumbers().length;
+      Integer [] savednr = DBConnect.getAllSaveNumbers();
 
-      for (Integer i = 0; i <= nrlength; i++)
+      for (Integer i = 0; i < nrlength; i++)
       {
-        Object [] tableEntry = DBConnect.getMainTableEntry(i);
+        Object [] tableEntry = DBConnect.getMainTableEntry(savednr[i]);
         Integer nr = (Integer) tableEntry[0];
         double succesrate = (Double) tableEntry [1];
         addEntry(nr, succesrate);

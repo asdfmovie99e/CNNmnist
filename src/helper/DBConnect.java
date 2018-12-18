@@ -26,7 +26,7 @@ public class DBConnect {
     public static void connect(String URL, String user, String pass) throws Exception{
         try {
             Class.forName(jdbcDriver);
-            connection = DriverManager.getConnection(url,"root","m+m071213");
+            connection = DriverManager.getConnection(UserDatamanager.getDburl(),UserDatamanager.getDbuser(),UserDatamanager.getDbpassword());
             System.out.println("Sie sind jetzt verbunden.");
         } catch (Exception e) {
             e.printStackTrace();
@@ -117,7 +117,7 @@ public class DBConnect {
             stmt = conn.createStatement();
 
             String sql = "Create Table MAINTABLE"
-                    + " (Save_Nr Integer Auto_Increment, "
+                    + " (Save_Nr Integer , "
                     + " Input_Neuron Integer, "
                     + " HIDDEN_NEURON_ONE Integer, "
                     + " HIDDEN_NEURON_TWO Integer, "
@@ -184,17 +184,22 @@ public class DBConnect {
         try {
             stmt = connection.createStatement();
             rs = stmt.executeQuery("SELECT * FROM MAINTABLE WHERE SAVE_NR =" + SaveNr);
-            Object [] ObArray = new Object[9];
+            Object [] obArray = new Object[9];
+
             while (rs.next()) {
-                result = rs.getObject(1);
-                resultList.add(result);
+                obArray[0] = rs.getInt("SAVE_NR");
+                obArray[1] = rs.getDouble("ACCURACY");
+                obArray[2] = rs.getInt("INPUT_NEURON");
+                obArray[3] = rs.getInt("HIDDEN_NEURON_ONE");
+                obArray[4] = rs.getInt("HIDDEN_NEURON_TWO");
+                obArray[5] = rs.getInt("HIDDEN_NEURON_THREE");
+                obArray[6] = rs.getInt("HIDDEN_NEURON_FOUR");
+                obArray[7] = rs.getInt("HIDDEN_NEURON_FIVE");
+                obArray[8] = rs.getInt("OUTPUT_NEURON");
+
+
             }
-            Integer[] resultArray = new Integer[resultList.size()];
-            Object[] objectArray = resultList.toArray();
-            for(int i = 0 ; i < resultList.size(); i++){
-                resultArray[i] = (Integer) (objectArray[i]);
-            }
-            return resultArray;
+            return obArray;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -202,7 +207,7 @@ public class DBConnect {
         return null;
     }
 
-    public static void addMainTableEntry(Integer InputNeurons, Integer HiddenNeuronsOne,Integer HiddenNeuronsTwo, Integer HiddenNeuronsThree, Integer HiddenNeuronsFour,Integer HiddenNeuronsFive, Integer OutputNeurons, Double SuccessRate) {
+    public static void addMainTableEntry(Integer saveNr, Integer InputNeurons, Integer HiddenNeuronsOne,Integer HiddenNeuronsTwo, Integer HiddenNeuronsThree, Integer HiddenNeuronsFour,Integer HiddenNeuronsFive, Integer OutputNeurons, Double SuccessRate) {
         /*
         @params Sind selbsterklärend
          */
@@ -210,8 +215,8 @@ public class DBConnect {
         ResultSet rst = null;
         checkConnection();
         try {
-            String s = "INSERT INTO MAINTABLE (INPUT_NEURON, HIDDEN_NEURON_ONE, HIDDEN_NEURON_TWO, HIDDEN_NEURON_THREE, HIDDEN_NEURON_FOUR, HIDDEN_NEURON_FIVE, OUTPUT_NEURON,ACCURACY) VALUES " +
-                    "(" + InputNeurons + "," + HiddenNeuronsOne + "," + HiddenNeuronsTwo + "," + HiddenNeuronsThree + "," + HiddenNeuronsFour + "," + HiddenNeuronsFive + "," + OutputNeurons + "," + SuccessRate +")" ;
+            String s = "INSERT INTO MAINTABLE (SAVE_NR, INPUT_NEURON, HIDDEN_NEURON_ONE, HIDDEN_NEURON_TWO, HIDDEN_NEURON_THREE, HIDDEN_NEURON_FOUR, HIDDEN_NEURON_FIVE, OUTPUT_NEURON,ACCURACY) VALUES " +
+                    "(" + saveNr + "," + InputNeurons + "," + HiddenNeuronsOne + "," + HiddenNeuronsTwo + "," + HiddenNeuronsThree + "," + HiddenNeuronsFour + "," + HiddenNeuronsFive + "," + OutputNeurons + "," + SuccessRate +")" ;
             stmt = connection.createStatement();
             rst = stmt.executeQuery(s);
           //  rst2 = stmt.executeQuery("INSERT INTO HIDDENLAYER")
@@ -244,29 +249,25 @@ public class DBConnect {
         Statement stmt = null;
         ResultSet rs = null;
         checkConnection();
-        Object result;
-        ArrayList <Object> resultList = new ArrayList<Object>();
+        Object [] obArray = new Object[3];
         try {
-            String s = "SELECT PRE_NEURON_IDENT, NEXT_NEURON_IDENT, ACCURACY FROM EDGETABELLE WHERE " +
+            String s = "SELECT PRE_NEURON_IDENT, NEXT_NEURON_IDENT, WEIGHT FROM EDGETABlE WHERE " +
                     "SAVE_NR = "+ SaveNr+ " and LAYER_NR ="+ Layernumber +" and EDGE_NR = "+ EdgeNumber;
             stmt = connection.createStatement();
             rs = stmt.executeQuery(s);
-            Object [] ObArray = new Object[6];
             while (rs.next()) {
-                result = rs.getObject(1);
-                resultList.add(result);
+                obArray[0] = rs.getInt("PRE_NEURON_IDENT");
+                obArray[1] = rs.getInt("NEXT_NEURON_IDENT");
+                obArray[2] = rs.getDouble("WEIGHT");
             }
-            Integer[] resultArray = new Integer[resultList.size()];
-            Object[] objectArray = resultList.toArray();
-            for(int i = 0 ; i < resultList.size(); i++){
-                resultArray[i] = (Integer) (objectArray[i]);
-            }
-            return resultArray;
+
 
 
         }catch (SQLException e){
+            e.printStackTrace();
             return null;
         }
+        return obArray;
     }
 
     public static void checkCredentials() throws Exception{
@@ -281,16 +282,21 @@ public class DBConnect {
          */
         Statement stmt = null;
         ResultSet rst = null;
+        Integer result = null;
         checkConnection();
         try {
-            String s = ("SELECT COUNT(EDGE_NR) FROM EDGETABLE WHERE SAVE_NR = " + SaveNr + " and LAYER_NR = " + Layernumber);
+            String s = ("SELECT COUNT(EDGE_NR) AS EDGECOUNT FROM EDGETABLE WHERE SAVE_NR = " + SaveNr + " and LAYER_NR = " + Layernumber);
             stmt = connection.createStatement();
             rst = stmt.executeQuery(s);
+
+            while (rst.next()) {
+                result = rst.getInt("EDGECOUNT");
+            }
 
         }catch (SQLException e){
             return null;
         }
-        return null;
+        return result;
     }
 
     public static void deleteRows (Integer SaveNr){
