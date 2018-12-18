@@ -1,13 +1,6 @@
 package gui;
 
-/**
- * Die Controllerklasse für die MainGui (GUI.fxml)
- * @author Jens Krüger
- * @author Niklas Bruns
- * @author Marc Seibel
- * @version 1.0
- *
- */
+
 
 import java.io.File;
 import java.io.IOException;
@@ -29,6 +22,14 @@ import main.PictureCoder;
 
 import javax.imageio.ImageIO;
 
+/**
+ * Die Controllerklasse für die MainGui (GUI.fxml)
+ * @author Jens Krüger
+ * @author Niklas Bruns
+ * @author Marc Seibel
+ * @version 1.0
+ *
+ */
 
 public class Controller {
 

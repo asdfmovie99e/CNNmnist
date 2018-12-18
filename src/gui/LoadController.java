@@ -15,13 +15,26 @@ import javafx.scene.control.*;
 import main.Main;
 import main.NetworkController;
 
+/**
+ * Die Controllerklasse für die LoadGui (guidbLoad.fxml)
+ * @author Jens Krüger
+ * @author Niklas Bruns
+ * @author Marc Seibel
+ * @version 1.0
+ *
+ */
+
 public class LoadController implements Initializable {
 
 
     @FXML
     private TableView<WeightData> table;
-    @FXML private TableColumn saveNrCol ;
-    @FXML private TableColumn genauigkeitCol ;
+
+    @FXML
+    private TableColumn saveNrCol ;
+
+    @FXML
+    private TableColumn genauigkeitCol ;
 
     @FXML
     private Button loadbutton;
@@ -31,7 +44,9 @@ public class LoadController implements Initializable {
     private Button deletebutton;
 
     @FXML
-    //löscht Datensätze
+    /**
+     * Loescht den ausgewaehlten Datensatz aus der Tabelle und aus der DB.
+     */
     void clickdelete(ActionEvent event) {
 
         WeightData selectedItem = table.getSelectionModel().getSelectedItem();
@@ -43,6 +58,9 @@ public class LoadController implements Initializable {
 
 
     @FXML
+    /**
+     * Laedt ausgewählten Datensatz mit Gewichten in das Netz und schließt LoadGui
+     */
     //liest nr des ausgewählten Gewichtes aus
     void clickload(ActionEvent event) {
        WeightData selectedItem = table.getSelectionModel().getSelectedItem();
@@ -54,9 +72,13 @@ public class LoadController implements Initializable {
 
     private final ObservableList<WeightData> data = FXCollections.observableArrayList();
 
-
+    /**
+     * Schreibt Daten in die Tabelle
+     * @param saveNr Die Savenummer in der DB.
+     * @param genauigkeit Gibt die Erfolgsrate des Datensatzes an.
+     */
     private void addEntry(Integer saveNr, Double genauigkeit) {
-        // DAS HIER IST DIE FUNKTION MIT DER MAN NEUE EINTRÄGE HINZUFÜGEN KANN
+
         System.out.println("Entry added");
         table.getItems().add(new WeightData(
                 saveNr,
@@ -64,14 +86,19 @@ public class LoadController implements Initializable {
     }
 
     @Override
+    /**
+     *  Initialisiert die Tabelle
+     */
     public void initialize(URL url, ResourceBundle rb) {
-        //DAS HIER IST DIE FUNKTION DIE AM ANFANG AUFGERUFEN WIRD. DU KANNST ALSO VON HIER AUS DIE DATEN AUS DER DATENBANK ABRUFEN UND MIT addEntry(s,g) DIREKT SICHTBAR MACHEN
         saveNrCol.setMinWidth(100);
         genauigkeitCol.setMinWidth(100);
         table.getItems().setAll(this.data);
         putDBEntrysToTable();
     }
 
+    /**
+     * Laedt Daten fuer die Tabelle und fuehrt dann addEntry aus.
+     */
     private void putDBEntrysToTable() {
       Integer nrlength = DBConnect.getAllSaveNumbers().length;
       Integer [] savednr = DBConnect.getAllSaveNumbers();
@@ -85,6 +112,9 @@ public class LoadController implements Initializable {
       }
     }
 
+    /**
+     * Verwaltet die Daten der Tabelle.
+     */
     public static class WeightData {
 
         private final SimpleIntegerProperty saveNr;
