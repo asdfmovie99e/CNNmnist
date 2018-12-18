@@ -1,7 +1,7 @@
 package main;
 
 /**
- * Ein Neuron, welches kein Vorgängerneuron hat und direkt von der NetworkController Klasse angesprochen wird.
+ * Ein Neuron, welches keine Vorgängerneuron hat und direkt von der NetworkController Klasse angesprochen wird.
  * @author Jens Krüger
  * @author Niklas Bruns
  * @author Marc Seibel

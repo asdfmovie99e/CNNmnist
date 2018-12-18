@@ -8,6 +8,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * Steuert das gesamte Neuronale Netzwerk.
+ * @
+ * @author Jens Krüger
+ * @author Niklas Bruns
+ * @author Marc Seibel
+ * @version 1.0
+ *
+ */
 public class PictureCoder {
 
     private static File mnistFolder = new File(Paths.get("").toAbsolutePath().toString() + "\\src\\mnist");
@@ -15,15 +24,20 @@ public class PictureCoder {
     private static byte[] byteArray;
     private static int[] pixelArray;
 
+    /**
+     * Lädt die MNIST Dateien.
+     */
     public static void readMnistFiles(){
         scanImages();
         scanLabels();
     }
 
-
+    /**
+     * Berechnet und gibt ein 2 Dimentionales Array zurück, welches ein Bild represntiert
+     * @param pictureId Die Nummer der gewünschten Bildes
+     * @return Das Array, in dem das Bild gespeichert ist.
+     */
     public static int[][] get2DPictureArray(int pictureId) {
-        //gibt ein 2 dimensionales Array aus in dem die Pixel des Bildes pictureId gespeichert sind. jeder wert ist zwischen 0(weiss) und 1(schwarz)
-        // das erste [] gibt die x koordinate an und das zweite [] gibt die y koordinate an
         int[][] result2Darray = new int[28][28];
         for(int x = 0; x < 28; x++){
             for(int y = 0; y < 28; y++){
@@ -42,6 +56,9 @@ public class PictureCoder {
         return  labelArray[pictureId];
     }
 
+    /**
+     * Liest die MNIST label Datei ein.
+     */
     private static void scanLabels() {
         //die Daten aus der UByte Label Datei werden in das LabelArray geladen
         byteArray = new byte[0];
@@ -56,6 +73,9 @@ public class PictureCoder {
         }
     }
 
+    /**
+     * Liest die MNIST picture Datei ein.
+     */
     private static void scanImages() {
         //die Daten aus der UByte images Datei werden in das pixelArray geladen
         byteArray = new byte[0];
@@ -74,7 +94,10 @@ public class PictureCoder {
         }
     }
 
-
+    /**
+     * Liest das Bild ein, welches zuvor gemalt und gespeichert wurde
+     * @return Ein Array, in dem das Bild gespeichert ist.
+     */
     public static int[][] readSelfDrawnImage() {
         BufferedImage img = null;
         try {
@@ -92,6 +115,11 @@ public class PictureCoder {
         return scaleColorArrayDown(colorArray);
     }
 
+    /**
+     * Skaliert das 196x196 Bild auf 28x28 herunter.
+     * @param colorArray Das zu skalierende Bild.
+     * @return Das herunterskalierte Bild.
+     */
     private static int[][] scaleColorArrayDown(int[][] colorArray) {
         int[][] scaledDownArray = new int[28][28];
         BufferedImage shrunkImage = new BufferedImage(28, 28, BufferedImage.TYPE_INT_RGB);

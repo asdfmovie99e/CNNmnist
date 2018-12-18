@@ -2,6 +2,14 @@ package main;
 
 import helper.MathHelper;
 
+/**
+ * Ein Neuron, welches sowohl Vorgänger-, als auch Nachfolgerneuronen hat und in einer Hidden-Schicht liegt.
+ * @author Jens Krüger
+ * @author Niklas Bruns
+ * @author Marc Seibel
+ * @version 1.0
+ *
+ */
 public class HiddenNeuron extends Neuron {
 
     /**

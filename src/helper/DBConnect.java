@@ -21,6 +21,8 @@ public class DBConnect {
     public static String url = "jdbc:mysql://localhost:3306/neuronaldata";
     private static Connection connection;
     private static String driver ="com.mysql.jdbc.Driver";
+    private static Object[][][] preparedEdgeArray = null;
+    private static Integer preparedSaveNr = null;
 
     //Methode zum verbinden
     public static void connect(String URL, String user, String pass) throws Exception{
@@ -95,7 +97,7 @@ public class DBConnect {
         }
     }
 
-
+@Deprecated
     public static void createMainTable(){
         Connection conn = null;
         Statement stmt = null;
@@ -244,31 +246,19 @@ public class DBConnect {
         }
     }
 
-    public static Object[] getEdgeEntry(Integer SaveNr, Integer Layernumber, Integer EdgeNumber){
-
-        Statement stmt = null;
-        ResultSet rs = null;
-        checkConnection();
-        Object [] obArray = new Object[3];
-        try {
-            String s = "SELECT PRE_NEURON_IDENT, NEXT_NEURON_IDENT, WEIGHT FROM EDGETABlE WHERE " +
-                    "SAVE_NR = "+ SaveNr+ " and LAYER_NR ="+ Layernumber +" and EDGE_NR = "+ EdgeNumber;
-            stmt = connection.createStatement();
-            rs = stmt.executeQuery(s);
-            while (rs.next()) {
-                obArray[0] = rs.getInt("PRE_NEURON_IDENT");
-                obArray[1] = rs.getInt("NEXT_NEURON_IDENT");
-                obArray[2] = rs.getDouble("WEIGHT");
-            }
 
 
-
-        }catch (SQLException e){
-            e.printStackTrace();
-            return null;
+    public static Object[] getEdgeEntry(Integer saveNr, Integer layerNumber, Integer edgeNumber){
+        if(preparedSaveNr == null || preparedSaveNr != saveNr){
+            prepareSave(saveNr);
         }
-        return obArray;
+
+        Object[] edge = preparedEdgeArray[layerNumber][edgeNumber];
+
+
+        return edge;
     }
+
 
     public static void checkCredentials() throws Exception{
         connect(UserDatamanager.getDburl(),UserDatamanager.getDbuser(), UserDatamanager.getDbpassword());
@@ -315,6 +305,33 @@ public class DBConnect {
         }catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void prepareSave(Integer saveNr){
+
+        Statement stmt = null;
+        ResultSet rs = null;
+        checkConnection();
+        Object [][][] obArray = new Object[100000][6][3]; // MUSS NOCH ANGEPASST WERDE MIT MAX EDGES PER LAYER
+        try {
+            String s = "SELECT PRE_NEURON_IDENT, NEXT_NEURON_IDENT, WEIGHT, LAYER_NR, EDGE_NR FROM EDGETABlE WHERE " +
+                    "SAVE_NR = "+ saveNr;
+            stmt = connection.createStatement();
+            rs = stmt.executeQuery(s);
+            while (rs.next()) {
+                int layerNr =rs.getInt("LAYER_NR");
+                int edgeNr = rs.getInt("LAYER_NR");
+                obArray[layerNr][edgeNr][0] = rs.getInt("PRE_NEURON_IDENT");
+                obArray[layerNr][edgeNr][1] = rs.getInt("NEXT_NEURON_IDENT");
+                obArray[layerNr][edgeNr][2]= rs.getDouble("WEIGHT");
+            }
+
+
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        preparedEdgeArray = obArray;
     }
 }
 //Bitte lade hoch

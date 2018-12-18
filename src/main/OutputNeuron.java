@@ -2,6 +2,14 @@ package main;
 
 import helper.MathHelper;
 
+/**
+ * Ein Neuronen, welches die Wahrscheinlichkeit representiert, dass eine bestimmte Zahl gezeichnet oder eingelesen wurde.
+ * @author Jens Krüger
+ * @author Niklas Bruns
+ * @author Marc Seibel
+ * @version 1.0
+ *
+ */
 public class OutputNeuron extends Neuron{
 
     /**
