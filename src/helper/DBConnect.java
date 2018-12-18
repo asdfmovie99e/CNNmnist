@@ -300,13 +300,18 @@ public class DBConnect {
     }
 
     public static void deleteRows (Integer SaveNr){
-        Statement stmt = null;
-        ResultSet rst = null;
+        Statement stmt1 = null;
+        ResultSet rst1 = null;
+        Statement stmt2 = null;
+        ResultSet rst2 = null;
         checkConnection();
         try {
-            String s = "DELETE FROM MAINTABLE,EDGETABLE WHERE SAVE_NR =" + SaveNr;           stmt = connection.createStatement();
-            stmt = connection.createStatement();
-            rst = stmt.executeQuery(s);
+            String s1 = "DELETE FROM MAINTABLE WHERE SAVE_NR =" + SaveNr;
+            stmt1 = connection.createStatement();
+            rst1 = stmt1.executeQuery(s1);
+            String s2 = " DELETE FROM EDGETABLE WHERE SAVE_NR =" + SaveNr;
+            stmt2 = connection.createStatement();
+            rst2 = stmt2.executeQuery(s2);
         }catch (SQLException e) {
             e.printStackTrace();
         }
