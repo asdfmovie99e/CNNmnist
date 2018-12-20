@@ -14,8 +14,9 @@ public class DBConnect {
 
     static final String jdbcDriver = "org.mariadb.jdbc.Driver";
     private static Connection connection;
-    private static Object[][][] preparedEdgeArray = null;
-    private static Integer preparedSaveNr = null;
+    private static Object[][][] bufferedLoadEdgeArray = null;
+    private static String bufferedSaveCommand = null;
+    private static Integer bufferedLoadSaveNr = null;
 
     //Methode zum verbinden
     public static void connect(String url, String user, String pass, String port) throws Exception{
@@ -177,7 +178,7 @@ public class DBConnect {
         }
 
     }
-
+/*
     public static void addEdge(Integer SaveNr,Integer LayerNumber,Integer EdgeNumber, Integer previousNeuronID, Integer nextNeuronID, Double Weight){
 
         Statement stmt = null;
@@ -195,14 +196,14 @@ public class DBConnect {
         }
     }
 
-
+*/
 
     public static Object[] getEdgeEntry(Integer saveNr, Integer layerNumber, Integer edgeNumber){
-        if(preparedSaveNr == null || preparedSaveNr != saveNr){
+        if(bufferedLoadSaveNr == null || bufferedLoadSaveNr != saveNr){
             prepareSave(saveNr);
         }
 
-        Object[] edge = preparedEdgeArray[layerNumber][edgeNumber];
+        Object[] edge = bufferedLoadEdgeArray[layerNumber][edgeNumber];
 
 
         return edge;
@@ -283,7 +284,34 @@ public class DBConnect {
         }catch (SQLException e){
             e.printStackTrace();
         }
-        preparedEdgeArray = obArray;
-        preparedSaveNr = saveNr;
+        bufferedLoadEdgeArray = obArray;
+        bufferedLoadSaveNr = saveNr;
     }
+
+    public static void addEdge(Integer saveNr,Integer layerNumber,Integer edgeNumber, Integer previousNeuronID, Integer nextNeuronID, Double weight){
+        String startString = "insert into EDGETABLE (SAVE_NR, LAYER_NR, EDGE_NR, PRE_NEURON_IDENT, NEXT_NEURON_IDENT, WEIGHT) VALUES ";
+        if(bufferedSaveCommand == null){
+            bufferedSaveCommand = startString;
+        }
+        if(!bufferedSaveCommand.equals(startString)){
+            bufferedSaveCommand+= ",";
+        }
+        bufferedSaveCommand += "(" + saveNr + "," + layerNumber + "," + edgeNumber + "," + previousNeuronID + "," + nextNeuronID + "," + weight + ")";
+        if (bufferedSaveCommand.length() > 10000){
+            flushSaveCommand();
+        }
+    }
+
+    public static void flushSaveCommand() {
+        checkConnection();
+
+        try {
+            Statement stmt = connection.createStatement();
+            stmt.executeQuery(bufferedSaveCommand);
+            bufferedSaveCommand = null;
+        } catch (SQLException e) {
+            return ;
+        }
+    }
+
 }
