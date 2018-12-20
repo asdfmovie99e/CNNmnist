@@ -1,7 +1,15 @@
 package gui;
 
 
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 import java.io.*;
+import java.security.Key;
+import java.security.MessageDigest;
+import java.util.Arrays;
 
 /**
  * Speichert die Anmeldedaten und liest diese auch wieder aus.
@@ -13,22 +21,24 @@ import java.io.*;
  */
 public class UserDatamanager {
 
-   private static String dburl;
-   private static String dbuser;
-   private static String dbpassword;
-   private static String port;
+   private static String dbUrl;
+   private static String dbUser;
+   private static String dbEncryptedPassword;
+   private static String dbPort;
+
     /**
      * Speichert Url und Username in der Datei 'userdata.txt'.
      * @param url Url zum anmelden an die DB.
      * @param user Username zum anmelden an die DB.
      */
-public static void SaveUserData(String url, String user)
+public static void saveUserData(String url, String user, String decryptedPassword)
     {
         PrintWriter pWriter = null;
         try {
             pWriter = new PrintWriter(new BufferedWriter(new FileWriter(System.getenv("APPDATA")+ "\\mnist\\userdata.txt")));
             pWriter.println(url);
             pWriter.println(user);
+            pWriter.println(encode(decryptedPassword));
             pWriter.close();
         } catch (IOException ioe) {
             ioe.printStackTrace();
@@ -41,6 +51,7 @@ public static void SaveUserData(String url, String user)
 public static String [] readSavedUserData() {
     String url = null;
     String user = null ;
+    String encryptedPassword = null;
 
     FileReader fr = null;
     BufferedReader br = null;
@@ -48,11 +59,8 @@ public static String [] readSavedUserData() {
     try {
         String fileName = System.getenv("APPDATA")+ "\\mnist\\userdata.txt";
         File file = new File(fileName);
-        if (file.exists())
-        {
+        if (!file.exists())
 
-        }
-        else
         {
             PrintWriter pWriter = null;
             try {
@@ -68,50 +76,94 @@ public static String [] readSavedUserData() {
 
         url = br.readLine();
         user = br.readLine();
+        encryptedPassword = br.readLine();
         }
          catch (IOException ex) {
         ex.printStackTrace();
     }
-        if (url == null || url.equals(""))
-        {
-            url = "jdbc:mysql://";
-        }
 
-    return new String[] {url, user};
+    return new String[] {url, user, decode(encryptedPassword)};
     }
 
-    public static String getDburl() {
-        return dburl;
+    public static String getDbUrl() {
+        return dbUrl;
     }
 
-    public static void setDburl(String url) {
-        dburl = url;
+    public static void setDbUrl(String url) {
+        dbUrl = url;
     }
 
-    public static String getDbuser() {
-        return dbuser;
+    public static String getDbUser() {
+        return dbUser;
     }
 
-    public static void setDbuser(String user) {
-        dbuser = user;
+    public static void setDbUser(String user) {
+        dbUser = user;
     }
 
-    public static String getDbpassword() {
-        return dbpassword;
+    public static String getDbDecryptedPassword() {
+        return decode(dbEncryptedPassword);
     }
 
-    public static void setDbpassword(String password)
+    public static void setDbDecryptedPassword(String password)
     {
-        dbpassword = password;
+        dbEncryptedPassword = encode(password);
     }
 
-    public static void setPort(String portNew) {
-    port = portNew;
+    public static void setDbPort(String portNew) {
+    dbPort = portNew;
     }
 
-    public static String getPort() {
-        return port;
+    public static String getDbPort() {
+        return dbPort;
     }
 
+    private static String encode(String decryptedPassword){
+        String encryptedPassword = null;
+try {
+    Cipher cipher = Cipher.getInstance("AES");
+    cipher.init(Cipher.ENCRYPT_MODE, generateAESKey());
+    byte[] encrypted = cipher.doFinal(decryptedPassword.getBytes());
+
+    BASE64Encoder myEncoder = new BASE64Encoder();
+    encryptedPassword = myEncoder.encode(encrypted);
+
+} catch (Exception e){
+    e.printStackTrace();
+}
+        return encryptedPassword;
+}
+
+private static String decode(String encryptedString) {
+    String decryptedString = null;
+    try {
+        BASE64Decoder myDecoder2 = new BASE64Decoder();
+        byte[] crypted2 = myDecoder2.decodeBuffer(encryptedString);
+
+        Cipher cipher2 = Cipher.getInstance("AES");
+        cipher2.init(Cipher.DECRYPT_MODE, generateAESKey());
+        byte[] cipherData2 = cipher2.doFinal(crypted2);
+        decryptedString = new String(cipherData2);
+
+    }catch (Exception e){
+        e.printStackTrace();
+    }
+    return decryptedString;
+}
+
+private static SecretKeySpec generateAESKey() {
+    SecretKeySpec secretKeySpec = null;
+    try {
+        String keyStr = new BufferedReader(new InputStreamReader(Runtime.getRuntime().exec("wmic baseboard get serialnumber").getInputStream())).readLine();;
+        byte[] key = (keyStr).getBytes("UTF-8");
+        MessageDigest sha = MessageDigest.getInstance("SHA-256");
+        key = sha.digest(key);
+        key = Arrays.copyOf(key, 16);
+        secretKeySpec = new SecretKeySpec(key, "AES");
+    }catch (Exception e){
+        e.printStackTrace();
+    }
+    return secretKeySpec;
+}
 
 }

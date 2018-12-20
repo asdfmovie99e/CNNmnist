@@ -2,30 +2,26 @@ package helper;
 
 import gui.UserDatamanager;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
-import java.sql.*;
 
 public class DBConnect {
 
     static final String jdbcDriver = "org.mariadb.jdbc.Driver";
-    public static String url = "jdbc:mysql://localhost:3306/neuronaldata";
     private static Connection connection;
     private static Object[][][] preparedEdgeArray = null;
     private static Integer preparedSaveNr = null;
 
     //Methode zum verbinden
-    public static void connect(String URL, String user, String pass) throws Exception{
+    public static void connect(String url, String user, String pass, String port) throws Exception{
         try {
             Class.forName(jdbcDriver);
-            connection = DriverManager.getConnection("jdbc:mysql://" + UserDatamanager.getDburl() + ":" + UserDatamanager.getPort() + "/neuronaldata",UserDatamanager.getDbuser(),UserDatamanager.getDbpassword());
+            connection = DriverManager.getConnection("jdbc:mysql://" + url + ":" + port + "/neuronaldata", user, pass);
             System.out.println("Sie sind jetzt verbunden.");
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,7 +60,7 @@ public class DBConnect {
     public static void checkConnection() {
         if (!isConnected()) {
             try {
-                connect(UserDatamanager.getDburl(),UserDatamanager.getDbuser(), UserDatamanager.getDbpassword());
+                connect(UserDatamanager.getDbUrl(),UserDatamanager.getDbUser(), UserDatamanager.getDbDecryptedPassword(), UserDatamanager.getDbPort());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -214,7 +210,7 @@ public class DBConnect {
 
 
     public static void checkCredentials() throws Exception{
-        connect(UserDatamanager.getDburl(),UserDatamanager.getDbuser(), UserDatamanager.getDbpassword());
+        connect(UserDatamanager.getDbUrl(),UserDatamanager.getDbUser(), UserDatamanager.getDbDecryptedPassword(), UserDatamanager.getDbPort());
     }
 
 

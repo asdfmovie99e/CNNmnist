@@ -62,12 +62,12 @@ public class PasswordController {
         String password = Password.getText();
         String port = portField.getText();
         //Übergabe an die Variabeln im UserDatamanager zum späteren Aufruf
-        UserDatamanager.setDburl(url);
-        UserDatamanager.setDbuser(user);
-        UserDatamanager.setDbpassword(password);
-        UserDatamanager.setPort(port);
+        UserDatamanager.setDbUrl(url);
+        UserDatamanager.setDbUser(user);
+        UserDatamanager.setDbDecryptedPassword(password);
+        UserDatamanager.setDbPort(port);
         if (savelogin.isSelected()) {
-            UserDatamanager.SaveUserData(url, user);
+            UserDatamanager.saveUserData(url, user, password);
         }
 
         try {
@@ -91,6 +91,7 @@ public class PasswordController {
         String[] ret = UserDatamanager.readSavedUserData();
         URL.setText(ret[0]);
         User.setText(ret[1]);
+        Password.setText(ret[2]);
 
 
     }
