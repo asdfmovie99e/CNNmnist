@@ -154,7 +154,7 @@ private static String decode(String encryptedString) {
 private static SecretKeySpec generateAESKey() {
     SecretKeySpec secretKeySpec = null;
     try {
-        String keyStr = new BufferedReader(new InputStreamReader(Runtime.getRuntime().exec("wmic baseboard get serialnumber").getInputStream())).readLine();;
+        String keyStr = "rH4*~6nsFtN.-&5Sep#[f";
         byte[] key = (keyStr).getBytes("UTF-8");
         MessageDigest sha = MessageDigest.getInstance("SHA-256");
         key = sha.digest(key);
