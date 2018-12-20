@@ -20,7 +20,7 @@ public class NetworkController {
 
     private static int ANZAHL_INPUT_NEURONS = 28 * 28;
     private static int ANZAHL_HIDDEN_ONE = 784;
-    private static int ANZAHL_HIDDEN_TWO = 100;
+    private static int ANZAHL_HIDDEN_TWO = 105;
     private static int ANZAHL_OUTPUT_NEURON = 10;
     public static final double EPSILON = 0.053d;
     private static final int ANZAHL_BILDER = 60000;

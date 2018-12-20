@@ -100,7 +100,7 @@ public class DBConnect {
         ResultSet rs = null;
 
         try {
-            String s = "(SELECT SAVE_NR FROM MAINTABLE)";
+            String s = "(SELECT SAVE_NR FROM maintable)";
             stmt = connection.createStatement();
             rs = stmt.executeQuery(s);
             ArrayList<Integer> resultList = new ArrayList<Integer>();
@@ -135,7 +135,7 @@ public class DBConnect {
 
         try {
             stmt = connection.createStatement();
-            rs = stmt.executeQuery("SELECT * FROM MAINTABLE WHERE SAVE_NR =" + SaveNr);
+            rs = stmt.executeQuery("SELECT * FROM maintable WHERE SAVE_NR =" + SaveNr);
             Object [] obArray = new Object[9];
 
             while (rs.next()) {
@@ -167,7 +167,7 @@ public class DBConnect {
         ResultSet rst = null;
         checkConnection();
         try {
-            String s = "INSERT INTO MAINTABLE (SAVE_NR, INPUT_NEURON, HIDDEN_NEURON_ONE, HIDDEN_NEURON_TWO, HIDDEN_NEURON_THREE, HIDDEN_NEURON_FOUR, HIDDEN_NEURON_FIVE, OUTPUT_NEURON,ACCURACY) VALUES " +
+            String s = "INSERT INTO maintable (SAVE_NR, INPUT_NEURON, HIDDEN_NEURON_ONE, HIDDEN_NEURON_TWO, HIDDEN_NEURON_THREE, HIDDEN_NEURON_FOUR, HIDDEN_NEURON_FIVE, OUTPUT_NEURON,ACCURACY) VALUES " +
                     "(" + saveNr + "," + InputNeurons + "," + HiddenNeuronsOne + "," + HiddenNeuronsTwo + "," + HiddenNeuronsThree + "," + HiddenNeuronsFour + "," + HiddenNeuronsFive + "," + OutputNeurons + "," + SuccessRate +")" ;
             stmt = connection.createStatement();
             rst = stmt.executeQuery(s);
@@ -225,7 +225,7 @@ public class DBConnect {
         Integer result = null;
         checkConnection();
         try {
-            String s = ("SELECT COUNT(EDGE_NR) AS EDGECOUNT FROM EDGETABLE WHERE SAVE_NR = " + SaveNr + " and LAYER_NR = " + Layernumber);
+            String s = ("SELECT COUNT(EDGE_NR) AS EDGECOUNT FROM edgetable WHERE SAVE_NR = " + SaveNr + " and LAYER_NR = " + Layernumber);
             stmt = connection.createStatement();
             rst = stmt.executeQuery(s);
 
@@ -246,10 +246,10 @@ public class DBConnect {
         ResultSet rst2 = null;
         checkConnection();
         try {
-            String s1 = "DELETE FROM MAINTABLE WHERE SAVE_NR =" + SaveNr;
+            String s1 = "DELETE FROM maintable WHERE SAVE_NR =" + SaveNr;
             stmt1 = connection.createStatement();
             rst1 = stmt1.executeQuery(s1);
-            String s2 = " DELETE FROM EDGETABLE WHERE SAVE_NR =" + SaveNr;
+            String s2 = " DELETE FROM edgetable WHERE SAVE_NR =" + SaveNr;
             stmt2 = connection.createStatement();
             rst2 = stmt2.executeQuery(s2);
         }catch (SQLException e) {
@@ -264,7 +264,7 @@ public class DBConnect {
         checkConnection();
         Object [][][] obArray = new Object[6][500000][3]; // MUSS NOCH ANGEPASST WERDE MIT MAX EDGES PER LAYER
         try {
-            String s = "SELECT PRE_NEURON_IDENT, NEXT_NEURON_IDENT, WEIGHT, LAYER_NR, EDGE_NR FROM EDGETABlE WHERE " +
+            String s = "SELECT PRE_NEURON_IDENT, NEXT_NEURON_IDENT, WEIGHT, LAYER_NR, EDGE_NR FROM edgetable WHERE " +
                     "SAVE_NR = "+ saveNr;
             stmt = connection.createStatement();
             rs = stmt.executeQuery(s);
@@ -289,7 +289,7 @@ public class DBConnect {
     }
 
     public static void addEdge(Integer saveNr,Integer layerNumber,Integer edgeNumber, Integer previousNeuronID, Integer nextNeuronID, Double weight){
-        String startString = "insert into EDGETABLE (SAVE_NR, LAYER_NR, EDGE_NR, PRE_NEURON_IDENT, NEXT_NEURON_IDENT, WEIGHT) VALUES ";
+        String startString = "insert into edgetable (SAVE_NR, LAYER_NR, EDGE_NR, PRE_NEURON_IDENT, NEXT_NEURON_IDENT, WEIGHT) VALUES ";
         if(bufferedSaveCommand == null){
             bufferedSaveCommand = startString;
         }
@@ -297,7 +297,7 @@ public class DBConnect {
             bufferedSaveCommand+= ",";
         }
         bufferedSaveCommand += "(" + saveNr + "," + layerNumber + "," + edgeNumber + "," + previousNeuronID + "," + nextNeuronID + "," + weight + ")";
-        if (bufferedSaveCommand.length() > 10000){
+        if (bufferedSaveCommand.length() > 100000){
             flushSaveCommand();
         }
     }
