@@ -156,7 +156,7 @@ public class Controller {
     void initialize() {
         GraphicsContext g = canvas.getGraphicsContext2D();
         canvas.setOnMouseDragged(event ->{
-            double size = 2 ;
+            double size = 14 ;
             double x = event.getX() - size / 2;
             double y = event.getY() - size / 2;
             g.fill();

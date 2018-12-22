@@ -22,7 +22,7 @@ public class NetworkController {
     private static int ANZAHL_HIDDEN_ONE = 784;
     private static int ANZAHL_HIDDEN_TWO = 105;
     private static int ANZAHL_OUTPUT_NEURON = 10;
-    public static final double EPSILON = 0.053d;
+    public static final double EPSILON = 0.032d;
     private static final int ANZAHL_BILDER = 60000;
     private static ArrayList<InputNeuron> inputNeurons = new ArrayList<InputNeuron>();
     private static ArrayList<HiddenNeuron> hiddenNeuronsOne = new ArrayList<HiddenNeuron>();
@@ -228,6 +228,10 @@ public class NetworkController {
     public static void loadDataFromDb (Integer saveNr)
     {
        Object[] obArray = DBConnect.getMainTableEntry(saveNr);
+        inputNeurons = new ArrayList<InputNeuron>();
+        hiddenNeuronsOne = new ArrayList<HiddenNeuron>();
+        hiddenNeuronsTwo = new ArrayList<HiddenNeuron>();
+        outputNeurons = new ArrayList<OutputNeuron>();
        ANZAHL_INPUT_NEURONS = (Integer) obArray[2];
        ANZAHL_HIDDEN_ONE = (Integer) obArray[3];
        ANZAHL_HIDDEN_TWO = (Integer) obArray[4];
