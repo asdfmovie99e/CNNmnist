@@ -34,7 +34,13 @@ public class LoadController implements Initializable {
     private TableColumn saveNrCol ;
 
     @FXML
+    private CheckBox checkboxdelete;
+
+    @FXML
     private TableColumn genauigkeitCol ;
+
+    @FXML
+    private Label labelcheckbox;
 
     @FXML
     private Button loadbutton;
@@ -49,9 +55,19 @@ public class LoadController implements Initializable {
      */
     void clickdelete(ActionEvent event) {
 
-        WeightData selectedItem = table.getSelectionModel().getSelectedItem();
-        DBConnect.deleteRows(selectedItem.getSaveNr());
-        table.getItems().removeAll(table.getSelectionModel().getSelectedItem());
+        if (checkboxdelete.isSelected())
+        { WeightData selectedItem = table.getSelectionModel().getSelectedItem();
+            DBConnect.deleteRows(selectedItem.getSaveNr());
+            table.getItems().removeAll(table.getSelectionModel().getSelectedItem());
+            labelcheckbox.setVisible(false);}
+
+        else {
+
+            labelcheckbox.setVisible(true);
+
+        }
+
+
     }
 
 
@@ -63,9 +79,10 @@ public class LoadController implements Initializable {
      */
     //liest nr des ausgewählten Gewichtes aus
     void clickload(ActionEvent event) {
-       WeightData selectedItem = table.getSelectionModel().getSelectedItem();
+        WeightData selectedItem = table.getSelectionModel().getSelectedItem();
        NetworkController.loadDataFromDb(selectedItem.getSaveNr());
         Main.getLoadStage().close();
+
     }
 
 
