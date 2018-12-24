@@ -160,6 +160,8 @@ public class Controller {
             double x = event.getX() - size / 2;
             double y = event.getY() - size / 2;
             g.fill();
+            //eckig oder rund Schreiben
+            //g.fillRoundRect(x, y, size, size, size, size );
             g.fillRect(x, y, size, size);
 
         } );
