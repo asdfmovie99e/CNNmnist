@@ -35,7 +35,7 @@
         <Text layoutX="634.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0 =" />
         <Text layoutX="634.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" text="9 =" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#cfd8d8" height="200.0" layoutX="67.0" layoutY="85.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="200.0" />
-        <Canvas fx:id="canvas" height="196.0" layoutX="69.0" layoutY="87.0" width="196.0" AnchorPane.leftAnchor="69.0" AnchorPane.topAnchor="87.0">
+        <Canvas fx:id="canvas" height="28.0" layoutX="153.0" layoutY="171.0" scaleX="7.0" scaleY="7.0" width="28.0" AnchorPane.leftAnchor="153.0" AnchorPane.topAnchor="171.0">
             <cursor>
                 <Cursor fx:constant="DEFAULT" />
             </cursor>
