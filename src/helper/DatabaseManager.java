@@ -19,7 +19,7 @@ import java.sql.ResultSet;
  *
  */
 
-public class DBConnect {
+public class DatabaseManager {
 
     static final String jdbcDriver = "org.mariadb.jdbc.Driver";
     private static Connection connection;
@@ -34,7 +34,7 @@ public class DBConnect {
      * @param pass
      * @param port, diese Parameter sind notwendig um sich bei der Datenbank anmelden zu können.
      */
-    public static void connect(String url, String user, String pass, String port) throws Exception{
+    private static void connect(String url, String user, String pass, String port) throws Exception{
         try {
             Class.forName(jdbcDriver);
             connection = DriverManager.getConnection("jdbc:mysql://" + url + ":" + port + "/neuronaldata", user, pass);
@@ -62,10 +62,10 @@ public class DBConnect {
     /**
      * Prüfung ob eine bestehende Verbindung besteht.
      */
-    public static boolean isConnected(){
+    private static boolean isConnected(){
 
         try {
-            ResultSet rs = abfrage("SELECT 1;");
+            ResultSet rs = sendQuery("SELECT 1;");
             if (rs == null){
                 return false;
             }
@@ -83,7 +83,7 @@ public class DBConnect {
      * Wenn Verbindung besteht wird die Methode beendet und Programm fortgesetzt.
      * Wenn keine Verbindung besteht wird die Verbindung hergestellt und anschließend beendet.
      */
-    public static void checkConnection() {
+    private static void refreshConnection() {
         if (!isConnected()) {
             try {
                 connect(UserDatamanager.getDbUrl(),UserDatamanager.getDbUser(), UserDatamanager.getDbDecryptedPassword(), UserDatamanager.getDbPort());
@@ -94,7 +94,7 @@ public class DBConnect {
     }
 
     //Methode zur Abfrage aus der DB
-    public static ResultSet abfrage(String query) {
+    private static ResultSet sendQuery(String query) {
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -104,17 +104,6 @@ public class DBConnect {
         }
     }
 
-    //Methode zum Eintragen in die DB
-
-    public static boolean setEintrag(String query) {
-        try {
-            Statement stmt = connection.createStatement();
-            return stmt.execute(query);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
 
     /**
      * Es wird geprüft ob eine Verbindung besteht und falls notwendig eine Verbindung hergestellt.
@@ -124,7 +113,7 @@ public class DBConnect {
      */
     public static Integer[] getAllSaveNumbers() {
 
-        checkConnection();
+        refreshConnection();
         Statement stmt = null;
         ResultSet rs = null;
 
@@ -159,7 +148,7 @@ public class DBConnect {
      */
     public static Object[] getMainTableEntry(Integer SaveNr){
 
-        checkConnection();
+        refreshConnection();
         Statement stmt = null;
         ResultSet rs = null;
         Object result;
@@ -195,16 +184,13 @@ public class DBConnect {
      * Fragt ab ob eine Verbindung besteht und stellt wenn notwendig eine Verbindung her.
      * Füllt die angegebenen Parameter mit den übergebenenen Werten.
      */
-    public static void addMainTableEntry(Integer saveNr, Integer InputNeurons, Integer HiddenNeuronsOne,Integer HiddenNeuronsTwo, Integer HiddenNeuronsThree, Integer HiddenNeuronsFour,Integer HiddenNeuronsFive, Integer OutputNeurons, Double SuccessRate) {
-        /*
-        @params Sind selbsterklärend
-         */
+    public static void addMainTableEntry(Integer saveNr, Integer inputNeurons, Integer hiddenNeuronsOne,Integer hiddenNeuronsTwo, Integer outputNeurons, Double successRate) {
         Statement stmt = null;
         ResultSet rst = null;
-        checkConnection();
+        refreshConnection();
         try {
-            String s = "INSERT INTO maintable (SAVE_NR, INPUT_NEURON, HIDDEN_NEURON_ONE, HIDDEN_NEURON_TWO, HIDDEN_NEURON_THREE, HIDDEN_NEURON_FOUR, HIDDEN_NEURON_FIVE, OUTPUT_NEURON,ACCURACY) VALUES " +
-                    "(" + saveNr + "," + InputNeurons + "," + HiddenNeuronsOne + "," + HiddenNeuronsTwo + "," + HiddenNeuronsThree + "," + HiddenNeuronsFour + "," + HiddenNeuronsFive + "," + OutputNeurons + "," + SuccessRate +")" ;
+            String s = "INSERT INTO maintable (SAVE_NR, INPUT_NEURON, HIDDEN_NEURON_ONE, HIDDEN_NEURON_TWO, OUTPUT_NEURON, ACCURACY) VALUES " +
+                    "(" + saveNr + "," + inputNeurons + "," + hiddenNeuronsOne + "," + hiddenNeuronsTwo +  "," + outputNeurons + "," + successRate +")" ;
             stmt = connection.createStatement();
             rst = stmt.executeQuery(s);
             //  rst2 = stmt.executeQuery("INSERT INTO HIDDENLAYER")
@@ -215,29 +201,6 @@ public class DBConnect {
 
     }
 
-/*
-Fragt die Verbindung ab und stellt eine her wenn nötig.
-Befüllt die Zellen der Edgetabelle mit den übergebenen Parametern.
- */
-/*
-    public static void addEdge(Integer SaveNr,Integer LayerNumber,Integer EdgeNumber, Integer previousNeuronID, Integer nextNeuronID, Double Weight){
-
-        Statement stmt = null;
-        ResultSet rst = null;
-        checkConnection();
-
-        try {
-            String s = "INSERT INTO EDGETABLE (SAVE_NR, LAYER_NR, EDGE_NR, PRE_NEURON_IDENT, NEXT_NEURON_IDENT, WEIGHT) VALUES" +
-                    "( " + SaveNr +"," + LayerNumber + "," + EdgeNumber + "," + previousNeuronID + "," + nextNeuronID + "," + Weight + ")";
-            stmt = connection.createStatement();
-            rst = stmt.executeQuery(s);
-
-        } catch (SQLException e) {
-            return ;
-        }
-    }
-
-*/
 
     /**
      *
@@ -263,7 +226,7 @@ Befüllt die Zellen der Edgetabelle mit den übergebenen Parametern.
     }
 
 
-    public static Integer getEgeCountInLayer(Integer SaveNr, Integer Layernumber){
+    public static Integer getEgeCountInLayer(Integer SaveNr, Integer layerNumber){
         /*
         @params Die SaveNr und der Layernumber der zu zählenden Edges
         @return die anzahl der edges auf die das zutrifft
@@ -271,9 +234,9 @@ Befüllt die Zellen der Edgetabelle mit den übergebenen Parametern.
         Statement stmt = null;
         ResultSet rst = null;
         Integer result = null;
-        checkConnection();
+        refreshConnection();
         try {
-            String s = ("SELECT COUNT(EDGE_NR) AS EDGECOUNT FROM edgetable WHERE SAVE_NR = " + SaveNr + " and LAYER_NR = " + Layernumber);
+            String s = ("SELECT COUNT(EDGE_NR) AS EDGECOUNT FROM edgetable WHERE SAVE_NR = " + SaveNr + " and LAYER_NR = " + layerNumber);
             stmt = connection.createStatement();
             rst = stmt.executeQuery(s);
 
@@ -287,19 +250,17 @@ Befüllt die Zellen der Edgetabelle mit den übergebenen Parametern.
         return result;
     }
 
-    public static void deleteRows (Integer SaveNr){
+    public static void deleteSave(Integer SaveNr){
         Statement stmt1 = null;
-        ResultSet rst1 = null;
         Statement stmt2 = null;
-        ResultSet rst2 = null;
-        checkConnection();
+        refreshConnection();
         try {
             String s1 = "DELETE FROM maintable WHERE SAVE_NR =" + SaveNr;
             stmt1 = connection.createStatement();
-            rst1 = stmt1.executeQuery(s1);
+            stmt1.executeQuery(s1);
             String s2 = " DELETE FROM edgetable WHERE SAVE_NR =" + SaveNr;
             stmt2 = connection.createStatement();
-            rst2 = stmt2.executeQuery(s2);
+            stmt2.executeQuery(s2);
         }catch (SQLException e) {
             e.printStackTrace();
         }
@@ -309,7 +270,7 @@ Befüllt die Zellen der Edgetabelle mit den übergebenen Parametern.
 
         Statement stmt = null;
         ResultSet rs = null;
-        checkConnection();
+        refreshConnection();
         Object [][][] obArray = new Object[6][500000][3]; // MUSS NOCH ANGEPASST WERDE MIT MAX EDGES PER LAYER
         try {
             String s = "SELECT PRE_NEURON_IDENT, NEXT_NEURON_IDENT, WEIGHT, LAYER_NR, EDGE_NR FROM edgetable WHERE " +
@@ -351,7 +312,7 @@ Befüllt die Zellen der Edgetabelle mit den übergebenen Parametern.
     }
 
     public static void flushSaveCommand() {
-        checkConnection();
+        refreshConnection();
 
         try {
             Statement stmt = connection.createStatement();

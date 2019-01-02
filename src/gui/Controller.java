@@ -18,7 +18,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import main.Main;
 import main.NetworkController;
-import main.PictureCoder;
+import helper.PictureCoder;
 
 import javax.imageio.ImageIO;
 

@@ -1,7 +1,7 @@
 package gui;
 
 
-import helper.DBConnect;
+import helper.DatabaseManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -71,7 +71,7 @@ public class PasswordController {
         }
 
         try {
-            DBConnect.checkCredentials();
+            DatabaseManager.checkCredentials();
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -11,12 +11,12 @@ import java.util.HashSet;
  *
  */
 public abstract class Neuron {
-    protected double lastInputValue = 0;
-    protected double lastOutputValue = 0;
-    protected double lastSmallDelta;
-    protected HashSet<Edge> incomingEdges = new HashSet<Edge>();
-    protected HashSet<Edge> outgoingEdges = new HashSet<Edge>();
-    protected int identNumber;
+    double lastInputValue = 0;
+    double lastOutputValue = 0;
+    double lastSmallDelta;
+    HashSet<Edge> incomingEdges = new HashSet<Edge>();
+    HashSet<Edge> outgoingEdges = new HashSet<Edge>();
+    int identNumber;
 
     /**
      * Ein Neuron wird mit einer Identifikationsnummer initialisert, die eindeutig pro Schicht sein muss.

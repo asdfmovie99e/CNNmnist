@@ -1,7 +1,9 @@
 package main;
 
-import helper.DBConnect;
+import helper.DatabaseManager;
 import helper.LearnObserver;
+import helper.PictureCoder;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -18,11 +20,11 @@ import java.util.HashSet;
  */
 public class NetworkController {
 
-    private static int ANZAHL_INPUT_NEURONS = 28 * 28;
-    private static int ANZAHL_HIDDEN_ONE = 784;
-    private static int ANZAHL_HIDDEN_TWO = 105;
-    private static int ANZAHL_OUTPUT_NEURON = 10;
-    public static final double EPSILON = 0.032d;
+    private static int anzahlInputNeurons = 28 * 28;
+    private static int anzahlHiddenOne = 784;
+    private static int anzahlHiddenTwo = 105;
+    private static int anzahlOutputNeuron = 10;
+    public static double epsilon = 0.032d;
     private static final int ANZAHL_BILDER = 60000;
     private static ArrayList<InputNeuron> inputNeurons = new ArrayList<InputNeuron>();
     private static ArrayList<HiddenNeuron> hiddenNeuronsOne = new ArrayList<HiddenNeuron>();
@@ -90,14 +92,11 @@ public class NetworkController {
      */
     private static void instantiateEdges() {
         if(inputNeurons.get(0).outgoingEdges.size()> 0) return; // bricht hier ab falls es schon edges gibt
-        InputNeuron[] inputNeuronsArray =  inputNeurons.toArray(new InputNeuron[inputNeurons.size()]);
         HiddenNeuron[] hiddenNeuronsOneArray = hiddenNeuronsOne.toArray(new HiddenNeuron[hiddenNeuronsOne.size()]);
 
         for(InputNeuron inputNeuron: inputNeurons){
-            int debugNr = inputNeuron.getIdentNumber(); // DELETE!! ONLY FOR DEBUG PURPOSES
             for(int x = -1; x <= 1; x++){
                 for(int y = -1; y <= 1; y++){
-                    int inputNr = inputNeuron.getIdentNumber();
                     int targetNr = inputNeuron.getIdentNumber() + x + y * 28;
                     if(targetNr < 0 || targetNr >= 28 * 28 || (targetNr % 28 == 0 && x == 1) || (targetNr % 28 == 27 && x== -1)){
                         continue;
@@ -125,19 +124,19 @@ public class NetworkController {
      */
     private static void instantiateNeurons() {
         if(inputNeurons.size() > 0) return; // falls die neuronen schon existerien  passiert hier nichts
-        for(int i = 0; i < ANZAHL_INPUT_NEURONS; i++){
+        for(int i = 0; i < anzahlInputNeurons; i++){
             InputNeuron inputNeuron = new InputNeuron(i);
             inputNeurons.add(inputNeuron);
         }
-        for(int i = 0; i < ANZAHL_HIDDEN_ONE; i++){
+        for(int i = 0; i < anzahlHiddenOne; i++){
             HiddenNeuron hiddenNeuron = new HiddenNeuron(i);
             hiddenNeuronsOne.add(hiddenNeuron);
         }
-        for(int i = 0; i < ANZAHL_HIDDEN_TWO; i++){
+        for(int i = 0; i < anzahlHiddenTwo; i++){
             HiddenNeuron hiddenNeuron = new HiddenNeuron(i);
             hiddenNeuronsTwo.add(hiddenNeuron);
         }
-        for(int i = 0; i < ANZAHL_OUTPUT_NEURON; i++){
+        for(int i = 0; i < anzahlOutputNeuron; i++){
             OutputNeuron outputNeuron = new OutputNeuron(i);
             outputNeurons.add(outputNeuron);
         }
@@ -183,20 +182,20 @@ public class NetworkController {
      */
     private static void saveCurrentNetwork(){
         //Freie Save Nummer finden
-        Integer[] occupiedSaveNumbers = DBConnect.getAllSaveNumbers();
+        Integer[] occupiedSaveNumbers = DatabaseManager.getAllSaveNumbers();
         Integer saveNr = 0;
         while(Arrays.asList(occupiedSaveNumbers).contains(saveNr)){
             saveNr++;
         }
         //in den Haupttable Schreiben
-        DBConnect.addMainTableEntry(saveNr, ANZAHL_INPUT_NEURONS,ANZAHL_HIDDEN_ONE,ANZAHL_HIDDEN_TWO,
+        DatabaseManager.addMainTableEntry(saveNr, anzahlInputNeurons, anzahlHiddenOne, anzahlHiddenTwo,
                                     0, 0, 0,
-                                    ANZAHL_OUTPUT_NEURON,LearnObserver.getSuccesRate());
+                anzahlOutputNeuron,LearnObserver.getSuccesRate());
         Integer edgeNumber = 0;
         for(InputNeuron inputNeuron:inputNeurons){
             HashSet<Edge> outgoingEdges = inputNeuron.getOutgoingEdges();
             for(Edge edge: outgoingEdges){
-                DBConnect.addEdge(saveNr, 0,edgeNumber,edge.getPreviousNeuron().getIdentNumber(), edge.getNextNeuron().getIdentNumber(), edge.getCurrentWeight());
+                DatabaseManager.addEdge(saveNr, 0,edgeNumber,edge.getPreviousNeuron().getIdentNumber(), edge.getNextNeuron().getIdentNumber(), edge.getCurrentWeight());
                 edgeNumber++;
             }
         }
@@ -204,7 +203,7 @@ public class NetworkController {
         for(HiddenNeuron hiddenNeuronOne: hiddenNeuronsOne){
             HashSet<Edge> outgoingEdges = hiddenNeuronOne.getOutgoingEdges();
             for(Edge edge: outgoingEdges){
-                DBConnect.addEdge(saveNr,1,edgeNumber,edge.getPreviousNeuron().getIdentNumber(), edge.getNextNeuron().getIdentNumber(), edge.getCurrentWeight());
+                DatabaseManager.addEdge(saveNr,1,edgeNumber,edge.getPreviousNeuron().getIdentNumber(), edge.getNextNeuron().getIdentNumber(), edge.getCurrentWeight());
                 edgeNumber++;
             }
         }
@@ -212,13 +211,13 @@ public class NetworkController {
         for(HiddenNeuron hiddenNeuronTwo: hiddenNeuronsTwo){
             HashSet<Edge> outgoingEdges = hiddenNeuronTwo.getOutgoingEdges();
             for(Edge edge: outgoingEdges){
-                DBConnect.addEdge(saveNr,2,edgeNumber,edge.getPreviousNeuron().getIdentNumber(), edge.getNextNeuron().getIdentNumber(), edge.getCurrentWeight());
+                DatabaseManager.addEdge(saveNr,2,edgeNumber,edge.getPreviousNeuron().getIdentNumber(), edge.getNextNeuron().getIdentNumber(), edge.getCurrentWeight());
                 edgeNumber++;
             }
         }
 
 
-    DBConnect.flushSaveCommand();
+    DatabaseManager.flushSaveCommand();
     }
 
     /**
@@ -227,37 +226,37 @@ public class NetworkController {
      */
     public static void loadDataFromDb (Integer saveNr)
     {
-       Object[] obArray = DBConnect.getMainTableEntry(saveNr);
+       Object[] obArray = DatabaseManager.getMainTableEntry(saveNr);
         inputNeurons = new ArrayList<InputNeuron>();
         hiddenNeuronsOne = new ArrayList<HiddenNeuron>();
         hiddenNeuronsTwo = new ArrayList<HiddenNeuron>();
         outputNeurons = new ArrayList<OutputNeuron>();
-       ANZAHL_INPUT_NEURONS = (Integer) obArray[2];
-       ANZAHL_HIDDEN_ONE = (Integer) obArray[3];
-       ANZAHL_HIDDEN_TWO = (Integer) obArray[4];
-       ANZAHL_OUTPUT_NEURON = (Integer) obArray[8];
-        for(int i = 0; i < ANZAHL_INPUT_NEURONS; i++){
+       anzahlInputNeurons = (Integer) obArray[2];
+       anzahlHiddenOne = (Integer) obArray[3];
+       anzahlHiddenTwo = (Integer) obArray[4];
+       anzahlOutputNeuron = (Integer) obArray[8];
+        for(int i = 0; i < anzahlInputNeurons; i++){
             InputNeuron inputNeuron = new InputNeuron(i);
             inputNeurons.add(inputNeuron);
         }
-        for(int i = 0; i < ANZAHL_HIDDEN_ONE; i++){
+        for(int i = 0; i < anzahlHiddenOne; i++){
             HiddenNeuron hiddenNeuron = new HiddenNeuron(i);
             hiddenNeuronsOne.add(hiddenNeuron);
         }
-        for(int i = 0; i < ANZAHL_HIDDEN_TWO; i++){
+        for(int i = 0; i < anzahlHiddenTwo; i++){
             HiddenNeuron hiddenNeuron = new HiddenNeuron(i);
             hiddenNeuronsTwo.add(hiddenNeuron);
         }
-        for(int i = 0; i < ANZAHL_OUTPUT_NEURON; i++){
+        for(int i = 0; i < anzahlOutputNeuron; i++){
             OutputNeuron outputNeuron = new OutputNeuron(i);
             outputNeurons.add(outputNeuron);
         }
-        Integer layerZeroEdgeCount = DBConnect.getEgeCountInLayer(saveNr, 0);
-        Integer layerOneEdgeCount = DBConnect.getEgeCountInLayer(saveNr, 1);
-        Integer layerTwoEdgeCount = DBConnect.getEgeCountInLayer(saveNr, 2);
+        Integer layerZeroEdgeCount = DatabaseManager.getEgeCountInLayer(saveNr, 0);
+        Integer layerOneEdgeCount = DatabaseManager.getEgeCountInLayer(saveNr, 1);
+        Integer layerTwoEdgeCount = DatabaseManager.getEgeCountInLayer(saveNr, 2);
 
         for(int edgeNumber = 0; edgeNumber < layerZeroEdgeCount; edgeNumber++){
-            Object[] edgeValues = DBConnect.getEdgeEntry(saveNr,0, edgeNumber);
+            Object[] edgeValues = DatabaseManager.getEdgeEntry(saveNr,0, edgeNumber);
             Neuron preNeuron = inputNeurons.get((Integer) edgeValues[0]);
             Neuron nextNeuron = hiddenNeuronsOne.get((Integer) edgeValues[1]);
             Double weight = (Double) edgeValues[2];
@@ -266,7 +265,7 @@ public class NetworkController {
         }
 
         for(int edgeNumber = 0; edgeNumber < layerOneEdgeCount; edgeNumber++){
-            Object[] edgeValues = DBConnect.getEdgeEntry(saveNr,1, edgeNumber);
+            Object[] edgeValues = DatabaseManager.getEdgeEntry(saveNr,1, edgeNumber);
             Neuron preNeuron = hiddenNeuronsOne.get((Integer) edgeValues[0]);
             Neuron nextNeuron = hiddenNeuronsTwo.get((Integer) edgeValues[1]);
             Double weight = (Double) edgeValues[2];
@@ -275,7 +274,7 @@ public class NetworkController {
         }
 
         for(int edgeNumber = 0; edgeNumber < layerTwoEdgeCount; edgeNumber++){
-            Object[] edgeValues = DBConnect.getEdgeEntry(saveNr,2, edgeNumber);
+            Object[] edgeValues = DatabaseManager.getEdgeEntry(saveNr,2, edgeNumber);
             Neuron preNeuron = hiddenNeuronsTwo.get((Integer) edgeValues[0]);
             Neuron nextNeuron = outputNeurons.get((Integer) edgeValues[1]);
             Double weight = (Double) edgeValues[2];

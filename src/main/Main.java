@@ -3,8 +3,7 @@ package main;
 import gui.Controller;
 import gui.LoadController;
 import gui.PasswordController;
-import helper.DBConnect;
-import helper.MathHelper;
+import helper.DatabaseManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -55,7 +54,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
 
-      // Integer[] test =  DBConnect.getAllSaveNumbers();
+        DatabaseManager.close();
         System.exit(1);
     }
 

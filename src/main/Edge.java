@@ -9,10 +9,10 @@ package main;
  *
  */
 public class Edge {
-    protected double currentWeight;
-    protected double lastInputValue;
-    protected Neuron previousNeuron;
-    protected Neuron nextNeuron;
+    private double currentWeight;
+    private double lastInputValue;
+    private Neuron previousNeuron;
+    private Neuron nextNeuron;
 
     /**
      * @param previousNeuron Das Neuron, von welchem die Kante ausgeht.
@@ -66,7 +66,7 @@ public class Edge {
      */
     public void modWeight(Double smallDelta, Double ableitung) {
         double edgeInput = previousNeuron.getLastOutputValue();
-        Double bigDelta = smallDelta * ableitung * NetworkController.EPSILON * edgeInput;
+        Double bigDelta = smallDelta * ableitung * NetworkController.epsilon * edgeInput;
         currentWeight += bigDelta;
     }
 

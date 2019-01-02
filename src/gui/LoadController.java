@@ -3,7 +3,7 @@ package gui;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import helper.DBConnect;
+import helper.DatabaseManager;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -57,7 +57,7 @@ public class LoadController implements Initializable {
 
         if (checkboxdelete.isSelected())
         { WeightData selectedItem = table.getSelectionModel().getSelectedItem();
-            DBConnect.deleteRows(selectedItem.getSaveNr());
+            DatabaseManager.deleteSave(selectedItem.getSaveNr());
             table.getItems().removeAll(table.getSelectionModel().getSelectedItem());
             labelcheckbox.setVisible(false);}
 
@@ -117,12 +117,12 @@ public class LoadController implements Initializable {
      * Laedt Daten fuer die Tabelle und fuehrt dann addEntry aus.
      */
     private void putDBEntrysToTable() {
-      Integer nrlength = DBConnect.getAllSaveNumbers().length;
-      Integer [] savednr = DBConnect.getAllSaveNumbers();
+      Integer nrlength = DatabaseManager.getAllSaveNumbers().length;
+      Integer [] savednr = DatabaseManager.getAllSaveNumbers();
 
       for (Integer i = 0; i < nrlength; i++)
       {
-        Object [] tableEntry = DBConnect.getMainTableEntry(savednr[i]);
+        Object [] tableEntry = DatabaseManager.getMainTableEntry(savednr[i]);
         Integer nr = (Integer) tableEntry[0];
         double succesrate = (Double) tableEntry [1];
         addEntry(nr, succesrate);
