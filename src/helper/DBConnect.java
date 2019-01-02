@@ -10,6 +10,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 
+/**
+ * Die Klasse zur Steuerung der Datenbank Ein- und Ausgaben
+ * @author Jens Krüger
+ * @author Niklas Bruns
+ * @author Marc Seibel
+ * @version 1.0
+ *
+ */
+
 public class DBConnect {
 
     static final String jdbcDriver = "org.mariadb.jdbc.Driver";
@@ -18,7 +27,13 @@ public class DBConnect {
     private static String bufferedSaveCommand = null;
     private static Integer bufferedLoadSaveNr = null;
 
-    //Methode zum verbinden
+    /**
+     * Erstellt eine Verbindung zur Datenbank.
+     * @param url ist die Adresse zur Datenbank.
+     * @param user
+     * @param pass
+     * @param port, diese Parameter sind notwendig um sich bei der Datenbank anmelden zu können.
+     */
     public static void connect(String url, String user, String pass, String port) throws Exception{
         try {
             Class.forName(jdbcDriver);
@@ -30,7 +45,9 @@ public class DBConnect {
         }
     }
 
-    //Methode zum trennen
+    /**
+     * Diese Methode meldet dich von der Datenbank ab.
+     */
     public static void close(){
         if (connection != null) {
             try {
@@ -41,7 +58,10 @@ public class DBConnect {
         }
     }
 
-    //Methode zum prüfen einer bestehenden Verbindung
+
+    /**
+     * Prüfung ob eine bestehende Verbindung besteht.
+     */
     public static boolean isConnected(){
 
         try {
@@ -58,6 +78,11 @@ public class DBConnect {
         }
     }
 
+    /**
+     * Anfangs wird geprüft ob eine Verbindung besteht.
+     * Wenn Verbindung besteht wird die Methode beendet und Programm fortgesetzt.
+     * Wenn keine Verbindung besteht wird die Verbindung hergestellt und anschließend beendet.
+     */
     public static void checkConnection() {
         if (!isConnected()) {
             try {
@@ -91,10 +116,14 @@ public class DBConnect {
         }
     }
 
+    /**
+     * Es wird geprüft ob eine Verbindung besteht und falls notwendig eine Verbindung hergestellt.
+     * Darauf folgt die Abfrage aller Save_NR aus der Maintable aus der Datenbank.
+     * Das Ergebnis der Abfrage wird in einem Array gespeichert.
+     * @return gibt alle Save_Nr aus dem Array aus.
+     */
     public static Integer[] getAllSaveNumbers() {
-        /*
-        @return Gibt ein Array mit allen SaveNummern aus.
-         */
+
         checkConnection();
         Statement stmt = null;
         ResultSet rs = null;
@@ -121,12 +150,15 @@ public class DBConnect {
         }
     }
 
+    /**
+     * Prüft Verbindung und erstellt falls notwendig eine Verbindung.
+     * Erstellt dann ein Objektarray.
+     * Fragt eine konkrete Spalte ab bei der die übergebene Save_NR zutrifft.
+     * @param SaveNr ist das Auswahlkriterium der auszugebenden Spalte
+     * @return gibt ein Objektarray aus mit der abgefragten Spalte aus.
+     */
     public static Object[] getMainTableEntry(Integer SaveNr){
-        /*
-        @params Die SaveNr des Standes der ausgegeben werden soll
-        @return Es wird ein ObjectArray ausgegeben mit [Save_Nr, Input_Neuron, Hidden_Neuron_One,...HiddenNeuronFive, OutputNeuron, SuccessRate]
-                Alles ist Integer, ausser SuccessRate, das ist Double
-        */
+
         checkConnection();
         Statement stmt = null;
         ResultSet rs = null;
@@ -159,6 +191,10 @@ public class DBConnect {
         return null;
     }
 
+    /**
+     * Fragt ab ob eine Verbindung besteht und stellt wenn notwendig eine Verbindung her.
+     * Füllt die angegebenen Parameter mit den übergebenenen Werten.
+     */
     public static void addMainTableEntry(Integer saveNr, Integer InputNeurons, Integer HiddenNeuronsOne,Integer HiddenNeuronsTwo, Integer HiddenNeuronsThree, Integer HiddenNeuronsFour,Integer HiddenNeuronsFive, Integer OutputNeurons, Double SuccessRate) {
         /*
         @params Sind selbsterklärend
@@ -178,6 +214,11 @@ public class DBConnect {
         }
 
     }
+
+/*
+Fragt die Verbindung ab und stellt eine her wenn nötig.
+Befüllt die Zellen der Edgetabelle mit den übergebenen Parametern.
+ */
 /*
     public static void addEdge(Integer SaveNr,Integer LayerNumber,Integer EdgeNumber, Integer previousNeuronID, Integer nextNeuronID, Double Weight){
 
@@ -198,6 +239,13 @@ public class DBConnect {
 
 */
 
+    /**
+     *
+     * @param saveNr
+     * @param layerNumber
+     * @param edgeNumber
+     * @return
+     */
     public static Object[] getEdgeEntry(Integer saveNr, Integer layerNumber, Integer edgeNumber){
         if(bufferedLoadSaveNr == null || bufferedLoadSaveNr != saveNr){
             prepareSave(saveNr);
