@@ -189,8 +189,7 @@ public class NetworkController {
         }
         //in den Haupttable Schreiben
         DatabaseManager.addMainTableEntry(saveNr, anzahlInputNeurons, anzahlHiddenOne, anzahlHiddenTwo,
-                                    0, 0, 0,
-                anzahlOutputNeuron,LearnObserver.getSuccesRate());
+                                            anzahlOutputNeuron,LearnObserver.getSuccesRate());
         Integer edgeNumber = 0;
         for(InputNeuron inputNeuron:inputNeurons){
             HashSet<Edge> outgoingEdges = inputNeuron.getOutgoingEdges();
