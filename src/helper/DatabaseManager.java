@@ -30,8 +30,8 @@ public class DatabaseManager {
     /**
      * Erstellt eine Verbindung zur Datenbank.
      * @param url ist die Adresse zur Datenbank.
-     * @param user
-     * @param pass
+     * @param user Benutzerkennung der Datenbank,
+     * @param pass Passwort zur Benutzerkennung,
      * @param port, diese Parameter sind notwendig um sich bei der Datenbank anmelden zu können.
      */
     private static void connect(String url, String user, String pass, String port) throws Exception{
@@ -60,7 +60,7 @@ public class DatabaseManager {
 
 
     /**
-     * Prüfung ob eine bestehende Verbindung besteht.
+     * Prüfung ob eine bestehende Verbindung vorhanden ist.
      */
     private static boolean isConnected(){
 
@@ -93,7 +93,12 @@ public class DatabaseManager {
         }
     }
 
-    //Methode zur Abfrage aus der DB
+    /**
+     * Die Methode stellt die Abfrage aus der Datenbank zur Verfügung.
+      * @param query ist der SQL - Befehl der übergeben wird.
+     * @return Es wird dann ein ResultSet zurückgegeben, welches einem Tabellenausschnitt entspricht,
+     * oder im Falle der Exception wird nichts zurückgegeben.
+     */
     private static ResultSet sendQuery(String query) {
         try {
             Statement stmt = connection.createStatement();
@@ -143,7 +148,7 @@ public class DatabaseManager {
      * Prüft Verbindung und erstellt falls notwendig eine Verbindung.
      * Erstellt dann ein Objektarray.
      * Fragt eine konkrete Spalte ab bei der die übergebene Save_NR zutrifft.
-     * @param SaveNr ist das Auswahlkriterium der auszugebenden Spalte
+     * @param SaveNr ist die Nummer des Speicherstandes der geladen werden soll.
      * @return gibt ein Objektarray aus mit der abgefragten Spalte aus.
      */
     public static Object[] getMainTableEntry(Integer SaveNr){
@@ -183,6 +188,12 @@ public class DatabaseManager {
     /**
      * Fragt ab ob eine Verbindung besteht und stellt wenn notwendig eine Verbindung her.
      * Füllt die angegebenen Parameter mit den übergebenenen Werten.
+     * @param saveNr ist die Nummer des Speicherstandes der geladen werden soll.
+     * @param inputNeurons gibt an welches Neuron den Hiddenschichten den Wert übergibt.
+     * @param hiddenNeuronsOne ist die erste Schicht durch welche die Neuronen durchlaufen.
+     * @param hiddenNeuronsTwo ist die zweite Schicht durch welche die Neuronen durchlaufen.
+     * @param outputNeurons ist das Neuron, welches die Information beinhält welche Zahl erkannt wurde.
+     * @param successRate gibt die Erfolgsrate der Zahlenerkennung an.
      */
     public static void addMainTableEntry(Integer saveNr, Integer inputNeurons, Integer hiddenNeuronsOne,Integer hiddenNeuronsTwo, Integer outputNeurons, Double successRate) {
         Statement stmt = null;
@@ -204,10 +215,10 @@ public class DatabaseManager {
 
     /**
      *
-     * @param saveNr
-     * @param layerNumber
-     * @param edgeNumber
-     * @return
+     * @param saveNr ist die Nummer des Speicherstandes der geladen werden soll.
+     * @param layerNumber beschreibt die Nummer, in welcher Schicht das Neuron sich befindet.
+     * @param edgeNumber beschreibt die Anzahl an Kanten.
+     * @return gibt ein Objektarray aus, in dem die Layernumber und Edgenumber beinhält.
      */
     public static Object[] getEdgeEntry(Integer saveNr, Integer layerNumber, Integer edgeNumber){
         if(bufferedLoadSaveNr == null || bufferedLoadSaveNr != saveNr){
@@ -220,17 +231,23 @@ public class DatabaseManager {
         return edge;
     }
 
-
+    /**
+     * Die Methode holt sich die Anmeldeinformationen aus dem Anmeldefenster der GUI und loggt sich über die
+     * connect() ein.
+     * @throws Exception wirft eine Fehlermeldung, wenn die Informationen nicht empfangen werden können.
+     */
     public static void checkCredentials() throws Exception{
         connect(UserDatamanager.getDbUrl(),UserDatamanager.getDbUser(), UserDatamanager.getDbDecryptedPassword(), UserDatamanager.getDbPort());
     }
 
-
+    /**
+     * Es werden die Kanten gezählt auf welche die Parameter zutreffen.
+     * @param SaveNr ist die Nummer des Speicherstandes der geladen werden soll.
+     * @param layerNumber beschreibt die Nummer, in welcher Schicht das Neuron sich befindet.
+     * @return gibt die Anzahl von Kanten aus, welche die angegebene SaveNr und Layernumber haben.
+     */
     public static Integer getEgeCountInLayer(Integer SaveNr, Integer layerNumber){
-        /*
-        @params Die SaveNr und der Layernumber der zu zählenden Edges
-        @return die anzahl der edges auf die das zutrifft
-         */
+
         Statement stmt = null;
         ResultSet rst = null;
         Integer result = null;
@@ -250,6 +267,10 @@ public class DatabaseManager {
         return result;
     }
 
+    /**
+     * Es werden aus beiden Tabellen der Datenbank die Zeilen gelöscht, bei denen die Übergebene SaveNr zutrifft
+     * @param SaveNr ist die Nummer des Speicherstandes der geladen werden soll.
+     */
     public static void deleteSave(Integer SaveNr){
         Statement stmt1 = null;
         Statement stmt2 = null;
@@ -266,6 +287,11 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * Gibt alle Information aus der Edgetabelle zur übergebenen SaveNr aus und weißt aus dem ResultSet
+     * den zugehörigen Wert zu.
+     * @param saveNr ist die Nummer des Speicherstandes der geladen werden soll.
+     */
     public static void prepareSave(Integer saveNr){
 
         Statement stmt = null;
@@ -297,6 +323,16 @@ public class DatabaseManager {
         bufferedLoadSaveNr = saveNr;
     }
 
+    /**
+     * Es werden sofern keine Werte in der Datenbank vorhanden, erstmal alle Werte befüllt und anschließend
+     * alle 10.000 Daten ein String ohne Abfrage bereitgestellt um die Abfragezeit zu verkürzen.
+     * @param saveNr ist die Nummer des Speicherstandes der geladen werden soll.
+     * @param layerNumber beschreibt die Nummer, in welcher Schicht das Neuron sich befindet.
+     * @param edgeNumber beschreibt die Anzahl an Kanten.
+     * @param previousNeuronID ist die eindeutige Identifikationsnummer des eingegangen Neurons.
+     * @param nextNeuronID ist die eindeutige Indentifikationsnummer des Neurons welches die Information erhält.
+     * @param weight ist die
+     */
     public static void addEdge(Integer saveNr,Integer layerNumber,Integer edgeNumber, Integer previousNeuronID, Integer nextNeuronID, Double weight){
         String startString = "insert into edgetable (SAVE_NR, LAYER_NR, EDGE_NR, PRE_NEURON_IDENT, NEXT_NEURON_IDENT, WEIGHT) VALUES ";
         if(bufferedSaveCommand == null){
@@ -311,6 +347,10 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * Verkürzt die Ladezeit in dem ein String mit einer bestimmten Anzahl an Daten befüllt und bereits
+     * vor Abfrage bereitgestellt wird.
+     */
     public static void flushSaveCommand() {
         refreshConnection();
 
