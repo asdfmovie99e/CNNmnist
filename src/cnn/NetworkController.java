@@ -1,4 +1,4 @@
-package main;
+package cnn;
 
 import helper.DatabaseManager;
 import helper.LearnObserver;

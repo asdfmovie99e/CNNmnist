@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="324.0" prefWidth="253.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LoadController">
+<AnchorPane id="AnchorPane" prefHeight="324.0" prefWidth="253.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.LoadController">
     <children>
         <Label fx:id="labelcheckbox" layoutX="17.0" layoutY="301.0" minHeight="16" minWidth="69" prefHeight="18.0" prefWidth="223.0" text="Checkbox zum löschen auswählen" textFill="#f00808" visible="false">
          <font>

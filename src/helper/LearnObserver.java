@@ -1,6 +1,6 @@
 package helper;
 
-import main.OutputNeuron;
+import cnn.OutputNeuron;
 
 import java.util.ArrayList;
 import java.util.stream.IntStream;

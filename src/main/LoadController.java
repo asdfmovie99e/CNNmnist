@@ -1,4 +1,4 @@
-package gui;
+package main;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,8 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import main.Main;
-import main.NetworkController;
+import cnn.NetworkController;
 
 /**
  * Die Controllerklasse fuer die LoadGui (guidbLoad.fxml)

@@ -1,4 +1,4 @@
-package gui;
+package main;
 
 
 
@@ -16,8 +16,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import main.Main;
-import main.NetworkController;
+import cnn.NetworkController;
 import helper.PictureCoder;
 
 import javax.imageio.ImageIO;
@@ -207,7 +206,7 @@ public class Controller {
 
         Parent root = null;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/guidbLoad.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("guidbLoad.fxml"));
             root = loader.load();
             Stage loadStage = new Stage();
             loadStage.setTitle("Zahlenerkennung");

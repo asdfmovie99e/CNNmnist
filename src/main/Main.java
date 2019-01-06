@@ -1,8 +1,6 @@
 package main;
 
-import gui.Controller;
-import gui.LoadController;
-import gui.PasswordController;
+
 import helper.DatabaseManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -35,7 +33,7 @@ public class Main extends Application {
      * @param passwordStage Wird von JavaFX automatisch übergeben.
      */
     public void start(Stage passwordStage) throws Exception{
-        FXMLLoader loader =new FXMLLoader(getClass().getResource("../gui/GUIPassword.fxml"));
+        FXMLLoader loader =new FXMLLoader(getClass().getResource("GUIPassword.fxml"));
         root = loader.load();
         passwordStage.setTitle("Zahlenerkennung");
         passwordStage.setScene(new Scene(root, 380, 240));

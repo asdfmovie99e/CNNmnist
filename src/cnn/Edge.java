@@ -1,4 +1,4 @@
-package main;
+package cnn;
 
 /**
  * Repräsentiert eine Kante zwischen 2 Neuronen

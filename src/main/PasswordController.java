@@ -1,4 +1,4 @@
-package gui;
+package main;
 
 
 import helper.DatabaseManager;
@@ -103,7 +103,7 @@ public class PasswordController {
         Main.getPasswordStage().close();
         Parent root = null;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/GUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI.fxml"));
             root = loader.load();
             Stage mainStage = new Stage();
             mainStage.setTitle("Zahlenerkennung");

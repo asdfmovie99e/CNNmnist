@@ -1,4 +1,4 @@
-package main;
+package cnn;
 
 /**
  * Ein Neuron, welches keine Vorgängerneuron hat und direkt von der NetworkController Klasse angesprochen wird.
