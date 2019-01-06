@@ -156,13 +156,13 @@ public class Controller {
     void initialize() {
         GraphicsContext g = canvas.getGraphicsContext2D();
         canvas.setOnMouseDragged(event ->{
-            double size = 2 ;
+            double size = 15 ;
             double x = event.getX() - size / 2;
             double y = event.getY() - size / 2;
-            g.fill();
+            //g.fill();
             //eckig oder rund Schreiben
-            //g.fillRoundRect(x, y, size, size, size, size );
-            g.fillRect(x, y, size, size);
+            g.fillRoundRect(x, y, size, size, size, size );
+            //g.fillRect(x, y, size, size);
 
         } );
 

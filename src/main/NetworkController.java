@@ -22,9 +22,9 @@ public class NetworkController {
 
     private static int anzahlInputNeurons = 28 * 28;
     private static int anzahlHiddenOne = 784;
-    private static int anzahlHiddenTwo = 105;
+    private static int anzahlHiddenTwo = 100;
     private static int anzahlOutputNeuron = 10;
-    public static double epsilon = 0.032d;
+    public static double epsilon = 0.036d;
     private static final int ANZAHL_BILDER = 60000;
     private static ArrayList<InputNeuron> inputNeurons = new ArrayList<InputNeuron>();
     private static ArrayList<HiddenNeuron> hiddenNeuronsOne = new ArrayList<HiddenNeuron>();
