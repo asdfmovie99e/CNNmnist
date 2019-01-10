@@ -325,14 +325,14 @@ public class DatabaseManager {
     }
 
     /**
-     * Es werden sofern keine Werte in der Datenbank vorhanden, erstmal alle Werte befüllt und anschließend
-     * alle 10.000 Daten ein String ohne Abfrage bereitgestellt um die Abfragezeit zu verkürzen.
+     * Es werden sofern keine Werte in der Datenbank vorhanden sind,wird der SQL-Befehl gestartet und Werte befüllt.
+     * Anschließend wird alle 10.000 Daten ein String bereitgestellt um die Abfragezeit zu verkürzen.
      * @param saveNr ist die Nummer des Speicherstandes der geladen werden soll.
      * @param layerNumber beschreibt die Nummer, in welcher Schicht das Neuron sich befindet.
      * @param edgeNumber beschreibt die Anzahl an Kanten.
      * @param previousNeuronID ist die eindeutige Identifikationsnummer des eingegangen Neurons.
      * @param nextNeuronID ist die eindeutige Indentifikationsnummer des Neurons welches die Information erhält.
-     * @param weight ist die
+     * @param weight ist die Gewichtung der Kanten
      */
     public static void addEdge(Integer saveNr,Integer layerNumber,Integer edgeNumber, Integer previousNeuronID, Integer nextNeuronID, Double weight){
         String startString = "insert into edgetable (SAVE_NR, LAYER_NR, EDGE_NR, PRE_NEURON_IDENT, NEXT_NEURON_IDENT, WEIGHT) VALUES ";
@@ -363,5 +363,4 @@ public class DatabaseManager {
             return ;
         }
     }
-
 }
