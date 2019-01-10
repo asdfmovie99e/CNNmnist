@@ -358,7 +358,7 @@ public class DatabaseManager {
             stmt.executeQuery(bufferedSaveCommand);
             bufferedSaveCommand = null;
         } catch (SQLException e) {
-            return ;
+            e.printStackTrace();
         }
     }
 }
