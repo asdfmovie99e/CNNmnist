@@ -198,13 +198,12 @@ public class DatabaseManager {
      */
     public static void addMainTableEntry(Integer saveNr, Integer inputNeurons, Integer hiddenNeuronsOne,Integer hiddenNeuronsTwo, Integer outputNeurons, Double successRate) {
         Statement stmt = null;
-        ResultSet rst = null;
         refreshConnection();
         try {
             String s = "INSERT INTO maintable (SAVE_NR, INPUT_NEURON, HIDDEN_NEURON_ONE, HIDDEN_NEURON_TWO, OUTPUT_NEURON, ACCURACY) VALUES " +
                     "(" + saveNr + "," + inputNeurons + "," + hiddenNeuronsOne + "," + hiddenNeuronsTwo +  "," + outputNeurons + "," + successRate +")" ;
             stmt = connection.createStatement();
-            rst = stmt.executeQuery(s);
+            stmt.executeQuery(s);
         } catch (Exception e) {
             e.printStackTrace();
 
