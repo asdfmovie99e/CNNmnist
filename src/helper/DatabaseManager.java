@@ -298,7 +298,7 @@ public class DatabaseManager {
         Statement stmt = null;
         ResultSet rs = null;
         refreshConnection();
-        Object [][][] obArray = new Object[6][500000][3]; // MUSS NOCH ANGEPASST WERDE MIT MAX EDGES PER LAYER
+        Object [][][] obArray = new Object[6][235200][3]; // MUSS NOCH ANGEPASST WERDE MIT MAX EDGES PER LAYER
         try {
             String s = "SELECT PRE_NEURON_IDENT, NEXT_NEURON_IDENT, WEIGHT, LAYER_NR, EDGE_NR FROM edgetable WHERE " +
                     "SAVE_NR = "+ saveNr;
