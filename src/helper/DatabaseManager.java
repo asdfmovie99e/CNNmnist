@@ -350,7 +350,7 @@ public class DatabaseManager {
 
     /**
      * Verkürzt die Ladezeit in dem ein String mit einer bestimmten Anzahl an Daten befüllt und bereits
-     * vor Abfrage bereitgestellt wird.
+     * vor Abfrage bereitgestellt wird. Verschickt den String auch wenn unter 10.000 Daten enthalten sind.
      */
     public static void flushSaveCommand() {
         refreshConnection();

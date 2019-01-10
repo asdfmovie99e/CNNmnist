@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/Database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/Database.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/helper/DatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/DatabaseManager.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
@@ -195,11 +195,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Database.sql" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Database.sql" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/helper/Database.sql">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="479">
-              <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
+              <caret line="34" column="2" selection-start-line="34" selection-start-column="2" selection-end-line="34" selection-end-column="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DatabaseManager.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/helper/DatabaseManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="352" column="106" selection-start-line="352" selection-start-column="106" selection-end-line="352" selection-end-column="106" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#4026#4035#0" expanded="true" />
+                <element signature="e#5173#5181#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -257,10 +271,10 @@
         <option value="$PROJECT_DIR$/src/gui/PasswortController.java" />
         <option value="$PROJECT_DIR$/src/gui/WeightData.java" />
         <option value="$PROJECT_DIR$/src/main/NetworkController.java" />
-        <option value="$PROJECT_DIR$/src/helper/Database.sql" />
         <option value="$PROJECT_DIR$/src/main/Main.java" />
         <option value="$PROJECT_DIR$/src/gui/LoadController.java" />
         <option value="$PROJECT_DIR$/src/helper/DBConnect.java" />
+        <option value="$PROJECT_DIR$/src/helper/Database.sql" />
         <option value="$PROJECT_DIR$/src/helper/DatabaseManager.java" />
       </list>
     </option>
@@ -290,7 +304,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -325,8 +340,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -517,6 +531,8 @@
       <workItem from="1545119993871" duration="209000" />
       <workItem from="1546873522969" duration="3196000" />
       <workItem from="1547025927398" duration="757000" />
+      <workItem from="1547110259136" duration="229000" />
+      <workItem from="1547118200541" duration="334000" />
     </task>
     <task id="LOCAL-00001" summary="Übernahme von GUI und Controller aus altem Projekt">
       <created>1542701323939</created>
@@ -784,11 +800,18 @@
       <option name="project" value="LOCAL" />
       <updated>1545120170793</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary=" Löschen Methode hinzugefügt&#10; Methode umbenannt (createMainTable)">
+      <created>1547110473222</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1547110473222</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="117013000" />
+    <option name="totallyTimeSpent" value="117576000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -807,7 +830,7 @@
       <window_info anchor="bottom" id="Terminal" order="15" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="3" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" weight="0.32980332" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.33509833" />
       <window_info anchor="right" id="Database" order="5" weight="0.15204236" />
       <window_info id="Learn" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -833,13 +856,12 @@
     <layout-to-restore>
       <window_info anchor="bottom" id="Application Servers" order="7" />
       <window_info id="Designer" order="3" />
-      <window_info anchor="right" id="Palette" order="6" />
+      <window_info id="Learn" order="7" />
+      <window_info id="Image Layers" order="4" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32673267" />
       <window_info anchor="right" id="JetGradle" order="3" />
-      <window_info id="Image Layers" order="4" />
-      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.32838285" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="6" />
       <window_info id="UI Designer" order="5" />
       <window_info anchor="bottom" id="Profiler" order="11" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -848,6 +870,7 @@
       <window_info anchor="right" id="Capture Analysis" order="7" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Messages" order="13" weight="0.32838285" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Problems" order="9" />
@@ -856,7 +879,6 @@
       <window_info anchor="right" id="Maven Projects" order="4" weight="0.3295302" />
       <window_info anchor="bottom" id="Terminal" order="15" />
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.32980332" />
-      <window_info id="Learn" order="7" />
       <window_info anchor="right" id="Database" order="5" visible="true" weight="0.15204236" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -865,6 +887,7 @@
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Coverage" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.32838285" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.40924093" />
     </layout-to-restore>
   </component>
@@ -1059,20 +1082,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/helper/DatabaseManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="524">
-          <caret line="364" column="5" selection-start-line="364" selection-start-column="5" selection-end-line="364" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/helper/Database.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="479">
-          <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
+          <caret line="34" column="2" selection-start-line="34" selection-start-column="2" selection-end-line="34" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/helper/DatabaseManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="352" column="106" selection-start-line="352" selection-start-column="106" selection-end-line="352" selection-end-column="106" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4026#4035#0" expanded="true" />
+            <element signature="e#5173#5181#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
